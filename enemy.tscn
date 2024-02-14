@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6slg26cwu56v"]
+[gd_scene load_steps=8 format=3 uid="uid://c6slg26cwu56v"]
 
 [ext_resource type="Texture2D" uid="uid://b3viwereixnih" path="res://tendrils.png" id="1_f8wnp"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_hj3g7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f81b6"]
 
@@ -18,6 +19,7 @@ light_mode = 2
 
 [node name="Enemy" type="StaticBody2D"]
 position = Vector2(534, 71)
+script = ExtResource("1_hj3g7")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

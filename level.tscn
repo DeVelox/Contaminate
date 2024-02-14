@@ -12,8 +12,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xbp56"]
 gradient = SubResource("Gradient_aow1d")
-width = 350
-height = 350
+width = 512
+height = 512
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.867521, 0.153846)
@@ -24,8 +24,8 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.388235, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_efvw8"]
 gradient = SubResource("Gradient_brl7v")
-width = 350
-height = 350
+width = 512
+height = 512
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -34,7 +34,14 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Level" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0980392, 0, 0.054902, 1)
+color = Color(0.168627, 0.00392157, 0.0745098, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -516.0
+offset_top = -326.0
+offset_right = 1539.0
+offset_bottom = 1074.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -902.0
@@ -52,6 +59,7 @@ metadata/_edit_group_ = true
 shape = SubResource("CapsuleShape2D_6w4ij")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
+color = Color(0.772549, 0.466667, 0.219608, 1)
 shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_xbp56")
@@ -67,6 +75,7 @@ scale = Vector2(20, 30)
 texture = SubResource("PlaceholderTexture2D_xgpdu")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_67gk6")
