@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bavnh0qellabo"]
+
+[ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entitites/player/player.tscn" id="1_5a4th"]
+[ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entitites/prefabs/enemy_manager.tscn" id="2_3sed6"]
+[ext_resource type="PackedScene" uid="uid://b2pik842iva40" path="res://entitites/enemies/enemy.tscn" id="2_15r12"]
+[ext_resource type="PackedScene" uid="uid://dbttptgrknflx" path="res://entitites/enemies/enemy_elite.tscn" id="3_w7vtg"]
+
+[node name="Main" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.129412, 0, 0.129412, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15118.0
+offset_top = -8319.0
+offset_right = -13198.0
+offset_bottom = -7239.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(16, 16)
+color = Color(0.270588, 0.270588, 0.270588, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_5a4th")]
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
+position = Vector2(673, 440)
+player = NodePath("../Player")
+enemy = ExtResource("2_15r12")
+elite = ExtResource("3_w7vtg")
+horde_size = 500

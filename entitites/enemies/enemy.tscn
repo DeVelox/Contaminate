@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2pik842iva40"]
+
+[ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
+[ext_resource type="Texture2D" uid="uid://dj651iwqndkd" path="res://assets/tendrils.png" id="2_3xrm6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca18n"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kfkco"]
+cull_mode = 1
+polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k4ibx"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b7o3p"]
+light_mode = 2
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_qnt0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ca18n")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_kfkco")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_k4ibx")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_con38")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.270588, 0.270588, 0.270588, 1)
+self_modulate = Color(0.129412, 0, 0.129412, 1)
+light_mask = 2
+material = SubResource("CanvasItemMaterial_b7o3p")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_3xrm6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=6]

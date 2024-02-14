@@ -1,0 +1,7 @@
+class_name Enemy extends Area2D
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		get_parent().enemy_instances.erase(self)
+		queue_free()

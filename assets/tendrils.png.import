@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3viwereixnih"
-path="res://.godot/imported/tendrils.png-734b3959cb7a411d4dec419dc1901055.ctex"
+uid="uid://dj651iwqndkd"
+path="res://.godot/imported/tendrils.png-3de867e29cad7d2d30b1b43386e15ffe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tendrils.png"
-dest_files=["res://.godot/imported/tendrils.png-734b3959cb7a411d4dec419dc1901055.ctex"]
+source_file="res://assets/tendrils.png"
+dest_files=["res://.godot/imported/tendrils.png-3de867e29cad7d2d30b1b43386e15ffe.ctex"]
 
 [params]
 
