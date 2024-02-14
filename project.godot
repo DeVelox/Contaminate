@@ -11,5 +11,15 @@ config_version=5
 [application]
 
 config/name="Rogue One"
+run/main_scene="res://level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/always_on_top=true
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
