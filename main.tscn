@@ -32,3 +32,4 @@ position = Vector2(834, 628)
 player = NodePath("../Player")
 enemy = ExtResource("2_15r12")
 elite = ExtResource("3_w7vtg")
+horde_size = 500

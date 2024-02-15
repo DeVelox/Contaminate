@@ -8,5 +8,5 @@ func _on_body_entered(body: Node2D) -> void:
 		if hits > 0:
 			hits -= 1
 		else:
-			get_parent().enemy_instances.erase(self)
+			get_parent().get_parent().enemy_instances.erase(self)
 			queue_free()
