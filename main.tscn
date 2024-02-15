@@ -24,13 +24,11 @@ offset_bottom = -7239.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16, 16)
-color = Color(0.270588, 0.270588, 0.270588, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
-position = Vector2(673, 440)
+position = Vector2(834, 628)
 player = NodePath("../Player")
 enemy = ExtResource("2_15r12")
 elite = ExtResource("3_w7vtg")
-horde_size = 500
