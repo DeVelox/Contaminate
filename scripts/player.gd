@@ -14,3 +14,6 @@ func _physics_process(delta: float) -> void:
 		velocity = lerp(velocity, Vector2.ZERO, 0.25)
 
 	move_and_slide()
+	
+	$TextureProgressBar.value = $Pistol.heat_level
+	print_debug($Pistol.heat_level)

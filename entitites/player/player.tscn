@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=10 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_4h5fs"]
@@ -12,6 +12,12 @@ size = Vector2(20, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ss4se"]
 radius = 400.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c06l2"]
+light_mode = 2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
+size = Vector2(20, 2)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nquv5")
@@ -43,3 +49,12 @@ zoom = Vector2(2, 2)
 shape = SubResource("CircleShape2D_ss4se")
 
 [node name="Pistol" parent="." instance=ExtResource("4_q177l")]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_c06l2")
+custom_minimum_size = Vector2(20, 2)
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = -15.0
+texture_progress = SubResource("PlaceholderTexture2D_0eh1e")

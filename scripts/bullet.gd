@@ -10,7 +10,7 @@ func _init():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position += speed * delta * direction
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(3).timeout
 	queue_free()
 
 
