@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://e5o5ed575ll0"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_345b6"]
+[ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_l4cm3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_86o5x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tarbb"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14vqx"]
+radius = 8.0
+
+[node name="Bullet" type="Area2D"]
+material = SubResource("CanvasItemMaterial_86o5x")
+script = ExtResource("1_345b6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+material = SubResource("CanvasItemMaterial_tarbb")
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_l4cm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_14vqx")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

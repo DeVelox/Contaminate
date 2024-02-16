@@ -3,8 +3,8 @@ class_name Elite extends Enemy
 var hits: int = 3
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
+func _on_elite_area_entered(area: Area2D) -> void:
+	if area is Bullet:
 		if hits > 0:
 			hits -= 1
 		else:

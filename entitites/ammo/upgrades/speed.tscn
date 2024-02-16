@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://djam5xt6li3rd"]
+
+[sub_resource type="GDScript" id="GDScript_b1cg5"]
+resource_name = "speed"
+script/source = "extends AmmoUpgrade
+
+func _ready() -> void:
+	var parent := get_parent() as Ammo
+	if parent is Ammo:
+		parent.speed *= 2
+"
+
+[node name="Speed" type="Node2D"]
+script = SubResource("GDScript_b1cg5")

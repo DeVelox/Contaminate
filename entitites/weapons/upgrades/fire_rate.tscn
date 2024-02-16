@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://hn2gb5eweq4d"]
+
+[sub_resource type="GDScript" id="GDScript_vqgcy"]
+resource_name = "fire_rate"
+script/source = "extends WeaponUpgrade
+
+func _ready() -> void:
+	var parent := get_parent() as Weapon
+	if parent is Weapon:
+		parent.fire_rate += 2
+"
+
+[node name="FireRate" type="Node2D"]
+script = SubResource("GDScript_vqgcy")
