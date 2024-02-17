@@ -21,7 +21,7 @@ var spawned: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_area = min(2.5 * horde_size, 512)
+	spawn_area = 0.5 * horde_size
 	trigger_radius = pow(spawn_area * 1.5, 2)
 	sprite_2d.scale = Vector2.ONE * (spawn_area * 3) / 512
 

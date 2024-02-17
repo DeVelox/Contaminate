@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 		direction * speed * delta + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
 	)
 	velocity = lerp(velocity, motion, 0.1)
-	move_and_collide(velocity)
+	move_and_collide(velocity, false, 0.1)
 
 
 func destroy() -> void:

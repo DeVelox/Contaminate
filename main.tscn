@@ -28,7 +28,7 @@ scale = Vector2(16, 16)
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
-position = Vector2(834, 628)
+position = Vector2(995, 576)
 player = NodePath("../Player")
 enemy = ExtResource("2_15r12")
 elite = ExtResource("3_w7vtg")
