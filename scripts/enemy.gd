@@ -1,11 +1,19 @@
 class_name Enemy extends StaticBody2D
 
-var hits := 1
+@export var hits := 1
+@export var shake := 1.0
+@export var speed := 100.0
 var direction := Vector2.ZERO
+var motion := Vector2.ZERO
+var velocity := Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
-	move_and_collide(direction * delta + Vector2(randf_range(-1, 1), randf_range(-1, 1)))
+	motion = (
+		direction * speed * delta + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
+	)
+	velocity = lerp(velocity, motion, 0.1)
+	move_and_collide(velocity)
 
 
 func destroy() -> void:

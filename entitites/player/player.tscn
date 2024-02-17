@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=10 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_4h5fs"]
@@ -15,9 +15,6 @@ light_mode = 2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
 size = Vector2(20, 2)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ss4se"]
-radius = 400.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynkd2"]
 radius = 235.0
@@ -54,12 +51,6 @@ range_item_cull_mask = 2
 shadow_filter = 1
 shadow_item_cull_mask = 2
 texture = ExtResource("3_o1dlx")
-
-[node name="EnemySpawnTrigger" type="Area2D" parent="."]
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnTrigger"]
-shape = SubResource("CircleShape2D_ss4se")
 
 [node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 

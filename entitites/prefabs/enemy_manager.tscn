@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpkwa4hiehele"]
+[gd_scene load_steps=4 format=3 uid="uid://bpkwa4hiehele"]
 
 [ext_resource type="Script" path="res://scripts/enemy_manager.gd" id="1_vn8rp"]
+[ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_r16eb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qxtqd"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jwo53"]
+light_mode = 2
 
 [node name="EnemyManager" type="Node2D"]
 script = ExtResource("1_vn8rp")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_qxtqd")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered" flags=6]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.129412, 0, 0.129412, 1)
+light_mask = 2
+material = SubResource("CanvasItemMaterial_jwo53")
+texture = ExtResource("2_r16eb")
