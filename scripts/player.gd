@@ -15,3 +15,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	$TextureProgressBar.value = $Pistol.heat_level
+
+
+func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.show()
+
+
+func _on_area_2d_2_body_exited(body: Node2D) -> void:
+	if body is Enemy:
+		body.hide()

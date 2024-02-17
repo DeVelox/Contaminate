@@ -30,4 +30,4 @@ func _process(delta: float) -> void:
 				pass_ammo.origin = global_position
 				WeaponManager.shoot(pass_ammo)
 				await get_tree().create_timer(0.1).timeout
-	heat_level += delta * 10
+	heat_level = clamp(heat_level + delta * 10, 0, 100)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2pik842iva40"]
+[gd_scene load_steps=8 format=3 uid="uid://b2pik842iva40"]
 
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
@@ -11,15 +11,13 @@ radius = 8.0
 cull_mode = 1
 polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k4ibx"]
-light_mode = 2
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_arg3m"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qgob3"]
 light_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ca18n"]
 
 [node name="Enemy" type="StaticBody2D"]
+visible = false
 script = ExtResource("1_qnt0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,14 +28,13 @@ show_behind_parent = true
 occluder = SubResource("OccluderPolygon2D_kfkco")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_k4ibx")
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_con38")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 modulate = Color(0.129412, 0, 0.129412, 1)
 light_mask = 2
-material = SubResource("CanvasItemMaterial_arg3m")
+material = SubResource("CanvasItemMaterial_qgob3")
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_op73g")
 

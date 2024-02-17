@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=11 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_4h5fs"]
@@ -10,17 +10,23 @@ size = Vector2(20, 30)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ss4se"]
-radius = 400.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c06l2"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my4c5"]
 light_mode = 2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
 size = Vector2(20, 2)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ss4se"]
+radius = 400.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynkd2"]
+radius = 235.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nquv5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_kmbbx")
@@ -28,20 +34,26 @@ texture = SubResource("PlaceholderTexture2D_kmbbx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5rsor")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_my4c5")
+custom_minimum_size = Vector2(20, 2)
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = -15.0
+texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.1
+energy = 0.25
 shadow_enabled = true
 texture = ExtResource("2_4h5fs")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-energy = 0.1
+energy = 0.25
 range_item_cull_mask = 2
 shadow_filter = 1
 shadow_item_cull_mask = 2
 texture = ExtResource("3_o1dlx")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -50,11 +62,10 @@ shape = SubResource("CircleShape2D_ss4se")
 
 [node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-material = SubResource("CanvasItemMaterial_c06l2")
-custom_minimum_size = Vector2(20, 2)
-offset_left = -10.0
-offset_top = -17.0
-offset_right = 10.0
-offset_bottom = -15.0
-texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_ynkd2")
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]

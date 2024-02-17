@@ -5,7 +5,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_86o5x"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tarbb"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jr54h"]
 light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_14vqx"]
@@ -17,7 +17,7 @@ script = ExtResource("1_345b6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
-material = SubResource("CanvasItemMaterial_tarbb")
+material = SubResource("CanvasItemMaterial_jr54h")
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_l4cm3")
 

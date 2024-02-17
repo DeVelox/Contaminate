@@ -5,7 +5,7 @@ extends Node
 @export var elite: PackedScene
 
 @export var horde_size: int = 100
-@export var update_frequency: float = 0.6
+@export var update_frequency: float = 0.1
 #@export var group_size: int = 10
 @export_range(0.0, 1.0) var elite_chance: float = 0.01
 
