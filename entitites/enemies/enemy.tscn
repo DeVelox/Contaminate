@@ -23,6 +23,7 @@ script = ExtResource("1_qnt0r")
 shape = SubResource("RectangleShape2D_ca18n")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+show_behind_parent = true
 occluder = SubResource("OccluderPolygon2D_kfkco")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
