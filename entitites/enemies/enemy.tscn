@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2pik842iva40"]
+[gd_scene load_steps=9 format=3 uid="uid://b2pik842iva40"]
 
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="3_op73g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca18n"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojpu8"]
+radius = 8.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kfkco"]
 cull_mode = 1
@@ -16,11 +17,13 @@ light_mode = 2
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_arg3m"]
 light_mode = 2
 
-[node name="Enemy" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca18n"]
+
+[node name="Enemy" type="StaticBody2D"]
 script = ExtResource("1_qnt0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ca18n")
+shape = SubResource("CircleShape2D_ojpu8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 show_behind_parent = true
@@ -38,4 +41,9 @@ material = SubResource("CanvasItemMaterial_arg3m")
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_op73g")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ca18n")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

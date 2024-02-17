@@ -4,14 +4,17 @@ class_name Pistol extends Weapon
 
 var ammo: Ammo
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ammo = ammo_type.instantiate()
 	ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
-	
+
+
 func _init() -> void:
 	heat_level = 100
 	fire_rate = 1
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
