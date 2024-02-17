@@ -21,9 +21,11 @@ radius = 235.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nquv5")
+camera = "camera_drag"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_kmbbx")
@@ -40,6 +42,8 @@ offset_right = 10.0
 offset_bottom = -15.0
 texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
 
+[node name="Pistol" parent="." instance=ExtResource("4_q177l")]
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.25
 shadow_enabled = true
@@ -51,8 +55,6 @@ range_item_cull_mask = 2
 shadow_filter = 1
 shadow_item_cull_mask = 2
 texture = ExtResource("3_o1dlx")
-
-[node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 
 [node name="EnemyCulling" type="Area2D" parent="."]
 
