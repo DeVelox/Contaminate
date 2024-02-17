@@ -19,7 +19,7 @@ func _init() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
-		if heat_level > 0:
+		if heat_level > 10:
 			heat_level -= 10
 			for i in fire_rate:
 				heat_level -= 3

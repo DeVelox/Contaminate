@@ -55,17 +55,18 @@ shadow_filter = 1
 shadow_item_cull_mask = 2
 texture = ExtResource("3_o1dlx")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="EnemySpawnTrigger" type="Area2D" parent="."]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnTrigger"]
 shape = SubResource("CircleShape2D_ss4se")
 
 [node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="EnemyCulling" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
 shape = SubResource("CircleShape2D_ynkd2")
 
-[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
-[connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]
+[connection signal="body_entered" from="EnemyCulling" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="EnemyCulling" to="." method="_on_area_2d_2_body_exited"]

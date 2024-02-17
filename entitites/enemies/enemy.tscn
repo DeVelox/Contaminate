@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2pik842iva40"]
+[gd_scene load_steps=7 format=3 uid="uid://b2pik842iva40"]
 
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
@@ -13,8 +13,6 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qgob3"]
 light_mode = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca18n"]
 
 [node name="Enemy" type="StaticBody2D"]
 visible = false
@@ -37,10 +35,3 @@ light_mask = 2
 material = SubResource("CanvasItemMaterial_qgob3")
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_op73g")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ca18n")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

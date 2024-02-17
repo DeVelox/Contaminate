@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 	queue_free()
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Enemy:
+func _on_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.destroy()
 		queue_free()
