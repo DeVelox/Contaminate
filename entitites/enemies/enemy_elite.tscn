@@ -14,6 +14,7 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 light_mode = 2
 
 [node name="Enemy Elite" type="StaticBody2D"]
+visible = false
 scale = Vector2(2, 2)
 script = ExtResource("1_50jjs")
 
