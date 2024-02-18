@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx5l6w2qm1gay"]
+[gd_scene load_steps=6 format=3 uid="uid://dx5l6w2qm1gay"]
 
 [ext_resource type="Script" path="res://scripts/pistol.gd" id="1_ou55c"]
 [ext_resource type="PackedScene" uid="uid://e5o5ed575ll0" path="res://entitites/ammo/bullet.tscn" id="2_m6lfh"]
 [ext_resource type="Texture2D" uid="uid://rgggcol2e8x2" path="res://assets/bolter-gun.svg" id="3_3evwg"]
 [ext_resource type="PackedScene" uid="uid://djam5xt6li3rd" path="res://entitites/ammo/upgrades/speed.tscn" id="3_fcx85"]
-[ext_resource type="PackedScene" uid="uid://hn2gb5eweq4d" path="res://entitites/weapons/upgrades/fire_rate.tscn" id="4_bfebb"]
 [ext_resource type="PackedScene" uid="uid://ds1b4qhvj1a5l" path="res://entitites/ammo/upgrades/tracking.tscn" id="5_15yhb"]
 
 [node name="Pistol" type="Node2D"]
@@ -18,7 +17,3 @@ texture = ExtResource("3_3evwg")
 [node name="Speed" parent="." instance=ExtResource("3_fcx85")]
 
 [node name="Tracking" parent="." instance=ExtResource("5_15yhb")]
-
-[node name="FireRate" parent="." instance=ExtResource("4_bfebb")]
-
-[node name="FireRate2" parent="." instance=ExtResource("4_bfebb")]

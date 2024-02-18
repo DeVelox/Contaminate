@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 WeaponManager="*res://scripts/weapon_manager.gd"
 Helper="*res://scripts/helper.gd"
+OmniManager="*res://scripts/omni_manager.gd"
 
 [display]
 

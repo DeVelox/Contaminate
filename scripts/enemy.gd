@@ -1,6 +1,6 @@
 class_name Enemy extends StaticBody2D
 
-@export var hits := 1
+@export var hits := 3
 @export var shake := 1.0
 @export var speed := 100.0
 var direction := Vector2.ZERO
@@ -20,5 +20,6 @@ func destroy() -> void:
 	if hits > 0:
 		hits -= 1
 	else:
+		OmniManager.on_kill.emit(self)
 		get_parent().enemy_instances.erase(self)
 		queue_free()
