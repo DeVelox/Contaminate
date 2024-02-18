@@ -40,6 +40,11 @@ scale = Vector2(1.5, 1.5)
 shadow_enabled = true
 texture = ExtResource("3_22jw8")
 
+[node name="ShadowCaster2" type="PointLight2D" parent="."]
+scale = Vector2(1.5, 1.5)
+range_item_cull_mask = 2
+texture = ExtResource("3_22jw8")
+
 [node name="EnemyCulling" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyCulling"]

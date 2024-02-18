@@ -1,6 +1,8 @@
 extends Node2D
 
+
 @export var player: Player
+@export var weapon: Weapon
 @export var enemy: PackedScene
 @export var elite: PackedScene
 
