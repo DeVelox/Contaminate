@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 WeaponManager="*res://scripts/weapon_manager.gd"
+Helper="*res://scripts/helper.gd"
 
 [display]
 

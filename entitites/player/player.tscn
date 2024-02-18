@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
-[ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_4h5fs"]
-[ext_resource type="Texture2D" uid="uid://byfbaxjcftdfk" path="res://assets/light_tendrils.png" id="3_o1dlx"]
+[ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
+[ext_resource type="Texture2D" uid="uid://mfkdfj16eys4" path="res://assets/tendrils-iso.png" id="4_4053i"]
 [ext_resource type="PackedScene" uid="uid://dx5l6w2qm1gay" path="res://entitites/weapons/pistol.tscn" id="4_q177l"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmbbx"]
@@ -10,16 +10,18 @@ size = Vector2(20, 30)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0qo8g"]
+radius = 192.0
+height = 586.0
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my4c5"]
 light_mode = 2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
 size = Vector2(20, 2)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ynkd2"]
-radius = 235.0
-
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_nquv5")
 camera = "camera_drag"
 
@@ -28,12 +30,40 @@ zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
 texture = SubResource("PlaceholderTexture2D_kmbbx")
+offset = Vector2(0, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5rsor")
 
+[node name="Pistol" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_q177l")]
+player = NodePath("..")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shadow_enabled = true
+texture = ExtResource("3_22jw8")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+scale = Vector2(1.5, 1.5)
+range_item_cull_mask = 2
+shadow_filter = 1
+shadow_item_cull_mask = 2
+texture = ExtResource("4_4053i")
+
+[node name="EnemyCulling" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0qo8g")
+
+[node name="Flicker" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_my4c5")
 custom_minimum_size = Vector2(20, 2)
 offset_left = -10.0
@@ -42,24 +72,6 @@ offset_right = 10.0
 offset_bottom = -15.0
 texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
 
-[node name="Pistol" parent="." instance=ExtResource("4_q177l")]
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.25
-shadow_enabled = true
-texture = ExtResource("2_4h5fs")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-energy = 0.25
-range_item_cull_mask = 2
-shadow_filter = 1
-shadow_item_cull_mask = 2
-texture = ExtResource("3_o1dlx")
-
-[node name="EnemyCulling" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
-shape = SubResource("CircleShape2D_ynkd2")
-
 [connection signal="body_entered" from="EnemyCulling" to="." method="_on_area_2d_2_body_entered"]
 [connection signal="body_exited" from="EnemyCulling" to="." method="_on_area_2d_2_body_exited"]
+[connection signal="timeout" from="Flicker" to="." method="_on_flicker_timeout"]
