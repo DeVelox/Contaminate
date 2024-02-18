@@ -6,13 +6,12 @@ extends Node2D
 
 @export var horde_size: int = 100
 @export var update_frequency: float = 0.1
-#@export var group_size: int = 10
 @export_range(0.0, 1.0) var elite_chance: float = 0.01
 
 var enemy_instances: Array[Enemy]
-#var enemy_groups: Array[Node2D]
 var spawn_area: float
 var trigger_radius: float
+var player_distance: float
 var update: float = update_frequency
 var spawned: bool
 
@@ -28,7 +27,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not spawned and global_position.distance_squared_to(player.global_position) < trigger_radius:
+	player_distance = global_position.distance_squared_to(player.global_position)
+	player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
+	if not spawned and player_distance < trigger_radius:
 		_spawn_enemies()
 	if not enemy_instances.is_empty():
 		update -= delta
@@ -36,18 +37,6 @@ func _process(delta: float) -> void:
 			for i in enemy_instances:
 				i.direction = (player.global_position - i.global_position).normalized()
 			update = update_frequency
-			
-	# No groups pls
-	#var group: Node2D
-	#for i in enemy_instances.size() - 1:
-	#if not i % group_size:
-	#group = Node2D.new()
-	#enemy_groups.append(group)
-	#add_child.call_deferred(group)
-	#enemy_instances[i].position = (
-	#Vector2.ONE.normalized().rotated(randf_range(0.0, 1.0) * 2 * PI)
-	#* randf_range(0.0, spawn_area)
-	#)
 
 
 func _spawn_enemies() -> void:

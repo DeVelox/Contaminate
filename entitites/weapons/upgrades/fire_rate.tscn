@@ -4,10 +4,25 @@
 resource_name = "fire_rate"
 script/source = "extends WeaponUpgrade
 
+var fire_rate = 3
+var shoot_func: Callable
+var parent: Weapon
+
 func _ready() -> void:
-	var parent := get_parent() as Weapon
+	parent = get_parent() as Weapon
 	if parent is Weapon:
-		parent.fire_rate += 2
+		if parent.fire_rate > 1:
+			parent.fire_rate += fire_rate
+		else:
+			shoot_func = parent.shoot_func
+			parent.shoot_func = _fire_rate
+			parent.fire_rate = fire_rate
+		
+func _fire_rate(player: Player, ammo: Ammo, gun_length: float) -> void:
+	fire_rate = parent.fire_rate
+	for i in fire_rate:
+		shoot_func.call(player, ammo, gun_length)
+		await get_tree().create_timer(0.1).timeout
 "
 
 [node name="FireRate" type="Node2D"]

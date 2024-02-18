@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2iv7r7dy1ws"]
+
+[sub_resource type="GDScript" id="GDScript_prhfu"]
+resource_name = "heat"
+script/source = "extends WeaponUpgrade
+
+var heat_level: float = 100
+var shoot_func: Callable
+var parent: Weapon
+
+func _ready() -> void:
+	parent = get_parent() as Weapon
+	if parent is Weapon:
+		shoot_func = parent.shoot_func
+		parent.shoot_func = _heat_gun
+		parent.heat_level = heat_level
+		
+func _process(delta: float) -> void:
+	heat_level = clamp(heat_level + delta * 10, 0, 100)
+	parent.heat_level = heat_level
+		
+func _heat_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
+	if heat_level > 10:
+		heat_level -= 15
+		shoot_func.call(player, ammo, gun_length)
+"
+
+[node name="Heat" type="Node2D"]
+script = SubResource("GDScript_prhfu")
