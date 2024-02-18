@@ -10,8 +10,7 @@ var flicker_intensity: float = 0.05
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
 func _ready() -> void:
-	$PointLight2D.energy = LIGHT
-	$PointLight2D2.energy = LIGHT
+	$ShadowCaster.energy = LIGHT
 
 func _physics_process(delta: float) -> void:
 	var direction := (
@@ -24,8 +23,7 @@ func _physics_process(delta: float) -> void:
 		
 	match camera:
 		"light_ahead":
-			$PointLight2D.position = lerp($PointLight2D.position, direction * CAMERA_SPEED, 0.1)
-			$PointLight2D2.position = lerp($PointLight2D2.position, direction * CAMERA_SPEED, 0.1)
+			$ShadowCaster.position = lerp($ShadowCaster.position, direction * CAMERA_SPEED, 0.1)
 			$EnemyCulling.position = lerp($EnemyCulling.position, direction * CAMERA_SPEED, 0.1)
 		"camera_ahead":
 			$Camera2D.offset = lerp($Camera2D.offset, direction * CAMERA_SPEED, 0.1)
@@ -36,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	$PointLight2D.energy = lerp($PointLight2D.energy, light_energy, 0.1)
+	$ShadowCaster.energy = lerp($ShadowCaster.energy, light_energy, 0.1)
 	$TextureProgressBar.value = $Pistol.heat_level
 
 
