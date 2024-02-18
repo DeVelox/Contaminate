@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=9 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
@@ -8,6 +8,9 @@
 size = Vector2(20, 30)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4v7n"]
+radius = 390.49
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my4c5"]
 light_mode = 2
@@ -41,15 +44,16 @@ shadow_enabled = true
 texture = ExtResource("3_22jw8")
 
 [node name="ShadowCaster2" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 range_item_cull_mask = 2
 texture = ExtResource("3_22jw8")
 
 [node name="EnemyCulling" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyCulling"]
-visible = false
-polygon = PackedVector2Array(-365, -12, -345, -49, -322, -57, -304, -63, -293, -106, -308, -110, -289, -134, -266, -139, -230, -172, -238, -191, -210, -200, -184, -198, -101, -231, -5, -250, 108, -230, 241, -176, 304, -121, 325, -82, 361, -69, 379, -33, 376, -2, 340, 22, 337, 42, 342, 69, 315, 98, 281, 110, 258, 101, 266, 134, 235, 139, 200, 145, 115, 185, 1, 204, -90, 216, -133, 195, -153, 133, -219, 101, -230, 115, -313, 105, -379, 42, -378, 19)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
+scale = Vector2(1, 0.6)
+shape = SubResource("CircleShape2D_a4v7n")
 
 [node name="Flicker" type="Timer" parent="."]
 wait_time = 0.1
