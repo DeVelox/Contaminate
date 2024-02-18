@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	move_and_collide(velocity, false, 0.1)
 
 
-func destroy() -> void:
+func damage() -> void:
 	if hits > 0:
 		hits -= 1
 	else:

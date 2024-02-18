@@ -1,7 +1,5 @@
 extends Node
 
-const LIGHTNING = preload("res://entitites/effects/lightning.tscn")
-
 signal on_roll(player: Player)
 signal on_move(player: Player)
 
@@ -13,11 +11,10 @@ signal on_hit(enemy: Enemy)
 signal on_damage(enemy:Enemy)
 
 func _ready() -> void:
-	on_kill.connect(lightning)
-
-func lightning(enemy: Enemy) -> void:
-	var effect = LIGHTNING.instantiate()
-	effect.position = enemy.global_position
-	get_tree().root.add_child.call_deferred(effect)
+	var lightning_rod = load("res://scripts/upgrades/lightning_rod/ligthning_rod_manager.gd")
+	lightning_rod.new()
 	
+	
+func create_scene(scene) -> void:
+	get_tree().root.add_child.call_deferred(scene)
 	

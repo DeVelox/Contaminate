@@ -14,4 +14,3 @@ func _process(delta: float) -> void:
 	
 func _lightning_strike(enemy: Enemy) -> void:
 	var effect = get_child(0).duplicate()
-	effect
