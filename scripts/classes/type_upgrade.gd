@@ -1,4 +1,4 @@
-class_name Upgrade extends RefCounted
+class_name Upgrade extends Node
 
 enum Type { AMMO, WEAPON, GENERAL }
 enum Rarity { COMMON, RARE, LEGENDARY }

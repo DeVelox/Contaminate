@@ -26,7 +26,7 @@ grow_vertical = 2
 scale = Vector2(16, 16)
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
-position = Vector2(1492.5, 864)
+position = Vector2(944, 548)
 player = NodePath("../Player")
 enemy = ExtResource("2_15r12")
 elite = ExtResource("3_w7vtg")
