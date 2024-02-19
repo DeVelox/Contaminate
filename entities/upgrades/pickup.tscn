@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://csjiihdhc5pc8"]
 
-[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_v5dgd"]
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_mbpw6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m0ts4"]
 
@@ -10,7 +10,7 @@
 
 [node name="Pickup" type="StaticBody2D"]
 collision_layer = 4
-script = ExtResource("1_v5dgd")
+script = ExtResource("1_mbpw6")
 upgrade = "Lightning"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

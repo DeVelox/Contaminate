@@ -1,6 +1,6 @@
 extends Upgrade
 
-const LIGHTNING_ROD = preload("res://entitites/upgrades/lightning_rod.tscn")
+const LIGHTNING_ROD = preload("res://entities/upgrades/lightning_rod.tscn")
 
 
 # Called when the node enters the scene tree for the first time.

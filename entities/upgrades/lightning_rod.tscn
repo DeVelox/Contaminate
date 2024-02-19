@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://emhb6x5gw17g"]
 
-[ext_resource type="Script" path="res://scripts/upgrades/lightning_rod/lightning_rod_scene.gd" id="1_ty655"]
-[ext_resource type="Texture2D" uid="uid://bwymhbvckbw1u" path="res://assets/lightning.png" id="2_srmm7"]
+[ext_resource type="Script" path="res://scripts/upgrades/lightning_rod/lightning_rod_scene.gd" id="1_s5lpc"]
+[ext_resource type="Texture2D" uid="uid://bwymhbvckbw1u" path="res://assets/lightning.png" id="2_0fqvg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dl8ad"]
 radius = 50.0
 
 [node name="LightningRod" type="Area2D"]
-script = ExtResource("1_ty655")
+script = ExtResource("1_s5lpc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dl8ad")
@@ -15,6 +15,6 @@ shape = SubResource("CircleShape2D_dl8ad")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(43, -57)
 scale = Vector2(0.18, 0.18)
-texture = ExtResource("2_srmm7")
+texture = ExtResource("2_0fqvg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
