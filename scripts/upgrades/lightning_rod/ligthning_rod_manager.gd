@@ -8,13 +8,13 @@ func _init(register: bool = false) -> void:
 	if register:
 		_register()
 	else:
-		OmniManager.on_hit.connect(_summon_lightning)
+		UpgradeManager.on_hit.connect(_summon_lightning)
 
 
 func _summon_lightning(enemy) -> void:
 	var lightning = LIGHTNING_ROD.instantiate()
 	lightning.global_position = enemy.global_position
-	OmniManager.create_scene(lightning)
+	UpgradeManager.create_scene(lightning)
 
 
 func _register() -> void:
@@ -22,6 +22,7 @@ func _register() -> void:
 	type = Type.GENERAL
 	rarity = Rarity.RARE
 	logic = "res://scripts/upgrades/lightning_rod/ligthning_rod_manager.gd"
+	icon = "res://assets/lightning.png"
 	level = 0
 
-	OmniManager.upgrades[uname] = self
+	UpgradeManager.upgrades[uname] = self

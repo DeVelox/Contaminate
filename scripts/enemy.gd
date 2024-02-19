@@ -28,7 +28,7 @@ func damage() -> void:
 		var drop = load("res://entities/upgrades/pickup.tscn").instantiate()
 		drop.position = global_position
 		get_tree().root.add_child.call_deferred(drop)
-		OmniManager.on_kill.emit(self)
+		UpgradeManager.on_kill.emit(self)
 		get_parent().enemy_instances.erase(self)
 		queue_free()
 

@@ -7,7 +7,7 @@ func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
 	if Engine.is_editor_hint():
 		var hint_string: String = ""
-		for i in OmniManager.upgrades:
+		for i in UpgradeManager.upgrades:
 			hint_string += i + ","
 		properties.append(
 			{
@@ -21,5 +21,5 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func activate() -> void:
-	OmniManager.add_upgrade(upgrade)
+	UpgradeManager.add_upgrade(upgrade)
 	queue_free()

@@ -19,6 +19,6 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		OmniManager.on_hit.emit(body)
+		UpgradeManager.on_hit.emit(body)
 		body.damage()
 		queue_free()
