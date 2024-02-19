@@ -15,9 +15,10 @@ func _ready() -> void:
 	ammo = ammo_type.instantiate()
 	ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_point_gun(player, gun_offset)
-	
+
 	if Input.is_action_just_pressed("shoot"):
 		shoot_func.call(player, ammo, gun_length)

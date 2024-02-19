@@ -12,7 +12,8 @@ func _point_gun(player: Player, gun_offset: float) -> void:
 		$Sprite2D.flip_v = true
 	else:
 		$Sprite2D.flip_v = false
-		
+
+
 func _shoot_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
 	var pass_ammo = ammo.duplicate()
 	var direction = player.velocity.normalized()

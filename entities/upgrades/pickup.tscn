@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://csjiihdhc5pc8"]
+
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_v5dgd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m0ts4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wxhef"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fuqnl"]
+
+[node name="Pickup" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_v5dgd")
+upgrade = "Lightning"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_m0ts4")
+rotation = 0.785398
+scale = Vector2(15, 15)
+texture = SubResource("PlaceholderTexture2D_wxhef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fuqnl")

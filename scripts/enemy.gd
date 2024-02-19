@@ -20,6 +20,9 @@ func damage() -> void:
 	if hits > 0:
 		hits -= 1
 	else:
+		var drop = load("res://entitites/upgrades/pickup.tscn").instantiate()
+		drop.position = global_position
+		get_tree().root.add_child.call_deferred(drop)
 		OmniManager.on_kill.emit(self)
 		get_parent().enemy_instances.erase(self)
 		queue_free()

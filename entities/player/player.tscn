@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=10 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
-[ext_resource type="PackedScene" uid="uid://dx5l6w2qm1gay" path="res://entitites/weapons/pistol.tscn" id="4_q177l"]
+[ext_resource type="PackedScene" uid="uid://dx5l6w2qm1gay" path="res://entities/weapons/pistol.tscn" id="4_q177l"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmbbx"]
 size = Vector2(20, 30)
@@ -12,6 +12,9 @@ size = Vector2(20, 30)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4v7n"]
 radius = 390.49
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ifrs4"]
+radius = 50.0
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my4c5"]
 light_mode = 2
 
@@ -20,6 +23,7 @@ size = Vector2(20, 2)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_mask = 0
 script = ExtResource("1_nquv5")
 camera = "camera_drag"
 
@@ -43,17 +47,19 @@ scale = Vector2(1.5, 1.5)
 shadow_enabled = true
 texture = ExtResource("3_22jw8")
 
-[node name="ShadowCaster2" type="PointLight2D" parent="."]
-visible = false
-scale = Vector2(1.5, 1.5)
-range_item_cull_mask = 2
-texture = ExtResource("3_22jw8")
-
 [node name="EnemyCulling" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
 scale = Vector2(1, 0.6)
 shape = SubResource("CircleShape2D_a4v7n")
+
+[node name="PickupRadius" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
+shape = SubResource("CircleShape2D_ifrs4")
 
 [node name="Flicker" type="Timer" parent="."]
 wait_time = 0.1
