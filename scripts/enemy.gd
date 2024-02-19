@@ -6,9 +6,11 @@ class_name Enemy extends StaticBody2D
 var direction := Vector2.ZERO
 var motion := Vector2.ZERO
 var velocity := Vector2.ZERO
+var physics := true
 
 
 func _physics_process(delta: float) -> void:
+	set_physics_process(physics)
 	motion = (
 		direction * speed * delta + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
 	)
@@ -26,3 +28,9 @@ func damage() -> void:
 		OmniManager.on_kill.emit(self)
 		get_parent().enemy_instances.erase(self)
 		queue_free()
+		
+func disable_physics() -> void:
+	physics = false
+
+func enable_physics() -> void:
+	physics = true
