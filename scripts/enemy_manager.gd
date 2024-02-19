@@ -10,6 +10,7 @@ extends Node2D
 @export var update_frequency: float = 0.1
 
 var enemy_instances: Array[Enemy]
+var spawn_point: Vector2
 var spawn_area: float
 var trigger_radius: float
 var leash_radius: float
@@ -22,13 +23,15 @@ var leashed: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_point = global_position
 	spawn_area = 0.5 * horde_size
-	trigger_radius = pow(spawn_area * 1.5, 2)
-	leash_radius = pow(spawn_area * 3, 2)
+	trigger_radius = pow(spawn_area * 2, 2)
+	leash_radius = pow(spawn_area * 4, 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	global_position = spawn_point
 	player_distance = global_position.distance_squared_to(player.global_position)
 	player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
 	if not spawned and player_distance < trigger_radius:
@@ -36,7 +39,6 @@ func _process(delta: float) -> void:
 	if player_distance > leash_radius:
 		destination = global_position
 		$LeashTimer.start()
-		print_debug($LeashTimer.time_left)
 	else:
 		destination = player.global_position
 	if not enemy_instances.is_empty():
@@ -64,5 +66,6 @@ func _spawn_enemies() -> void:
 
 
 func _on_leash_timer_timeout() -> void:
+	print_debug("stop")
 	for i in enemy_instances:
 		i.disable_physics()

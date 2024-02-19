@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bavnh0qellabo"]
+[gd_scene load_steps=7 format=3 uid="uid://bavnh0qellabo"]
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
+[ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
 [ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entities/prefabs/enemy_manager.tscn" id="2_3sed6"]
 [ext_resource type="PackedScene" uid="uid://b2pik842iva40" path="res://entities/enemies/enemy.tscn" id="2_15r12"]
+[ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
 [ext_resource type="PackedScene" uid="uid://dbttptgrknflx" path="res://entities/enemies/enemy_elite.tscn" id="3_w7vtg"]
 
 [node name="Main" type="Node2D"]
@@ -25,9 +27,16 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16, 16)
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
-position = Vector2(944, 548)
+[node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
+clip_children = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_6b8jp")
+script = ExtResource("2_e4yt6")
 player = NodePath("../Player")
+
+[node name="EnemyManager" parent="LightMask" node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
+position = Vector2(628, 370)
+player = NodePath("../../Player")
 enemy = ExtResource("2_15r12")
 elite = ExtResource("3_w7vtg")
 horde_size = 1000

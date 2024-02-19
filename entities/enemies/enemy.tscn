@@ -11,16 +11,17 @@ cull_mode = 1
 polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [node name="Enemy" type="StaticBody2D"]
+visible = false
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qnt0r")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("1_con38")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ojpu8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_kfkco")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_con38")

@@ -28,7 +28,7 @@ script = ExtResource("1_nquv5")
 camera = "camera_drag"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -48,13 +48,11 @@ shadow_enabled = true
 texture = ExtResource("3_22jw8")
 
 [node name="EnemyCulling" type="Area2D" parent="."]
-collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCulling"]
 scale = Vector2(1, 0.6)
 shape = SubResource("CircleShape2D_a4v7n")
-disabled = true
 
 [node name="PickupRadius" type="Area2D" parent="."]
 collision_mask = 4
