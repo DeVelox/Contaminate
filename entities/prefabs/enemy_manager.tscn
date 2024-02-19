@@ -8,4 +8,4 @@ script = ExtResource("1_vn8rp")
 [node name="LeashTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="LeashTimer" to="." method="_on_leash_timer_timeout"]
+[connection signal="timeout" from="LeashTimer" to="." method="_set_enemy_physics"]

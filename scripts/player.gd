@@ -6,16 +6,23 @@ const LIGHT = 0.25
 
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
+var direction: Vector2
 var light_energy: float = 0.25
 var flicker_intensity: float = 0.05
+@onready var pistol: Pistol = $Pistol
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var pickup_radius: Area2D = $PickupRadius
+@onready var enemy_culling: Area2D = $EnemyCulling
+@onready var shadow_caster: PointLight2D = $ShadowCaster
+@onready var progress_bar: TextureProgressBar = $TextureProgressBar
 
 
 func _ready() -> void:
-	$ShadowCaster.energy = LIGHT
+	shadow_caster.energy = LIGHT
 
 
 func _physics_process(_delta: float) -> void:
-	var direction := (
+	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
 	if direction:
@@ -25,24 +32,26 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-	$ShadowCaster.energy = lerp($ShadowCaster.energy, light_energy, 0.1)
-	$TextureProgressBar.value = $Pistol.heat_level
+	shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
+	progress_bar.value = pistol.heat_level
 
-	match camera:
-		"light_ahead":
-			$ShadowCaster.position = lerp($ShadowCaster.position, direction * CAMERA_SPEED, 0.1)
-			$EnemyCulling.position = lerp($EnemyCulling.position, direction * CAMERA_SPEED, 0.1)
-		"camera_ahead":
-			$Camera2D.offset = lerp($Camera2D.offset, direction * CAMERA_SPEED, 0.1)
-		"camera_drag":
-			$Camera2D.offset = lerp($Camera2D.offset, -direction * CAMERA_SPEED, 0.1)
-		_:
-			pass
-
-	for i in $PickupRadius.get_overlapping_bodies():
+	for i in pickup_radius.get_overlapping_bodies():
 		i.global_position = lerp(i.global_position, global_position, 0.1)
 		if i.global_position.distance_squared_to(global_position) < 25:
 			i.activate()
+
+
+func _camera_mode(mode: String) -> void:
+	match mode:
+		"light_ahead":
+			shadow_caster.position = lerp(shadow_caster.position, direction * CAMERA_SPEED, 0.1)
+			enemy_culling.position = lerp(enemy_culling.position, direction * CAMERA_SPEED, 0.1)
+		"camera_ahead":
+			camera_2d.offset = lerp(camera_2d.offset, direction * CAMERA_SPEED, 0.1)
+		"camera_drag":
+			camera_2d.offset = lerp(camera_2d.offset, -direction * CAMERA_SPEED, 0.1)
+		_:
+			return
 
 
 func _on_area_2d_2_body_entered(body: Node2D) -> void:

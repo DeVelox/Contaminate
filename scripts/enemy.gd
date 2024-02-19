@@ -10,12 +10,15 @@ var physics := true
 
 
 func _physics_process(delta: float) -> void:
-	set_physics_process(physics)
 	motion = (
 		direction * speed * delta + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
 	)
 	velocity = lerp(velocity, motion, 0.1)
 	move_and_collide(velocity, false, 0.1)
+
+
+func _process(_delta: float) -> void:
+	set_physics_process(physics)
 
 
 func damage() -> void:
@@ -28,9 +31,11 @@ func damage() -> void:
 		OmniManager.on_kill.emit(self)
 		get_parent().enemy_instances.erase(self)
 		queue_free()
-		
+
+
 func disable_physics() -> void:
 	physics = false
+
 
 func enable_physics() -> void:
 	physics = true
