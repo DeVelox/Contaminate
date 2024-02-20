@@ -1,7 +1,6 @@
 class_name Spawner extends Node2D
 
 enum Danger { LOW, MEDIUM, HIGH, EXTREME, BOSS }
-enum Rarity { COMMON, RARE, UNIQUE }
 
 class EnemyType:
 	var basic_enemy: PackedScene
@@ -59,8 +58,6 @@ class ZoneSeverity:
 	set(t):
 		danger = t
 		severity = ZoneSeverity.new(danger)
-
-@export var rarity: Rarity
 
 
 # Keep track of enemy ownership
