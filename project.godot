@@ -79,9 +79,7 @@ dash={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="pickup"
-2d_physics/layer_4="area_effect"
-2d_physics/layer_5="enemy_culling"
-2d_physics/layer_6="ammo"
+2d_physics/layer_4="elite"
 
 [physics]
 

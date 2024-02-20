@@ -7,12 +7,11 @@ const LIGHT = 0.25
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
 var direction: Vector2
-var light_energy: float = 0.25
+var light_energy: float
 var flicker_intensity: float = 0.05
 @onready var pistol: Pistol = $Pistol
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var pickup_radius: Area2D = $PickupRadius
-@onready var enemy_culling: Area2D = $EnemyCulling
 @onready var shadow_caster: PointLight2D = $ShadowCaster
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
 
@@ -45,24 +44,12 @@ func _camera_mode(mode: String) -> void:
 	match mode:
 		"light_ahead":
 			shadow_caster.position = lerp(shadow_caster.position, direction * CAMERA_SPEED, 0.1)
-			enemy_culling.position = lerp(enemy_culling.position, direction * CAMERA_SPEED, 0.1)
 		"camera_ahead":
 			camera_2d.offset = lerp(camera_2d.offset, direction * CAMERA_SPEED, 0.1)
 		"camera_drag":
 			camera_2d.offset = lerp(camera_2d.offset, -direction * CAMERA_SPEED, 0.1)
 		_:
 			return
-
-
-func _on_area_2d_2_body_entered(body: Node2D) -> void:
-	if body is Enemy:
-		body.show()
-
-
-func _on_area_2d_2_body_exited(body: Node2D) -> void:
-	if body is Enemy:
-		body.hide()
-
 
 func _on_flicker_timeout() -> void:
 	light_energy = randf_range(LIGHT - flicker_intensity, LIGHT + flicker_intensity)

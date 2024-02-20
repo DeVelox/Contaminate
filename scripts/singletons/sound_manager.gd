@@ -1,12 +1,9 @@
 extends Node
 # Music
 
-
 # SFX
 
-
 # Events
-
 
 var current_track: AudioStreamPlayer
 var rock_shift: AudioStreamPlayer

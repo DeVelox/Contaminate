@@ -1,20 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bavnh0qellabo"]
+[gd_scene load_steps=5 format=3 uid="uid://bavnh0qellabo"]
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
-[ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entities/prefabs/enemy_manager.tscn" id="2_3sed6"]
-[ext_resource type="PackedScene" uid="uid://b2pik842iva40" path="res://entities/enemies/enemy.tscn" id="2_15r12"]
+[ext_resource type="PackedScene" uid="uid://sma8asr61yf6" path="res://levels/level_template.tscn" id="1_oeh3k"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
-[ext_resource type="PackedScene" uid="uid://dbttptgrknflx" path="res://entities/enemies/enemy_elite.tscn" id="3_w7vtg"]
-[ext_resource type="PackedScene" uid="uid://biyictybejk6j" path="res://levels/T1L1.tscn" id="7_x0hv0"]
 
 [node name="Main" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(1, 0.647059, 0.980392, 1)
+color = Color(0.403922, 0.117647, 0.333333, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,8 +24,9 @@ offset_bottom = -7239.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16, 16)
+color = Color(0.239216, 0.027451, 0.0352941, 1)
 
-[node name="Level2" parent="." instance=ExtResource("7_x0hv0")]
+[node name="Level" parent="." instance=ExtResource("1_oeh3k")]
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1
@@ -37,12 +34,5 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_6b8jp")
 script = ExtResource("2_e4yt6")
 player = NodePath("../Player")
-
-[node name="EnemyManager" parent="LightMask" node_paths=PackedStringArray("player") instance=ExtResource("2_3sed6")]
-position = Vector2(628, 370)
-player = NodePath("../../Player")
-enemy = ExtResource("2_15r12")
-elite = ExtResource("3_w7vtg")
-horde_size = 1000
 
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]

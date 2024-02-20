@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbttptgrknflx"]
+[gd_scene load_steps=6 format=3 uid="uid://dbttptgrknflx"]
 
 [ext_resource type="Script" path="res://scripts/enemy_elite.gd" id="1_50jjs"]
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_bndbx"]
+[ext_resource type="Texture2D" uid="uid://3htiipjkmunm" path="res://assets/icon_eyes.png" id="3_ixrx0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yb1s2"]
 
@@ -10,10 +11,9 @@ cull_mode = 1
 polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [node name="Enemy Elite" type="StaticBody2D"]
-visible = false
 scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 9
 script = ExtResource("1_50jjs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,3 +26,8 @@ occluder = SubResource("OccluderPolygon2D_kfkco")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_bndbx")
+
+[node name="Eyes" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_ixrx0")

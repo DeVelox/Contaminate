@@ -2,4 +2,6 @@ class_name Elite extends Enemy
 
 
 func _init() -> void:
-	hits = 3
+	health = 3
+	cost = 10
+	speed = 150

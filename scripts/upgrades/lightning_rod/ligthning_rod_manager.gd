@@ -21,6 +21,7 @@ func _register() -> void:
 	uname = "Lightning"
 	type = Type.GENERAL
 	rarity = Rarity.RARE
+	description = "Does the zap-zap."
 	logic = "res://scripts/upgrades/lightning_rod/ligthning_rod_manager.gd"
 	icon = "res://assets/lightning.png"
 	level = 0

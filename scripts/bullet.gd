@@ -26,4 +26,3 @@ func _on_body_entered(body: Node2D) -> void:
 			pen -= 1
 		else:
 			queue_free()
-		

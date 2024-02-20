@@ -14,7 +14,7 @@ radius = 8.0
 [node name="Bullet" type="Area2D"]
 material = SubResource("CanvasItemMaterial_86o5x")
 collision_layer = 32
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_quyrq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -5,3 +5,4 @@ extends Sprite2D
 
 func _process(_delta) -> void:
 	global_position = player.global_position
+	
