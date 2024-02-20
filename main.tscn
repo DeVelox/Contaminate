@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bavnh0qellabo"]
+[gd_scene load_steps=8 format=3 uid="uid://bavnh0qellabo"]
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
@@ -6,13 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://b2pik842iva40" path="res://entities/enemies/enemy.tscn" id="2_15r12"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
 [ext_resource type="PackedScene" uid="uid://dbttptgrknflx" path="res://entities/enemies/enemy_elite.tscn" id="3_w7vtg"]
+[ext_resource type="PackedScene" uid="uid://biyictybejk6j" path="res://levels/T1L1.tscn" id="7_x0hv0"]
 
 [node name="Main" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.129412, 0, 0.129412, 1)
+color = Color(1, 0.647059, 0.980392, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,6 +28,8 @@ offset_bottom = -7239.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(16, 16)
+
+[node name="Level2" parent="." instance=ExtResource("7_x0hv0")]
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1

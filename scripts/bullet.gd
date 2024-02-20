@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func _init():
 	speed = 300
+	pen = 10
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +20,10 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		UpgradeManager.on_hit.emit(body)
-		body.damage()
-		queue_free()
+		if pen >= 0:
+			UpgradeManager.on_hit.emit(body)
+			body.damage()
+			pen -= 1
+		else:
+			queue_free()
+		
