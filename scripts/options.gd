@@ -2,13 +2,16 @@ extends CenterContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	%Master.value = db_to_linear(AudioServer.get_bus_volume_db(0))
 	%Music.value = db_to_linear(AudioServer.get_bus_volume_db(1))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("menu"):
+		if is_visible():
+			hide()
 
 
 func _on_master_value_changed(value: float) -> void:
