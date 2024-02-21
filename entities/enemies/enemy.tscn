@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
-[ext_resource type="Texture2D" uid="uid://3htiipjkmunm" path="res://assets/icon_eyes.png" id="3_wncu4"]
+[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_gtvh1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ojpu8"]
 radius = 8.0
@@ -29,4 +29,5 @@ texture = ExtResource("1_con38")
 [node name="Eyes" type="Sprite2D" parent="."]
 z_index = 1
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_wncu4")
+texture = ExtResource("3_gtvh1")
+region_rect = Rect2(9.06706, -1.88276, 121.292, 9.79665)
