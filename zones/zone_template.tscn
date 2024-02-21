@@ -600,3 +600,58 @@ position = Vector2(833, 333)
 
 [node name="Spawn2" type="Marker2D" parent="SpawnLocations"]
 position = Vector2(225, 815)
+
+[node name="LoaderDirection" type="Node2D" parent="."]
+
+[node name="North" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(960, 0)
+scale = Vector2(50, 1)
+
+[node name="South" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(960, 1920)
+scale = Vector2(50, 1)
+
+[node name="West" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(0, 960)
+scale = Vector2(1, 50)
+
+[node name="East" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(1920, 960)
+scale = Vector2(1, 50)
+
+[node name="NorthWest" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+
+[node name="NorthEast" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(1920, 0)
+
+[node name="SouthWest" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(0, 1920)
+
+[node name="SouthEast" type="VisibleOnScreenNotifier2D" parent="LoaderDirection"]
+position = Vector2(1920, 1920)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 1904.0
+offset_bottom = 1907.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 1000
+text = "1"
+
+[node name="ChunkLoader" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(960, 960)
+
+[connection signal="screen_entered" from="LoaderDirection/North" to="." method="_load_zone" flags=6 binds= [&"north"]]
+[connection signal="screen_entered" from="LoaderDirection/South" to="." method="_load_zone" flags=6 binds= [&"south"]]
+[connection signal="screen_entered" from="LoaderDirection/West" to="." method="_load_zone" flags=6 binds= [&"west"]]
+[connection signal="screen_entered" from="LoaderDirection/East" to="." method="_load_zone" flags=6 binds= [&"east"]]
+[connection signal="screen_entered" from="LoaderDirection/NorthWest" to="." method="_load_zone" flags=6 binds= [&"northwest"]]
+[connection signal="screen_entered" from="LoaderDirection/NorthEast" to="." method="_load_zone" flags=6 binds= [&"northeast"]]
+[connection signal="screen_entered" from="LoaderDirection/SouthWest" to="." method="_load_zone" flags=6 binds= [&"southwest"]]
+[connection signal="screen_entered" from="LoaderDirection/SouthEast" to="." method="_load_zone" flags=6 binds= [&"southeast"]]
+[connection signal="screen_entered" from="ChunkLoader" to="." method="_on_chunk_loader_screen_entered"]
+[connection signal="screen_exited" from="ChunkLoader" to="." method="_on_chunk_loader_screen_exited"]

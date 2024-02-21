@@ -2,11 +2,12 @@ class_name Spawner extends Node2D
 
 enum Danger { LOW, MEDIUM, HIGH, EXTREME, BOSS }
 
+
 class EnemyType:
 	var basic_enemy: PackedScene
 	var elite_enemy: PackedScene
 	var boss_enemy: PackedScene
-	
+
 	func _init(enemy: String) -> void:
 		if not ResourceLoader.exists("res://entities/enemies/" + enemy + ".tscn"):
 			return
@@ -59,9 +60,7 @@ class Severity:
 		danger = t
 		severity = Severity.new(danger)
 
-
 # Keep track of enemy ownership
-static var id: int
 var instance_id: int:
 	set(iid):
 		instance_id = iid
@@ -101,6 +100,8 @@ var update_rate_curr: float
 @onready var light_mask_node: Sprite2D = get_node("/root/Main/LightMask")
 @onready var player: Player = get_node("/root/Main/Player")
 
+static var id: int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -120,7 +121,7 @@ func _process(delta: float) -> void:
 
 	if player_distance < trigger_radius:
 		_spawn_enemies()
-		
+
 	if update_rate_curr < 0:
 		_move_enemies()
 		update_rate_curr = update_rate
@@ -139,6 +140,7 @@ func _enemy_pool_to_array() -> Array[EnemyType]:
 		if enemy:
 			enemy_array.append(enemy)
 	return enemy_array
+
 
 func _spawn_enemies() -> void:
 	if spawned:
@@ -183,6 +185,7 @@ func _spawn_enemies() -> void:
 		enemy_manager.add_child.call_deferred(i)
 	spawned = true
 
+
 func _move_enemies() -> void:
 	if not spawned:
 		return
@@ -190,6 +193,7 @@ func _move_enemies() -> void:
 	if not enemy_instances.is_empty():
 		for i in enemy_instances:
 			i.direction = (player.global_position - i.global_position).normalized()
+
 
 func set_enemy_physics() -> void:
 	if not physics_disabled:

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
-[ext_resource type="PackedScene" uid="uid://sma8asr61yf6" path="res://levels/zone_template.tscn" id="1_oeh3k"]
+[ext_resource type="PackedScene" uid="uid://sma8asr61yf6" path="res://zones/zone_template.tscn" id="1_oeh3k"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
 
 [node name="Main" type="Node2D"]
@@ -26,9 +26,9 @@ grow_vertical = 2
 scale = Vector2(16, 16)
 color = Color(0.239216, 0.027451, 0.0352941, 1)
 
-[node name="Zone" parent="." instance=ExtResource("1_oeh3k")]
+[node name="Zones" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("1_5a4th")]
+[node name="Zone" parent="Zones" instance=ExtResource("1_oeh3k")]
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1
@@ -36,3 +36,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_6b8jp")
 script = ExtResource("2_e4yt6")
 player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_5a4th")]
+position = Vector2(947, 970)

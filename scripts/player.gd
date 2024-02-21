@@ -25,7 +25,7 @@ func _ready() -> void:
 	shadow_caster.energy = LIGHT
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 	shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
 	progress_bar.value = pistol.heat_level
 
-			
 
 func _roll() -> void:
 	if Input.is_action_just_pressed("roll") and not roll_disabled:
@@ -55,8 +54,8 @@ func _roll() -> void:
 		invuln_frames -= 1
 	else:
 		collision.set_deferred("disabled", false)
-	
-		
+
+
 func _pickup() -> void:
 	for i in pickup_radius.get_overlapping_bodies():
 		i.global_position = lerp(i.global_position, global_position, 0.1)
@@ -75,9 +74,11 @@ func _camera_mode(mode: String) -> void:
 		_:
 			return
 
+
 func _on_flicker_timeout() -> void:
 	light_energy = randf_range(LIGHT - flicker_intensity, LIGHT + flicker_intensity)
-	
+
+
 func damage(attack: int) -> void:
 	if health > 0:
 		health -= attack
