@@ -7,6 +7,8 @@ const LIGHT = 0.25
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
 var health: int = 50
+var invuln_frames: int
+var roll_disabled: int
 var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
@@ -22,7 +24,7 @@ func _ready() -> void:
 	shadow_caster.energy = LIGHT
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
@@ -32,10 +34,29 @@ func _physics_process(_delta: float) -> void:
 		velocity = lerp(velocity, Vector2.ZERO, 0.25)
 
 	move_and_slide()
+	_roll()
+	_pickup()
 
 	shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
 	progress_bar.value = pistol.heat_level
 
+			
+
+func _roll() -> void:
+	if Input.is_action_just_pressed("roll") and not roll_disabled:
+		set_deferred("collision_layer", 0)
+		invuln_frames = 3
+		roll_disabled = 60
+		velocity = direction * SPEED * 5
+	if roll_disabled > 0:
+		roll_disabled -= 1
+	if invuln_frames > 0:
+		invuln_frames -= 1
+	else:
+		set_deferred("collision_layer", 1)
+	
+		
+func _pickup() -> void:
 	for i in pickup_radius.get_overlapping_bodies():
 		i.global_position = lerp(i.global_position, global_position, 0.1)
 		if i.global_position.distance_squared_to(global_position) < 25:
