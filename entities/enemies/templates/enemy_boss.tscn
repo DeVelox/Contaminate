@@ -4,3 +4,7 @@
 
 [node name="EnemyBoss" type="Node2D"]
 script = ExtResource("1_3et4j")
+
+[node name="InfectionTimer" type="Timer" parent="."]
+
+[node name="ShockTimer" type="Timer" parent="."]

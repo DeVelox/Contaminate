@@ -31,3 +31,7 @@ texture = ExtResource("1_bndbx")
 z_index = 1
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("3_ixrx0")
+
+[node name="InfectionTimer" type="Timer" parent="."]
+
+[node name="ShockTimer" type="Timer" parent="."]

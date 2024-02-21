@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsh1qu5gohaws"]
+[gd_scene load_steps=6 format=3 uid="uid://cjyvwo5fgf00s"]
 
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_con38"]
-<<<<<<< Updated upstream
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qnt0r"]
-[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_gtvh1"]
-=======
-[ext_resource type="Script" path="res://scripts/enemies/bunny.gd" id="1_kpiww"]
-[ext_resource type="Texture2D" uid="uid://3htiipjkmunm" path="res://assets/icon_eyes.png" id="3_wncu4"]
->>>>>>> Stashed changes
+[ext_resource type="Script" path="res://scripts/classes/enemy.gd" id="1_k8q0w"]
+[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_2p4s7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ojpu8"]
 radius = 8.0
@@ -19,7 +14,7 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 [node name="Enemy" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 11
-script = ExtResource("1_kpiww")
+script = ExtResource("1_k8q0w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ojpu8")
@@ -34,5 +29,10 @@ texture = ExtResource("1_con38")
 [node name="Eyes" type="Sprite2D" parent="."]
 z_index = 1
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_gtvh1")
-region_rect = Rect2(9.06706, -1.88276, 121.292, 9.79665)
+texture = ExtResource("3_2p4s7")
+
+[node name="InfectionTimer" type="Timer" parent="."]
+
+[node name="ShockTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="InfectionTimer" to="." method="_check_infection"]
