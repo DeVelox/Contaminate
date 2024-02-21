@@ -21,6 +21,7 @@ WeaponManager="*res://scripts/singletons/weapon_manager.gd"
 Helper="*res://scripts/singletons/helper.gd"
 UpgradeManager="*res://scripts/singletons/omni_manager.gd"
 SoundManager="*res://scripts/singletons/sound_manager.gd"
+MechanicsManager="*res://scripts/singletons/mechanics_manager.gd"
 
 [display]
 
