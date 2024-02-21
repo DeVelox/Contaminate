@@ -15,7 +15,7 @@ class EnemyType:
 		boss_enemy = load("res://entities/enemies/" + enemy + "_boss.tscn")
 
 
-class ZoneSeverity:
+class Severity:
 	var budget: int
 	var elite_count: int
 	var boss_count: int
@@ -57,7 +57,7 @@ class ZoneSeverity:
 @export var danger: Danger:
 	set(t):
 		danger = t
-		severity = ZoneSeverity.new(danger)
+		severity = Severity.new(danger)
 
 
 # Keep track of enemy ownership
@@ -86,7 +86,7 @@ var enemy_group: String
 var enemies: Array[EnemyType]
 var spawn: Vector2
 var spawns: Array[Vector2]
-var severity: ZoneSeverity
+var severity: Severity
 var original_location: Vector2
 
 # Unused
@@ -95,6 +95,7 @@ var waves: int
 
 # Optional
 var update_rate: float = 0.1
+var update_rate_curr: float
 
 @onready var enemy_manager: Spawner = $"."
 @onready var light_mask_node: Sprite2D = get_node("/root/Main/LightMask")
@@ -109,20 +110,22 @@ func _ready() -> void:
 
 	id += 1
 	instance_id = id
-	
-	print_debug(EnemyType.new("patat"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	# Lock in position so it doesn't move with the light mask
 	global_position = original_location
 	player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
 
 	if player_distance < trigger_radius:
 		_spawn_enemies()
-	_move_enemies()
-	await get_tree().create_timer(update_rate).timeout
+		
+	if update_rate_curr < 0:
+		_move_enemies()
+		update_rate_curr = update_rate
+	else:
+		update_rate_curr -= delta
 
 
 func _enemy_pool_to_array() -> Array[EnemyType]:

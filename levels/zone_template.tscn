@@ -596,7 +596,7 @@ danger = 3
 [node name="SpawnLocations" type="Node2D" parent="."]
 
 [node name="Spawn1" type="Marker2D" parent="SpawnLocations"]
-position = Vector2(689, 285)
+position = Vector2(833, 333)
 
 [node name="Spawn2" type="Marker2D" parent="SpawnLocations"]
 position = Vector2(225, 815)

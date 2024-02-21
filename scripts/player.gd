@@ -6,11 +6,13 @@ const LIGHT = 0.25
 
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
+var health: int = 50
 var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
 @onready var pistol: Pistol = $Pistol
-@onready var camera_2d: Camera2D = $Camera2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var player_camera: Camera2D = $Camera2D
 @onready var pickup_radius: Area2D = $PickupRadius
 @onready var shadow_caster: PointLight2D = $ShadowCaster
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
@@ -45,11 +47,30 @@ func _camera_mode(mode: String) -> void:
 		"light_ahead":
 			shadow_caster.position = lerp(shadow_caster.position, direction * CAMERA_SPEED, 0.1)
 		"camera_ahead":
-			camera_2d.offset = lerp(camera_2d.offset, direction * CAMERA_SPEED, 0.1)
+			player_camera.offset = lerp(player_camera.offset, direction * CAMERA_SPEED, 0.1)
 		"camera_drag":
-			camera_2d.offset = lerp(camera_2d.offset, -direction * CAMERA_SPEED, 0.1)
+			player_camera.offset = lerp(player_camera.offset, -direction * CAMERA_SPEED, 0.1)
 		_:
 			return
 
 func _on_flicker_timeout() -> void:
 	light_energy = randf_range(LIGHT - flicker_intensity, LIGHT + flicker_intensity)
+	
+func damage(attack: int) -> void:
+	if health > 0:
+		health -= attack
+	else:
+		hide()
+		set_physics_process(false)
+		var pikachu := Sprite2D.new()
+		pikachu.texture = load("res://assets/pikachu.png")
+		pikachu.scale = Vector2(0.1, 0.1)
+		pikachu.global_position = global_position
+		get_tree().root.add_child(pikachu)
+		var tween := create_tween()
+		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		damage(body.attack)

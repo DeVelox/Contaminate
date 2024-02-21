@@ -1,7 +1,9 @@
 class_name Enemy extends StaticBody2D
 
 @export var health := 3
+@export var attack := 1
 @export var speed := 100.0
+@export var tier := 1
 @export var cost := 1
 var direction := Vector2.ZERO
 var motion := Vector2.ZERO
