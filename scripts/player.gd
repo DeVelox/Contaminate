@@ -18,6 +18,7 @@ var flicker_intensity: float = 0.05
 @onready var pickup_radius: Area2D = $PickupRadius
 @onready var shadow_caster: PointLight2D = $ShadowCaster
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
@@ -44,16 +45,16 @@ func _physics_process(delta: float) -> void:
 
 func _roll() -> void:
 	if Input.is_action_just_pressed("roll") and not roll_disabled:
-		set_deferred("collision_layer", 0)
+		collision.set_deferred("disabled", true)
 		invuln_frames = 3
 		roll_disabled = 60
-		velocity = direction * SPEED * 5
+		velocity = direction * SPEED * 6
 	if roll_disabled > 0:
 		roll_disabled -= 1
 	if invuln_frames > 0:
 		invuln_frames -= 1
 	else:
-		set_deferred("collision_layer", 1)
+		collision.set_deferred("disabled", false)
 	
 		
 func _pickup() -> void:
