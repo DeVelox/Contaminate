@@ -62,23 +62,23 @@ func set_shock_damage(damage) -> int:
 	_shock_damage = damage
 	return _shock_damage
 	
-func get_base_shock_slow() -> int:
+func get_base_shock_slow() -> float:
 	return _base_shock_slow
 
-func get_shock_slow() -> int:
+func get_shock_slow() -> float:
 	return _shock_slow
 
-func set_shock_slow(slow) -> int:
+func set_shock_slow(slow) -> float:
 	_shock_slow = slow
 	return _shock_slow
 
-func get_base_shock_duration() -> int:
+func get_base_shock_duration() -> float:
 	return _base_shock_duration
 
-func get_shock_duration() -> int:
+func get_shock_duration() -> float:
 	return _shock_duration
 
-func set_shock_duration(duration) -> int:
+func set_shock_duration(duration) -> float:
 	_shock_duration = duration
 	return _shock_duration
 
