@@ -3,6 +3,7 @@ extends CenterContainer
 var toggled: bool
 var zone_class: Zone = load("res://scripts/zone.gd").new()
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -19,7 +20,6 @@ func _process(_delta: float) -> void:
 			toggled = true
 			get_tree().paused = true
 			show()
-	pass
 
 
 func _on_restart_pressed() -> void:

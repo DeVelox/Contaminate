@@ -12,7 +12,7 @@ const MAP_SIZE = 100
 @export var max_rarity: Rarity = Rarity.COMMON
 
 var map_location: Vector2i
-var bounds: Rect2i = Rect2i(0, 0, MAP_SIZE, MAP_SIZE)
+var bounds := Rect2i(0, 0, MAP_SIZE, MAP_SIZE)
 
 @onready var zone_container := get_node("/root/Main/Zones")
 @onready var player := get_node("/root/Main/Player")

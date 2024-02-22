@@ -41,7 +41,11 @@ func _physics_process(_delta: float) -> void:
 	_pickup()
 
 	#shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
-	point_light_2d.offset = lerp(point_light_2d.offset, Vector2(randf_range(-LIGHT_SHAKE, LIGHT_SHAKE), randf_range(-LIGHT_SHAKE, LIGHT_SHAKE)), 0.25)
+	point_light_2d.offset = lerp(
+		point_light_2d.offset,
+		Vector2(randf_range(-LIGHT_SHAKE, LIGHT_SHAKE), randf_range(-LIGHT_SHAKE, LIGHT_SHAKE)),
+		0.25
+	)
 	progress_bar.value = pistol.heat_level
 
 
