@@ -189,16 +189,5 @@ func _spawn_enemies() -> void:
 func _move_enemies() -> void:
 	if not spawned:
 		return
-
-	if not enemy_instances.is_empty():
-		for i in enemy_instances:
-			i.direction = (player.global_position - i.global_position).normalized()
-
-
-func set_enemy_physics() -> void:
-	if not physics_disabled:
-		physics_disabled = true
-		get_tree().call_group(enemy_group, "enable_physics")
-	elif physics_disabled:
-		physics_disabled = false
-		get_tree().call_group(enemy_group, "enable_physics")
+		
+	get_tree().call_group("aggro", "set_direction", player.global_position)

@@ -2,6 +2,8 @@ class_name Enemy extends StaticBody2D
 
 enum SpeedGroup { SHOCK, KNEE_CAP, BOOST, MISC }
 
+signal speed_changed
+
 const BASE_SPEED = 100.0
 const MIN_SPEED = 10.0
 const MAX_SPEED = 200.0
@@ -16,11 +18,12 @@ const BOBBING = 45.0
 var direction := Vector2.ZERO
 var motion := Vector2.ZERO
 var velocity := Vector2.ZERO
-var physics := true
 var infection_count: int = 0
 
 var speed_flat: Array[float]
+var speed_flat_calc: float
 var speed_multi: Array[float]
+var speed_multi_calc: float
 
 var enemy_id: int
 
@@ -37,15 +40,18 @@ func _ready() -> void:
 
 	speed_flat.resize(SpeedGroup.size())
 	speed_multi.resize(SpeedGroup.size())
+	
+	speed_changed.connect(_speed_calc)
 
-	#apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
-	#apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
-	#apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
+	set_physics_process(false)
+	apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
+	apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
+	apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
 
 
 func _physics_process(delta: float) -> void:
 	speed = clamp(
-		(BASE_SPEED + speed_flat.reduce(_sum)) * (1 + speed_multi.reduce(_sum)),
+		(BASE_SPEED + speed_flat_calc) * (1 + speed_multi_calc),
 		MIN_SPEED,
 		MAX_SPEED
 	)
@@ -55,10 +61,6 @@ func _physics_process(delta: float) -> void:
 	velocity = lerp(velocity, motion, 0.1)
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, randf_range(-BOBBING, BOBBING), 0.1)
 	move_and_collide(velocity, false, 1.0)
-
-
-func _process(_delta: float) -> void:
-	set_physics_process(physics)
 
 
 func damage(amount) -> void:
@@ -89,21 +91,29 @@ func apply_speed_mod(
 	if group == SpeedGroup.MISC:
 		if multi:
 			speed_multi[group] += amount / 100.0
+			speed_changed.emit()
 			await get_tree().create_timer(duration).timeout
 			speed_multi[group] -= amount / 100.0
+			speed_changed.emit()
 		else:
 			speed_flat[group] += amount
+			speed_changed.emit()
 			await get_tree().create_timer(duration).timeout
 			speed_flat[group] -= amount
+			speed_changed.emit()
 	else:
 		if multi and absf(amount / 100.0) > absf(speed_multi[group]):
 			speed_multi[group] = amount / 100.0
+			speed_changed.emit()
 			await get_tree().create_timer(duration).timeout
 			speed_multi[group] = 0.0
+			speed_changed.emit()
 		elif absf(amount) > absf(speed_flat[group]):
 			speed_flat[group] = amount
+			speed_changed.emit()
 			await get_tree().create_timer(duration).timeout
 			speed_flat[group] = 0.0
+			speed_changed.emit()
 
 
 func infect() -> void:
@@ -111,14 +121,17 @@ func infect() -> void:
 		infection_timer.start()
 	infection_count += MechanicsManager.get_infection_count()
 
-
-func disable_physics() -> void:
-	physics = false
-
-
-func enable_physics() -> void:
-	physics = true
-
+func set_aggro(aggro: bool) -> void:
+	if aggro:
+		add_to_group("aggro")
+		set_physics_process(true)
+	else:
+		remove_from_group("aggro")
+		set_physics_process(false)
+		
+	
+func set_direction(player_pos: Vector2) -> void:
+	direction = (player_pos - global_position).normalized()
 
 func _check_infection() -> void:
 	if infection_count > 0:
@@ -131,3 +144,7 @@ func _check_infection() -> void:
 
 func _sum(a: float, b: float) -> float:
 	return a + b
+	
+func _speed_calc() -> void:
+	speed_multi_calc = speed_multi.reduce(_sum)
+	speed_flat_calc = speed_flat.reduce(_sum)

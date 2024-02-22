@@ -22,7 +22,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		if pen >= 0:
 			UpgradeManager.on_hit.emit(body)
-			body.damage()
+			body.damage(1)
 			pen -= 1
 		else:
 			queue_free()

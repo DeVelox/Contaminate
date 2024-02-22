@@ -1,10 +1,14 @@
 class_name Player extends CharacterBody2D
 
+signal just_shot
+
 const SPEED = 300.0
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
 const LIGHT_SHAKE = 25
 
+@export var aggro_radius: float
+@export var aggro_shoot_radius: float
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
 var health: int = 50
@@ -21,10 +25,13 @@ var flicker_intensity: float = 0.05
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var aggro_collision: CollisionShape2D = $AggroRange/CollisionShape2D
 
 
 func _ready() -> void:
 	shadow_caster.energy = LIGHT
+	aggro_collision.shape.radius = aggro_radius
+	just_shot.connect(_expand_aggro_range)
 
 
 func _physics_process(_delta: float) -> void:
@@ -100,7 +107,18 @@ func damage(attack: int) -> void:
 		var tween := create_tween()
 		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
 
+func _expand_aggro_range() -> void:
+	aggro_collision.shape.radius = aggro_shoot_radius
+	await get_tree().create_timer(0.1).timeout
+	aggro_collision.shape.radius = aggro_radius
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_aggro_range_body_entered(body: Node2D) -> void:
+	if body is Elite:
+		body.set_elite_aggro()
+	if body is Enemy:
+		body.set_aggro(true)
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		damage(body.attack)

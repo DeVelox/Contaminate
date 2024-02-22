@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=12 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
@@ -30,10 +30,14 @@ light_mode = 2
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
 size = Vector2(20, 2)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1xxo2"]
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_mask = 0
 script = ExtResource("1_nquv5")
+aggro_radius = 250.0
+aggro_shoot_radius = 500.0
 camera = "camera_drag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -83,11 +87,19 @@ offset_right = 10.0
 offset_bottom = -15.0
 texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_5rsor")
 
+[node name="AggroRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+shape = SubResource("CircleShape2D_1xxo2")
+
 [connection signal="timeout" from="Flicker" to="." method="_on_flicker_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]

@@ -588,10 +588,7 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Detail"
 layer_2/tile_data = PackedInt32Array()
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("2_rspjw")]
-spawn_locations = NodePath("../SpawnLocations")
-enemy_pool = "enemy"
-danger = 3
+[node name="EnemyManager" parent="." instance=ExtResource("2_rspjw")]
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 
