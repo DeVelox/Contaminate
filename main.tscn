@@ -3,36 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5ngur"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
-[ext_resource type="PackedScene" uid="uid://sma8asr61yf6" path="res://zones/zone_template.tscn" id="1_oeh3k"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
+[ext_resource type="PackedScene" uid="uid://ckkh04ho2xxxs" path="res://zones/t1r1.tscn" id="2_qoi1m"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_ikhpl"]
 [ext_resource type="Script" path="res://scripts/options.gd" id="6_08hp1"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5ngur")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CHANGE_COLOUR_HERE" type="CanvasModulate" parent="."]
 color = Color(0.403922, 0.117647, 0.333333, 1)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(1920, 1080)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15118.0
-offset_top = -8319.0
-offset_right = -13198.0
-offset_bottom = -7239.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(16, 16)
-color = Color(0.239216, 0.027451, 0.0352941, 1)
 
 [node name="Zones" type="Node2D" parent="."]
 
-[node name="Zone" parent="Zones" instance=ExtResource("1_oeh3k")]
+[node name="Zone" parent="Zones" instance=ExtResource("2_qoi1m")]
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1
