@@ -6,6 +6,8 @@ const BASE_SPEED = 100.0
 const MIN_SPEED = 10.0
 const MAX_SPEED = 200.0
 
+const BOBBING = 45.0
+
 @export var health := 100
 @export var attack := 1
 @export var speed := 100.0
@@ -21,6 +23,8 @@ var speed_flat: Array[float]
 var speed_multi: Array[float]
 
 var enemy_id: int
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 @onready var infection_timer: Timer = $InfectionTimer
 
@@ -49,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	#print_debug(speed)
 	motion = (direction * speed * delta)
 	velocity = lerp(velocity, motion, 0.1)
+	sprite.rotation_degrees = lerp(sprite.rotation_degrees, randf_range(-BOBBING, BOBBING), 0.1)
 	move_and_collide(velocity, false, 1.0)
 
 
