@@ -11,7 +11,7 @@ class EnemyType:
 	func _init(enemy: String) -> void:
 		if not ResourceLoader.exists("res://entities/enemies/" + enemy + ".tscn"):
 			return
-		basic_enemy = load("res://entities/enemies/" + enemy + ".tscn")
+		basic_enemy = load("res://entities/enemies/" + enemy + "_basic.tscn")
 		elite_enemy = load("res://entities/enemies/" + enemy + "_elite.tscn")
 		boss_enemy = load("res://entities/enemies/" + enemy + "_boss.tscn")
 
@@ -189,5 +189,5 @@ func _spawn_enemies() -> void:
 func _move_enemies() -> void:
 	if not spawned:
 		return
-		
+
 	get_tree().call_group("aggro", "set_direction", player.global_position)

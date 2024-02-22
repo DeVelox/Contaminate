@@ -107,10 +107,12 @@ func damage(attack: int) -> void:
 		var tween := create_tween()
 		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
 
+
 func _expand_aggro_range() -> void:
 	aggro_collision.shape.radius = aggro_shoot_radius
 	await get_tree().create_timer(0.1).timeout
 	aggro_collision.shape.radius = aggro_radius
+
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if body is Elite:
