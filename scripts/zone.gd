@@ -12,6 +12,7 @@ const MAP_SIZE = 100
 @export var max_rarity: Rarity = Rarity.COMMON
 
 var map_location: Vector2i
+var bounds: Rect2i = Rect2i(0, 0, MAP_SIZE, MAP_SIZE)
 
 @onready var zone_container := get_node("/root/Main/Zones")
 @onready var player := get_node("/root/Main/Player")
@@ -65,6 +66,8 @@ func _load_zone(direction: StringName) -> void:
 
 
 func _instantiate_zone(zone: String, direction: Vector2i) -> void:
+	if not bounds.has_point(map_location + direction):
+		return
 	if not loaded.get_bitv(map_location + direction):
 		var load_zone := load(zone).instantiate() as Zone
 		var new_map_location = map_location + direction

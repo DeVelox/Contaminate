@@ -41,6 +41,10 @@ shape = SubResource("CapsuleShape2D_5rsor")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+limit_left = -96000
+limit_top = -96000
+limit_right = 96000
+limit_bottom = 96000
 position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

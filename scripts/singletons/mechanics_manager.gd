@@ -83,5 +83,5 @@ func set_shock_duration(duration) -> float:
 	return _shock_duration
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
