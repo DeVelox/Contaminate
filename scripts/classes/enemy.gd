@@ -49,9 +49,10 @@ func _ready() -> void:
 	speed_changed.connect(_speed_calc)
 
 	set_physics_process(false)
-	apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
-	apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
-	apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
+	
+	#apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
+	#apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
+	#apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
 
 
 func _physics_process(delta: float) -> void:
