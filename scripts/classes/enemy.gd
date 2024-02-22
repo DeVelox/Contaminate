@@ -32,15 +32,15 @@ func _ready() -> void:
 	speed_flat.resize(SpeedGroup.size())
 	speed_multi.resize(SpeedGroup.size())
 	
-	apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
-	apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
-	apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
+	#apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
+	#apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
+	#apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
 
 
 func _physics_process(delta: float) -> void:
 	speed = clamp((BASE_SPEED + speed_flat.reduce(_sum)) * (1 + speed_multi.reduce(_sum)), MIN_SPEED, MAX_SPEED)
-	if enemy_id == 1:
-		print_debug(speed)
+	#if enemy_id == 1:
+		#print_debug(speed)
 	motion = (direction * speed * delta)
 	velocity = lerp(velocity, motion, 0.1)
 	move_and_collide(velocity, false, 1.0)
