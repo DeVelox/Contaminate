@@ -4,7 +4,7 @@ class_name Elite extends Enemy
 
 var got_the_boys: bool
 @onready var aggro_range: Area2D = $AggroRange
-@onready var s: CollisionShape2D = $AggroRange/CollisionShape2D
+@onready var collision: CollisionShape2D = $AggroRange/CollisionShape2D
 
 func _init() -> void:
 	health = 3
@@ -12,7 +12,7 @@ func _init() -> void:
 	speed = 150
 	
 func _ready() -> void:
-	s.shape.radius = reinforcement_radius
+	collision.shape.radius = reinforcement_radius
 	_monitoring(false)
 	
 func set_elite_aggro() -> void:

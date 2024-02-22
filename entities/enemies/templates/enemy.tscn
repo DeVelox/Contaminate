@@ -37,5 +37,4 @@ texture = ExtResource("3_1nj1j")
 
 [node name="ShockTimer" type="Timer" parent="."]
 
-[connection signal="screen_exited" from="Deaggro" to="." method="set_aggro" binds= [false]]
 [connection signal="timeout" from="InfectionTimer" to="." method="_check_infection"]

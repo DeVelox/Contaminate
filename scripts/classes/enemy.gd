@@ -15,6 +15,8 @@ const BOBBING = 45.0
 @export var speed := 100.0
 @export var tier := 1
 @export var cost := 1
+@export var deaggro_radius := 1000.0
+
 var direction := Vector2.ZERO
 var motion := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -28,7 +30,7 @@ var speed_multi_calc: float
 var enemy_id: int
 
 @onready var sprite: Sprite2D = $Sprite2D
-
+@onready var deaggro: VisibleOnScreenNotifier2D = $Deaggro
 @onready var infection_timer: Timer = $InfectionTimer
 
 static var id: int
@@ -37,7 +39,10 @@ static var id: int
 func _ready() -> void:
 	id += 1
 	enemy_id = id
-
+	
+	deaggro.scale = Vector2(deaggro_radius / 10, deaggro_radius / 10)
+	deaggro.screen_exited.connect(set_aggro.bind(false))
+	
 	speed_flat.resize(SpeedGroup.size())
 	speed_multi.resize(SpeedGroup.size())
 	
