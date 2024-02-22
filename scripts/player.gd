@@ -19,6 +19,7 @@ var flicker_intensity: float = 0.05
 @onready var shadow_caster: PointLight2D = $ShadowCaster
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var point_light_2d: PointLight2D = $PointLight2D
 
 
 func _ready() -> void:
@@ -39,6 +40,7 @@ func _physics_process(_delta: float) -> void:
 	_pickup()
 
 	shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
+	point_light_2d.offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))
 	progress_bar.value = pistol.heat_level
 
 

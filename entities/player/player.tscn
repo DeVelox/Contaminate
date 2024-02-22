@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=11 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
@@ -8,6 +8,18 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmbbx"]
 size = Vector2(20, 30)
+
+[sub_resource type="Gradient" id="Gradient_pe570"]
+offsets = PackedFloat32Array(0, 0.501961, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.341176, 0.341176, 0.341176, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ps2w7"]
+gradient = SubResource("Gradient_pe570")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.75641, 0.230769)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ifrs4"]
 radius = 50.0
@@ -43,6 +55,9 @@ player = NodePath("..")
 scale = Vector2(1.5, 1.5)
 shadow_enabled = true
 texture = ExtResource("3_22jw8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_ps2w7")
 
 [node name="PickupRadius" type="Area2D" parent="."]
 collision_mask = 4
