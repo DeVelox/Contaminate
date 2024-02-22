@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 const SPEED = 300.0
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
+const LIGHT_SHAKE = 25
 
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
@@ -39,8 +40,8 @@ func _physics_process(_delta: float) -> void:
 	_roll()
 	_pickup()
 
-	shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
-	point_light_2d.offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))
+	#shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
+	point_light_2d.offset = lerp(point_light_2d.offset, Vector2(randf_range(-LIGHT_SHAKE, LIGHT_SHAKE), randf_range(-LIGHT_SHAKE, LIGHT_SHAKE)), 0.25)
 	progress_bar.value = pistol.heat_level
 
 
