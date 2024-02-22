@@ -9,7 +9,7 @@ class EnemyType:
 	var boss_enemy: PackedScene
 
 	func _init(enemy: String) -> void:
-		if not ResourceLoader.exists("res://entities/enemies/" + enemy + ".tscn"):
+		if not ResourceLoader.exists("res://entities/enemies/" + enemy + "_basic.tscn"):
 			return
 		basic_enemy = load("res://entities/enemies/" + enemy + "_basic.tscn")
 		elite_enemy = load("res://entities/enemies/" + enemy + "_elite.tscn")
@@ -134,7 +134,7 @@ func _enemy_pool_to_array() -> Array[EnemyType]:
 	var enemy: EnemyType
 	var enemy_string := enemy_pool.replace(" ", "")
 	for i in enemy_string.split(","):
-		if not ResourceLoader.exists("res://entities/enemies/" + i + ".tscn"):
+		if not ResourceLoader.exists("res://entities/enemies/" + i + "_basic.tscn"):
 			continue
 		enemy = EnemyType.new(i)
 		if enemy:
