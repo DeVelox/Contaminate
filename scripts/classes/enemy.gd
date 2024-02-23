@@ -45,7 +45,8 @@ func _ready() -> void:
 	speed_multi.resize(SpeedGroup.size())
 
 	speed_changed.connect(_speed_calc)
-
+	
+	$Sprite2D.hide()
 	set_physics_process(false)
 
 	#apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
@@ -127,9 +128,11 @@ func infect() -> void:
 func set_aggro(aggro: bool) -> void:
 	if aggro:
 		add_to_group("aggro")
+		$Sprite2D.show()
 		set_physics_process(true)
 	else:
 		remove_from_group("aggro")
+		$Sprite2D.hide()
 		set_physics_process(false)
 
 
