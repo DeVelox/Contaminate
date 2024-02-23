@@ -9,6 +9,7 @@ var gun_length: float = 20
 
 @onready var player: Player = get_node("/root/Main/Player")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = Vector2(gun_offset, 0)

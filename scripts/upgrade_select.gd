@@ -4,8 +4,10 @@ const UPGRADE = preload("res://entities/prefabs/upgrade.tscn")
 
 @onready var hbox: HBoxContainer = $PanelContainer/MarginContainer/CenterContainer/HBoxContainer
 
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+
 
 func upgrade_select() -> void:
 	var upgrade_selection := UpgradeManager.random_upgrades() as Array[Upgrade]
@@ -20,7 +22,8 @@ func upgrade_select() -> void:
 		selection.pressed.connect(_close)
 		hbox.add_child.call_deferred(selection)
 	show()
-	
+
+
 func _close() -> void:
 	get_tree().paused = false
 	hide()

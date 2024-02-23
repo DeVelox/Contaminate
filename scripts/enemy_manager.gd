@@ -49,7 +49,7 @@ class Severity:
 			for i in spawn_locations.get_children():
 				spawns.append(i.global_position)
 			spawn = spawns.pick_random()
-			
+
 @export var enemy_pool: String:
 	set(ep):
 		enemy_pool = ep
@@ -200,17 +200,20 @@ func _move_enemies() -> void:
 		return
 
 	get_tree().call_group("aggro", "set_direction", player.global_position)
-	
+
+
 func _sum_weights() -> float:
 	var accum: float = 0.0
 	for i in enemies:
 		accum += i.weight
 	return accum
-	
+
+
 func _normalize_weights() -> void:
 	var sum: float = _sum_weights()
 	for i in enemies:
 		i.weight /= sum
+
 
 func _get_random_enemy() -> EnemyType:
 	var accum: float = 0.0

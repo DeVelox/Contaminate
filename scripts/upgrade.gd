@@ -8,6 +8,7 @@ extends Button
 @onready var bname: Label = $MarginContainer/VBoxContainer/Name
 @onready var bdesc: Label = $MarginContainer/VBoxContainer/Desc
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bicon.texture = load(uicon)

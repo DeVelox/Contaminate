@@ -2,8 +2,10 @@ extends CenterContainer
 
 const PISTOL = preload("res://entities/weapons/pistol.tscn")
 
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+
 
 func weapon_select() -> void:
 	get_tree().paused = true

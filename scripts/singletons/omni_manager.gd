@@ -28,11 +28,13 @@ func add_upgrade(upgrade: String) -> void:
 		upgrades[upgrade].level += 1
 		upgrades[upgrade].add()
 
+
 func remove_upgrade(upgrade: String) -> void:
 	if upgrades[upgrade].level > 0:
 		upgrades[upgrade].level = 0
 		upgrades[upgrade].remove()
-		
+
+
 func random_upgrades() -> Array[Upgrade]:
 	var selection := available_upgrades
 	var selected_upgrades: Array[Upgrade] = []
@@ -42,10 +44,12 @@ func random_upgrades() -> Array[Upgrade]:
 		selected_upgrades.append(upgrades[random_selection])
 		selection.erase(random_selection)
 	return selected_upgrades
-		
+
+
 func reset_upgrades() -> void:
 	for i in upgrades:
 		remove_upgrade(i)
+
 
 func _register_upgrades(folder: String, script: String) -> void:
 	var dir = DirAccess.open(folder)

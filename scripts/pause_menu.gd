@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 		return
 	if %WeaponSelect.is_visible():
 		return
-		
+
 	if Input.is_action_just_pressed("menu"):
 		if is_visible() and toggled:
 			toggled = false
