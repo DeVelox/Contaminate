@@ -12,6 +12,7 @@ signal on_hit(enemy: Enemy)
 signal on_damage(enemy: Enemy)
 
 var upgrades: Dictionary
+var available_upgrades: Array[StringName]
 
 
 func _ready() -> void:
@@ -31,6 +32,16 @@ func remove_upgrade(upgrade: String) -> void:
 	if upgrades[upgrade].level > 0:
 		upgrades[upgrade].level = 0
 		upgrades[upgrade].remove()
+		
+func random_upgrades() -> Array[Upgrade]:
+	var selection := available_upgrades
+	var selected_upgrades: Array[Upgrade] = []
+	var random_selection: String
+	for i in selection:
+		random_selection = selection.pick_random()
+		selected_upgrades.append(upgrades[random_selection])
+		selection.erase(random_selection)
+	return selected_upgrades
 		
 func reset_upgrades() -> void:
 	for i in upgrades:

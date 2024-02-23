@@ -9,10 +9,12 @@ func _init() -> void:
 func add() -> void:
 	if not UpgradeManager.on_hit.is_connected(_summon_lightning):
 		UpgradeManager.on_hit.connect(_summon_lightning)
+	UpgradeManager.available_upgrades.erase(uname)
 		
 func remove() -> void:
 	if UpgradeManager.on_hit.is_connected(_summon_lightning):
 		UpgradeManager.on_hit.disconnect(_summon_lightning)
+	UpgradeManager.available_upgrades.append(uname)
 
 func _summon_lightning(enemy) -> void:
 	var lightning = LIGHTNING_ROD.instantiate()
@@ -26,7 +28,8 @@ func _register() -> void:
 	rarity = Rarity.RARE
 	description = "Does the zap-zap."
 	logic = "res://scripts/upgrades/lightning_rod/lightning_rod_manager.gd"
-	icon = "res://assets/lightning.png"
+	icon = "res://assets/lightning-branches.svg"
 	level = 0
 
 	UpgradeManager.upgrades[uname] = self
+	UpgradeManager.available_upgrades.append(uname)

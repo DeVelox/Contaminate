@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://lgvewjetgk0v"]
+[gd_scene load_steps=9 format=3 uid="uid://lgvewjetgk0v"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_3lf01"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_5xlqd"]
 [ext_resource type="Script" path="res://scripts/options.gd" id="2_vh8js"]
+[ext_resource type="Texture2D" uid="uid://dja4cnmrwq3vd" path="res://assets/winchester-rifle.svg" id="4_rgsa0"]
+[ext_resource type="Script" path="res://scripts/weapon_select.gd" id="4_tsyyj"]
+[ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="5_5dfyb"]
+[ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="6_orimu"]
+[ext_resource type="Script" path="res://scripts/upgrade_select.gd" id="8_3h43c"]
 
 [node name="Menus" type="CanvasLayer"]
 
@@ -122,6 +127,160 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 
+[node name="WeaponSelect" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_tsyyj")
+
+[node name="PanelContainer" type="PanelContainer" parent="WeaponSelect"]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Rifle" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rgsa0")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Rifle"
+horizontal_alignment = 1
+
+[node name="Shotgun" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_5dfyb")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Shotgun"
+horizontal_alignment = 1
+
+[node name="Explosive" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_orimu")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Explosive"
+horizontal_alignment = 1
+
+[node name="UpgradeSelect" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_3h43c")
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeSelect"]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeSelect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="CenterContainer" type="CenterContainer" parent="UpgradeSelect/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeSelect/PanelContainer/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartGame" to="MainMenu" method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="MainMenu" method="_on_options_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
@@ -130,3 +289,6 @@ step = 0.01
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Master" to="Options" method="_on_master_value_changed"]
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Music" to="Options" method="_on_music_value_changed"]
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Sounds" to="Options" method="_on_sounds_value_changed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle" to="WeaponSelect" method="_on_rifle_pressed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun" to="WeaponSelect" method="_on_shotgun_pressed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive" to="WeaponSelect" method="_on_explosive_pressed"]

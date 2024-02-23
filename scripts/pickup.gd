@@ -21,5 +21,7 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func activate() -> void:
+	var weapon_select = get_node("/root/Main/Menus/UpgradeSelect")
+	weapon_select.upgrade_select()
 	UpgradeManager.add_upgrade(upgrade)
 	queue_free()
