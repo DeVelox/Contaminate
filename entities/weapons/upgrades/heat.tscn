@@ -16,7 +16,7 @@ func _ready() -> void:
 		parent.heat_level = heat_level
 		
 func _process(delta: float) -> void:
-	heat_level = clamp(heat_level + delta * 10, 0, 100)
+	heat_level = clamp(heat_level + delta * 50, 0, 100)
 	parent.heat_level = heat_level
 		
 func _heat_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
