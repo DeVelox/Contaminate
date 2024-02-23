@@ -44,7 +44,7 @@ camera = "camera_drag"
 shape = SubResource("CapsuleShape2D_5rsor")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(2, 2)
 limit_left = -96000
 limit_top = -96000
 limit_right = 96000

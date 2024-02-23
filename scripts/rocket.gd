@@ -14,5 +14,6 @@ func _on_contact(_body: Node2D) -> void:
 	
 func _on_explosion(body: Node2D) -> void:
 	if body is Enemy:
-		UpgradeManager.on_hit.emit(body)
+		if randf() < 0.1:
+			UpgradeManager.on_hit.emit(body)
 		body.damage(damage)
