@@ -15,6 +15,7 @@ func _point_gun(player: Player, gun_offset: float) -> void:
 
 
 func _shoot_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
+	SoundManager.sfx(SoundManager.PISTOL)
 	var pass_ammo = ammo.duplicate()
 	var direction = player.velocity.normalized()
 	if direction.is_zero_approx():

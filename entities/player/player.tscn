@@ -56,8 +56,7 @@ position = Vector2(0, -5)
 texture = SubResource("PlaceholderTexture2D_kmbbx")
 offset = Vector2(0, 5)
 
-[node name="Pistol" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_q177l")]
-player = NodePath("..")
+[node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 
 [node name="ShadowCaster" type="PointLight2D" parent="."]
 scale = Vector2(1.5, 1.5)

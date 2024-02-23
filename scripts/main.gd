@@ -1,10 +1,11 @@
 extends Node2D
 
-@onready var pause_menu = get_node("/root/Main/Menus/PauseMenu")
+@onready var pause_menu := get_node("/root/Main/Menus/PauseMenu")
+@onready var weapon_popup := get_node("/root/Main/Menus/WeaponSelect")
 
 func _ready() -> void:
 	SoundManager.crossfade(SoundManager.MUSIC_NORMAL)
-
+	weapon_popup.weapon_select()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):

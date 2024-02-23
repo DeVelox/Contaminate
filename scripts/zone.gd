@@ -15,7 +15,7 @@ var map_location: Vector2i
 var bounds := Rect2i(0, 0, MAP_SIZE, MAP_SIZE)
 
 @onready var zone_container := get_node("/root/Main/Zones")
-@onready var player := get_node("/root/Main/Player")
+@onready var player: Player = get_node("/root/Main/Player")
 
 static var loaded: BitMap
 static var count: int

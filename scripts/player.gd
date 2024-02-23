@@ -17,7 +17,7 @@ var roll_disabled: int
 var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
-@onready var pistol: Pistol = $Pistol
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var player_camera: Camera2D = $Camera2D
 @onready var pickup_radius: Area2D = $PickupRadius
@@ -53,7 +53,6 @@ func _physics_process(_delta: float) -> void:
 		Vector2(randf_range(-LIGHT_SHAKE, LIGHT_SHAKE), randf_range(-LIGHT_SHAKE, LIGHT_SHAKE)),
 		0.25
 	)
-	progress_bar.value = pistol.heat_level
 
 
 func _roll() -> void:

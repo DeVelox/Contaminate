@@ -1,6 +1,5 @@
 class_name Pistol extends Weapon
 
-@export var player: Player
 @export var ammo_type: PackedScene
 
 var ammo: Ammo
@@ -8,6 +7,7 @@ var shoot_func: Callable = _shoot_gun
 var gun_offset: float = 15
 var gun_length: float = 20
 
+@onready var player: Player = get_node("/root/Main/Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,9 +19,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_point_gun(player, gun_offset)
+	player.progress_bar.value = heat_level
 
 	if Input.is_action_just_pressed("shoot"):
-		SoundManager.sfx(SoundManager.PISTOL)
 		# Ability to override per weapon or just use player default
 		#player.aggro_shoot_radius = 300
 		player.just_shot.emit()

@@ -22,8 +22,8 @@ func upgrade_select() -> void:
 	show()
 	
 func _close() -> void:
+	get_tree().paused = false
+	hide()
 	for i in hbox.get_children():
 		hbox.remove_child.call_deferred(i)
 		i.queue_free()
-	get_tree().paused = false
-	hide()
