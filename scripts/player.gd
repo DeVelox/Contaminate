@@ -58,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 
 func _roll() -> void:
 	if Input.is_action_just_pressed("roll") and not roll_disabled:
+		SoundManager.sfx(SoundManager.ROLL)
 		collision.set_deferred("disabled", true)
 		invuln_frames = 3
 		roll_disabled = 60
@@ -97,6 +98,7 @@ func damage(attack: int) -> void:
 	if health > 0:
 		health -= attack
 	else:
+		SoundManager.sfx(SoundManager.DEATH)
 		hide()
 		set_physics_process(false)
 		var pikachu := Sprite2D.new()
@@ -115,6 +117,7 @@ func _expand_aggro_range() -> void:
 
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
+	SoundManager.crossfade(SoundManager.MUSIC_COMBAT)
 	if body is Elite:
 		body.set_elite_aggro()
 	if body is Enemy:
@@ -123,4 +126,5 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
+		SoundManager.sfx(SoundManager.HIT)
 		damage(body.attack)

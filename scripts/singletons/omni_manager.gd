@@ -24,9 +24,17 @@ func create_scene(scene) -> void:
 
 func add_upgrade(upgrade: String) -> void:
 	if upgrades[upgrade].level == 0:
-		load(upgrades[upgrade].logic).new()
 		upgrades[upgrade].level += 1
+		upgrades[upgrade].add()
 
+func remove_upgrade(upgrade: String) -> void:
+	if upgrades[upgrade].level > 0:
+		upgrades[upgrade].level = 0
+		upgrades[upgrade].remove()
+		
+func reset_upgrades() -> void:
+	for i in upgrades:
+		remove_upgrade(i)
 
 func _register_upgrades(folder: String, script: String) -> void:
 	var dir = DirAccess.open(folder)
@@ -37,5 +45,5 @@ func _register_upgrades(folder: String, script: String) -> void:
 			if dir.current_is_dir():
 				_register_upgrades(folder + "/" + file, script)
 			elif file.ends_with(script):
-				load(folder + "/" + file).new(true)
+				load(folder + "/" + file).new()
 			file = dir.get_next()

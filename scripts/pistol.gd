@@ -21,6 +21,7 @@ func _process(_delta: float) -> void:
 	_point_gun(player, gun_offset)
 
 	if Input.is_action_just_pressed("shoot"):
+		SoundManager.sfx(SoundManager.PISTOL)
 		# Ability to override per weapon or just use player default
 		#player.aggro_shoot_radius = 300
 		player.just_shot.emit()

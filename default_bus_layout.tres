@@ -1,15 +1,45 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://d4cyry7arok20"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://d4cyry7arok20"]
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_lebgw"]
+resource_name = "Compressor"
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_mw6mw"]
+resource_name = "Compressor"
+threshold = -18.0
+sidechain = &"Sounds"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_qc4v1"]
+resource_name = "Reverb"
+room_size = 0.1
+damping = 0.1
+wet = 0.01
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_kh514"]
+resource_name = "EQ"
+band_db/32_hz = -60.0
+band_db/100_hz = -36.0
+band_db/3200_hz = -36.0
+band_db/10000_hz = -60.0
 
 [resource]
+bus/0/volume_db = -8.00903
+bus/0/effect/0/effect = SubResource("AudioEffectCompressor_lebgw")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectCompressor_mw6mw")
+bus/1/effect/0/enabled = true
 bus/2/name = &"Sounds"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_qc4v1")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectEQ_kh514")
+bus/2/effect/1/enabled = true

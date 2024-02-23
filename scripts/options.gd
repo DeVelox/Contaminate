@@ -3,9 +3,10 @@ extends CenterContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	%Master.value = db_to_linear(AudioServer.get_bus_volume_db(0))
 	%Music.value = db_to_linear(AudioServer.get_bus_volume_db(1))
+	%Sounds.value = db_to_linear(AudioServer.get_bus_volume_db(2))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,3 +22,7 @@ func _on_master_value_changed(value: float) -> void:
 
 func _on_music_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(1, linear_to_db(value))
+
+
+func _on_sounds_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(2, linear_to_db(value))

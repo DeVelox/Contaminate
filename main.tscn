@@ -1,34 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://bavnh0qellabo"]
+[gd_scene load_steps=7 format=3 uid="uid://bavnh0qellabo"]
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5ngur"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
 [ext_resource type="PackedScene" uid="uid://cr7pdhdr0ftkb" path="res://zones/t1r1.tscn" id="2_gpy0j"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_ikhpl"]
-[ext_resource type="Script" path="res://scripts/options.gd" id="6_08hp1"]
+[ext_resource type="PackedScene" uid="uid://lgvewjetgk0v" path="res://entities/prefabs/menus.tscn" id="6_pje3k"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5ngur")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.403922, 0.117647, 0.333333, 1)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(1920, 1080)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15118.0
-offset_top = -8319.0
-offset_right = -13198.0
-offset_bottom = -7239.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(16, 16)
-color = Color(0.239216, 0.027451, 0.0352941, 1)
 
 [node name="Zones" type="Node2D" parent="."]
 
@@ -44,92 +27,4 @@ player = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 position = Vector2(947, 970)
 
-[node name="Menus" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" type="CenterContainer" parent="Menus"]
-unique_name_in_owner = true
-visible = false
-offset_right = 1920.0
-offset_bottom = 1080.0
-script = ExtResource("5_ikhpl")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/PauseMenu"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Restart" type="Button" parent="Menus/PauseMenu/VBoxContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-text = "Restart"
-
-[node name="Options" type="Button" parent="Menus/PauseMenu/VBoxContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-text = "Options"
-
-[node name="MainMenu" type="Button" parent="Menus/PauseMenu/VBoxContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-text = "Main Menu"
-
-[node name="Options" type="CenterContainer" parent="Menus"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(1920, 1080)
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_08hp1")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Options"]
-layout_mode = 2
-
-[node name="Volume" type="PanelContainer" parent="Menus/Options/VBoxContainer"]
-custom_minimum_size = Vector2(600, 80)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Menus/Options/VBoxContainer/Volume"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Options/VBoxContainer/Volume/MarginContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Volume"
-
-[node name="HSeparator" type="HSeparator" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Master"
-
-[node name="Master" type="HSlider" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.01
-
-[node name="Label2" type="Label" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Music"
-
-[node name="Music" type="HSlider" parent="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.01
-
-[connection signal="pressed" from="Menus/PauseMenu/VBoxContainer/Restart" to="Menus/PauseMenu" method="_on_restart_pressed"]
-[connection signal="pressed" from="Menus/PauseMenu/VBoxContainer/Options" to="Menus/PauseMenu" method="_on_options_pressed"]
-[connection signal="value_changed" from="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Master" to="Menus/Options" method="_on_master_value_changed"]
-[connection signal="value_changed" from="Menus/Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Music" to="Menus/Options" method="_on_music_value_changed"]
+[node name="Menus" parent="." instance=ExtResource("6_pje3k")]

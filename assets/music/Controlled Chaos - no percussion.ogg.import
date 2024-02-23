@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bqymqch1krp5g"
+path="res://.godot/imported/Controlled Chaos - no percussion.ogg-68ae831c7240694ce7d0c3adc8655b0c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Controlled Chaos - no percussion.ogg"
+dest_files=["res://.godot/imported/Controlled Chaos - no percussion.ogg-68ae831c7240694ce7d0c3adc8655b0c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
