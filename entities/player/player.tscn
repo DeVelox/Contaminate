@@ -44,7 +44,7 @@ camera = "camera_drag"
 shape = SubResource("CapsuleShape2D_5rsor")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(0.5, 0.5)
 limit_left = -96000
 limit_top = -96000
 limit_right = 96000
@@ -76,14 +76,17 @@ shape = SubResource("CircleShape2D_ifrs4")
 wait_time = 0.1
 autostart = true
 
+[node name="Invuln" type="Timer" parent="."]
+one_shot = true
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
 material = SubResource("CanvasItemMaterial_my4c5")
 custom_minimum_size = Vector2(20, 2)
 offset_left = -10.0
-offset_top = -17.0
+offset_top = -18.0
 offset_right = 10.0
-offset_bottom = -15.0
+offset_bottom = -16.0
 texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
 
 [node name="Hurtbox" type="Area2D" parent="."]

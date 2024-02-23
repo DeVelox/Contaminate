@@ -23,6 +23,7 @@ func _fire_rate(player: Player, ammo: Ammo, gun_length: float) -> void:
 	for i in fire_rate:
 		shoot_func.call(player, ammo, gun_length)
 		await get_tree().create_timer(0.1).timeout
+	
 "
 
 [node name="FireRate" type="Node2D"]

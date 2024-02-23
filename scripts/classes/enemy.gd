@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	move_and_collide(velocity, false, 1.0)
 
 
-func damage(amount) -> void:
+func damage(amount: int) -> void:
 	health -= amount
 	try_kill()
 
@@ -76,9 +76,10 @@ func try_kill() -> bool:
 
 
 func kill() -> void:
-	var drop = load("res://entities/upgrades/pickup.tscn").instantiate()
-	drop.position = global_position
-	get_tree().root.add_child.call_deferred(drop)
+	if randf() < 0.05:
+		var drop = load("res://entities/upgrades/pickup.tscn").instantiate()
+		drop.position = global_position
+		get_tree().current_scene.add_child.call_deferred(drop)
 
 	UpgradeManager.on_kill.emit(self)
 	remove_from_group("aggro")

@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal just_shot
 
-const SPEED = 300.0
+const SPEED = 200.0
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
 const LIGHT_SHAKE = 25
@@ -26,6 +26,7 @@ var flicker_intensity: float = 0.05
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var aggro_collision: CollisionShape2D = $AggroRange/CollisionShape2D
+@onready var invuln: Timer = $Invuln
 
 
 func _ready() -> void:
@@ -94,8 +95,12 @@ func _on_flicker_timeout() -> void:
 
 
 func damage(attack: int) -> void:
+	if invuln.time_left:
+		return
 	if health > 0:
+		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
+		invuln.start(0.5)
 	else:
 		SoundManager.sfx(SoundManager.DEATH)
 		hide()
@@ -125,5 +130,4 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		SoundManager.sfx(SoundManager.HIT)
 		damage(body.attack)

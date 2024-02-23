@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm3gd5ppkfxoe"]
+
+[ext_resource type="Script" path="res://scripts/rocket.gd" id="1_leur6"]
+[ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_66ysf"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_86o5x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jr54h"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14vqx"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8yfv"]
+radius = 100.0
+
+[node name="Rocket" type="Area2D"]
+material = SubResource("CanvasItemMaterial_86o5x")
+collision_layer = 0
+collision_mask = 10
+script = ExtResource("1_leur6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+material = SubResource("CanvasItemMaterial_jr54h")
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_66ysf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_14vqx")
+
+[node name="Explosion" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion"]
+shape = SubResource("CircleShape2D_k8yfv")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_contact"]
+[connection signal="body_entered" from="Explosion" to="." method="_on_explosion"]
