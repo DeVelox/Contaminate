@@ -7,6 +7,7 @@ class EnemyType:
 	var basic_enemy: PackedScene
 	var elite_enemy: PackedScene
 	var boss_enemy: PackedScene
+	var weight: float = 1.0
 
 	func _init(enemy: String) -> void:
 		if not ResourceLoader.exists("res://entities/enemies/" + enemy + "_basic.tscn"):
@@ -48,12 +49,13 @@ class Severity:
 			for i in spawn_locations.get_children():
 				spawns.append(i.global_position)
 			spawn = spawns.pick_random()
-
+			
 @export var enemy_pool: String:
 	set(ep):
 		enemy_pool = ep
 		if enemy_pool:
 			enemies = _enemy_pool_to_array()
+@export var enemy_eights: String
 
 @export var danger: Danger:
 	set(t):
@@ -68,6 +70,9 @@ var instance_id: int:
 
 # Internal
 var enemy_instances: Array[Enemy]
+var enemy_random: EnemyType:
+	get:
+		return _get_random_enemy()
 var physics_disabled: bool
 var spawned: bool
 
@@ -117,7 +122,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Lock in position so it doesn't move with the light mask
 	global_position = original_location
-	player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
+	#player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
 
 	if player_distance < trigger_radius:
 		_spawn_enemies()
@@ -133,10 +138,14 @@ func _enemy_pool_to_array() -> Array[EnemyType]:
 	var enemy_array: Array[EnemyType] = []
 	var enemy: EnemyType
 	var enemy_string := enemy_pool.replace(" ", "")
+	var j: PackedStringArray
 	for i in enemy_string.split(","):
-		if not ResourceLoader.exists("res://entities/enemies/" + i + "_basic.tscn"):
+		j = i.split(":")
+		if not ResourceLoader.exists("res://entities/enemies/" + j[0] + "_basic.tscn"):
 			continue
-		enemy = EnemyType.new(i)
+		enemy = EnemyType.new(j[0])
+		if j.size() > 1:
+			enemy.weight = float(j[1])
 		if enemy:
 			enemy_array.append(enemy)
 	return enemy_array
@@ -146,24 +155,24 @@ func _spawn_enemies() -> void:
 	if spawned:
 		return
 
-	var enemy: EnemyType = enemies.pick_random()
+	_normalize_weights()
 	var enemy_instance: Enemy
 	var budget: int = severity.budget
 
 	for i in severity.boss_count:
-		enemy_instance = enemy.boss_enemy.instantiate()
+		enemy_instance = enemy_random.boss_enemy.instantiate()
 		enemy_instance.add_to_group(enemy_group)
 		enemy_instances.append(enemy_instance)
 		budget -= enemy_instance.cost
 
 	for i in severity.elite_count:
-		enemy_instance = enemy.elite_enemy.instantiate()
+		enemy_instance = enemy_random.elite_enemy.instantiate()
 		enemy_instance.add_to_group(enemy_group)
 		enemy_instances.append(enemy_instance)
 		budget -= enemy_instance.cost
 
 	while budget > 0:
-		enemy_instance = enemy.basic_enemy.instantiate()
+		enemy_instance = enemy_random.basic_enemy.instantiate()
 		enemy_instance.add_to_group(enemy_group)
 		enemy_instances.append(enemy_instance)
 		budget -= enemy_instance.cost
@@ -191,3 +200,23 @@ func _move_enemies() -> void:
 		return
 
 	get_tree().call_group("aggro", "set_direction", player.global_position)
+	
+func _sum_weights() -> float:
+	var accum: float = 0.0
+	for i in enemies:
+		accum += i.weight
+	return accum
+	
+func _normalize_weights() -> void:
+	var sum: float = _sum_weights()
+	for i in enemies:
+		i.weight /= sum
+
+func _get_random_enemy() -> EnemyType:
+	var accum: float = 0.0
+	var rand: float = randf_range(0.0, 1.0)
+	for i in enemies:
+		accum += i.weight
+		if rand <= accum:
+			return i
+	return
