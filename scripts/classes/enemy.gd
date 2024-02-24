@@ -29,7 +29,8 @@ var enemy_id: int
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var deaggro: VisibleOnScreenNotifier2D = $Deaggro
 @onready var infection_timer: Timer = $InfectionTimer
-
+@onready var enemies := get_node("/root/Main/LightMask/Enemies")
+@onready var enemies_afk := get_node("/root/Main/EnemiesAFK")
 static var id: int
 
 
@@ -141,10 +142,12 @@ func infect() -> void:
 func set_aggro(aggro: bool) -> void:
 	if aggro:
 		add_to_group("aggro")
+		reparent.call_deferred(enemies)
 		$Sprite2D.show()
 		set_physics_process(true)
 	else:
 		remove_from_group("aggro")
+		reparent.call_deferred(enemies_afk)
 		$Sprite2D.hide()
 		set_physics_process(false)
 

@@ -76,7 +76,7 @@ var severity: Severity
 var spawn_rate: float
 var waves: int
 
-@onready var enemy_container: Node2D = get_node("/root/Main/LightMask/Enemies")
+@onready var enemy_container: Node2D = get_node("/root/Main/EnemiesAFK")
 @onready var player: Player = get_node("/root/Main/Player")
 
 static var id: int

@@ -17,8 +17,6 @@ var available_upgrades: Array[StringName]
 
 func _ready() -> void:
 	_register_upgrades("res://scripts/upgrades", "manager.gd")
-	print_debug(upgrades)
-	print_debug(available_upgrades)
 
 
 func create_scene(scene) -> void:
