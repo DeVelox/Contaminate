@@ -9,8 +9,8 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 
-func upgrade_select() -> void:
-	var upgrade_selection := UpgradeManager.random_upgrades() as Array[Upgrade]
+func upgrade_select(all: bool = false) -> void:
+	var upgrade_selection := UpgradeManager.random_upgrades(all) as Array[Upgrade]
 	if upgrade_selection.is_empty():
 		return
 	get_tree().paused = true

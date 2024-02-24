@@ -16,6 +16,7 @@
 
 [node name="HUD" type="MarginContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -81,6 +82,11 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 text = "Restart"
+
+[node name="Upgrades" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+text = "Upgrades"
 
 [node name="Options" type="Button" parent="PauseMenu/VBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
@@ -321,6 +327,7 @@ theme_override_constants/separation = 20
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartGame" to="MainMenu" method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="MainMenu" method="_on_options_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Upgrades" to="PauseMenu" method="_on_upgrades_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Options" to="PauseMenu" method="_on_options_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/MainMenu" to="PauseMenu" method="_on_main_menu_pressed"]
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Master" to="Options" method="_on_master_value_changed"]

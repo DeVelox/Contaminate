@@ -37,11 +37,12 @@ func remove_upgrade(upgrade: String) -> void:
 		upgrades[upgrade].remove()
 
 
-func random_upgrades() -> Array[Upgrade]:
+func random_upgrades(all: bool = false) -> Array[Upgrade]:
 	var selection := available_upgrades.duplicate()
 	var selected_upgrades: Array[Upgrade] = []
 	var random_selection: String
-	for i in 3:
+	var num_upgrades: int = selection.size() if all else 3
+	for i in num_upgrades:
 		if not selection.is_empty():
 			random_selection = selection.pick_random()
 			selected_upgrades.append(upgrades[random_selection])
