@@ -2,7 +2,6 @@ class_name Enemy extends StaticBody2D
 
 signal stat_changed(stat)
 
-
 @export var health: int = 10
 @export var attack: int = 1
 @export var base_speed: float = 100.0

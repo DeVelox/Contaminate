@@ -26,7 +26,7 @@ static var count: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	chunk_loader.reparent.call_deferred(zone_container)
-	
+
 	if not loaded:
 		var matrix = BitMap.new()
 		matrix.create(Vector2i(MAP_SIZE, MAP_SIZE))

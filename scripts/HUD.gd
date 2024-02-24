@@ -10,7 +10,8 @@ func update_upgrade_list(upgrade: String) -> void:
 	upgrade_icon.texture = load(upgrade)
 	upgrade_icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 	%Upgrades.add_child(upgrade_icon)
-	
+
+
 func reset_upgrade_list() -> void:
 	for i in %Upgrades.get_children():
 		i.queue_free()

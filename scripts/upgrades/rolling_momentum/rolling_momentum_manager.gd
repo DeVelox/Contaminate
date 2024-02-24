@@ -1,7 +1,6 @@
 extends Upgrade
 
-
-var duration: float  = 0.5
+var duration: float = 0.5
 var buff_type = MechanicsManager.BuffType.SPEED
 var buff_bucket = MechanicsManager.BuffBucket.ROLL
 var amount: float = 200.0
@@ -22,9 +21,11 @@ func remove() -> void:
 	if UpgradeManager.on_roll.is_connected(_speed_burst):
 		UpgradeManager.on_roll.disconnect(_speed_burst)
 	UpgradeManager.available_upgrades.append(uname)
-	
+
+
 func _speed_burst(player: Player) -> void:
 	player.apply_buff(duration, amount, buff_type, multi, buff_bucket)
+
 
 func _register() -> void:
 	uname = "RollingMomentum"

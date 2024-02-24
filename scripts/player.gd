@@ -3,8 +3,6 @@ class_name Player extends CharacterBody2D
 signal just_shot
 signal stat_changed(stat)
 
-
-
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
 const LIGHT_SHAKE = 25
@@ -208,7 +206,8 @@ func _sum(a: float, b: float) -> float:
 func _speed_calc(buff_type) -> void:
 	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
 	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)
-	
+
+
 func _move_enemies(delta: float) -> void:
 	if update_rate_curr < 0:
 		get_tree().call_group("aggro", "set_direction", global_position)
