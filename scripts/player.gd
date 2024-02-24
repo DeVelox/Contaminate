@@ -1,12 +1,18 @@
 class_name Player extends CharacterBody2D
 
 signal just_shot
+signal stat_changed(stat: BuffType)
 
-const SPEED = 200.0
+enum BuffBucket { SHOCK, KNEE_CAP, BOOST, MISC }
+enum BuffType { SPEED, HEALTH }
+
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
 const LIGHT_SHAKE = 25
 
+@export var base_speed: float = 200.0
+@export var min_speed: float = 10.0
+@export var max_speed: float = 300.0
 @export var aggro_radius: float
 @export var aggro_shoot_radius: float
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
@@ -17,6 +23,15 @@ var roll_disabled: int
 var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
+var speed: float
+var buff_dict: Dictionary ={
+	BuffType.SPEED: {
+		"multi": [],
+		"multi_calc": 0.0,
+		"flat": [],
+		"flat_calc": 0.0
+	}
+}
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var player_camera: Camera2D = $Camera2D
@@ -35,14 +50,23 @@ func _ready() -> void:
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
 	hud.health_change.emit(health)
+	
+	buff_dict[BuffType.SPEED]["multi"].resize(BuffBucket.size())
+	buff_dict[BuffType.SPEED]["flat"].resize(BuffBucket.size())
+	buff_dict[BuffType.SPEED]["multi"].fill(0.0)
+	buff_dict[BuffType.SPEED]["flat"].fill(0.0)
+
+	stat_changed.connect(_speed_calc)
 
 
 func _physics_process(_delta: float) -> void:
+	speed = clamp((base_speed + buff_dict[BuffType.SPEED]["flat_calc"]) * (1 + buff_dict[BuffType.SPEED]["multi_calc"]), min_speed, max_speed)
+	
 	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
 	if direction:
-		velocity = lerp(velocity, direction * SPEED, 0.25)
+		velocity = lerp(velocity, direction * speed, 0.25)
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, 0.25)
 
@@ -64,7 +88,7 @@ func _roll() -> void:
 		collision.set_deferred("disabled", true)
 		invuln_frames = 3
 		roll_disabled = 60
-		velocity = direction * SPEED * 6
+		velocity = direction * speed * 6
 	if roll_disabled > 0:
 		roll_disabled -= 1
 	if invuln_frames > 0:
@@ -135,3 +159,40 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		damage(body.attack)
+		
+func apply_buff(
+	duration: float, amount: float, buff_type: BuffType, multi: bool = false, group: BuffBucket = BuffBucket.MISC
+) -> void:
+	if group == BuffBucket.MISC:
+		if multi:
+			buff_dict[buff_type]["multi"][group] += amount / 100.0
+			stat_changed.emit(buff_type)
+			await get_tree().create_timer(duration).timeout
+			buff_dict[buff_type]["multi"][group] -= amount / 100.0
+			stat_changed.emit(buff_type)
+		else:
+			buff_dict[buff_type]["flat"][group] += amount
+			stat_changed.emit(buff_type)
+			await get_tree().create_timer(duration).timeout
+			buff_dict[buff_type]["flat"][group] -= amount
+			stat_changed.emit(buff_type)
+	else:
+		if multi and absf(amount / 100.0) > absf(buff_dict[buff_type]["multi"][group]):
+			buff_dict[buff_type]["multi"][group] = amount / 100.0
+			stat_changed.emit(buff_type)
+			await get_tree().create_timer(duration).timeout
+			buff_dict[buff_type]["multi"][group] = 0.0
+			stat_changed.emit(buff_type)
+		elif absf(amount) > absf(buff_dict[buff_type]["flat"][group]):
+			buff_dict[buff_type]["flat"][group] = amount
+			stat_changed.emit(buff_type)
+			await get_tree().create_timer(duration).timeout
+			buff_dict[buff_type]["flat"][group] = 0.0
+			stat_changed.emit(buff_type)
+			
+func _sum(a: float, b: float) -> float:
+	return a + b
+
+func _speed_calc(buff_type: BuffType) -> void:
+	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
+	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)

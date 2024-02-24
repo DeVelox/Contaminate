@@ -56,10 +56,10 @@ func _ready() -> void:
 
 	$Sprite2D.hide()
 	set_physics_process(false)
-
-	apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
-	apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
-	apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
+#
+	#apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
+	#apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
+	#apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
 
 
 func _physics_process(delta: float) -> void:
