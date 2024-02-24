@@ -25,6 +25,8 @@ func create_scene(scene) -> void:
 
 func add_upgrade(upgrade: String) -> void:
 	if upgrades[upgrade].level == 0:
+		var hud := get_node("/root/Main/Menus/HUD")
+		hud.update_upgrade_list(upgrades[upgrade].icon)
 		upgrades[upgrade].level += 1
 		upgrades[upgrade].add()
 

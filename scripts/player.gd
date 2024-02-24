@@ -24,13 +24,8 @@ var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
 var speed: float
-var buff_dict: Dictionary ={
-	BuffType.SPEED: {
-		"multi": [],
-		"multi_calc": 0.0,
-		"flat": [],
-		"flat_calc": 0.0
-	}
+var buff_dict: Dictionary = {
+	BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -49,8 +44,8 @@ func _ready() -> void:
 	shadow_caster.energy = LIGHT
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
-	hud.health_change.emit(health)
-	
+	hud.update_health(health)
+
 	buff_dict[BuffType.SPEED]["multi"].resize(BuffBucket.size())
 	buff_dict[BuffType.SPEED]["flat"].resize(BuffBucket.size())
 	buff_dict[BuffType.SPEED]["multi"].fill(0.0)
@@ -60,8 +55,15 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	speed = clamp((base_speed + buff_dict[BuffType.SPEED]["flat_calc"]) * (1 + buff_dict[BuffType.SPEED]["multi_calc"]), min_speed, max_speed)
-	
+	speed = clamp(
+		(
+			(base_speed + buff_dict[BuffType.SPEED]["flat_calc"])
+			* (1 + buff_dict[BuffType.SPEED]["multi_calc"])
+		),
+		min_speed,
+		max_speed
+	)
+
 	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
@@ -139,7 +141,7 @@ func damage(attack: int) -> void:
 		get_tree().root.add_child(pikachu)
 		var tween := create_tween()
 		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
-	hud.health_change.emit(health)
+	hud.update_health(health)
 
 
 func _expand_aggro_range() -> void:
@@ -159,9 +161,14 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		damage(body.attack)
-		
+
+
 func apply_buff(
-	duration: float, amount: float, buff_type: BuffType, multi: bool = false, group: BuffBucket = BuffBucket.MISC
+	duration: float,
+	amount: float,
+	buff_type: BuffType,
+	multi: bool = false,
+	group: BuffBucket = BuffBucket.MISC
 ) -> void:
 	if group == BuffBucket.MISC:
 		if multi:
@@ -189,9 +196,11 @@ func apply_buff(
 			await get_tree().create_timer(duration).timeout
 			buff_dict[buff_type]["flat"][group] = 0.0
 			stat_changed.emit(buff_type)
-			
+
+
 func _sum(a: float, b: float) -> float:
 	return a + b
+
 
 func _speed_calc(buff_type: BuffType) -> void:
 	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)

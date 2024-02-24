@@ -22,13 +22,8 @@ var infection_count: int = 0
 
 var speed: float
 
-var buff_dict: Dictionary ={
-	BuffType.SPEED: {
-		"multi": [],
-		"multi_calc": 0.0,
-		"flat": [],
-		"flat_calc": 0.0
-	}
+var buff_dict: Dictionary = {
+	BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
 
 var enemy_id: int
@@ -56,14 +51,23 @@ func _ready() -> void:
 
 	$Sprite2D.hide()
 	set_physics_process(false)
+
+
 #
-	#apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
-	#apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
-	#apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
+#apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
+#apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
+#apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
 
 
 func _physics_process(delta: float) -> void:
-	speed = clamp((base_speed + buff_dict[BuffType.SPEED]["flat_calc"]) * (1 + buff_dict[BuffType.SPEED]["multi_calc"]), min_speed, max_speed)
+	speed = clamp(
+		(
+			(base_speed + buff_dict[BuffType.SPEED]["flat_calc"])
+			* (1 + buff_dict[BuffType.SPEED]["multi_calc"])
+		),
+		min_speed,
+		max_speed
+	)
 	#if enemy_id == 1:
 	#print_debug(speed)
 	motion = (direction * speed * delta)
@@ -97,7 +101,11 @@ func kill() -> void:
 
 
 func apply_buff(
-	duration: float, amount: float, buff_type: BuffType, multi: bool = false, group: BuffBucket = BuffBucket.MISC
+	duration: float,
+	amount: float,
+	buff_type: BuffType,
+	multi: bool = false,
+	group: BuffBucket = BuffBucket.MISC
 ) -> void:
 	if group == BuffBucket.MISC:
 		if multi:
