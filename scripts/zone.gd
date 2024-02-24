@@ -14,8 +14,10 @@ const MAP_SIZE = 100
 var map_location: Vector2i
 var bounds := Rect2i(0, 0, MAP_SIZE, MAP_SIZE)
 
+@onready var zone: Zone = $"."
 @onready var zone_container := get_node("/root/Main/Zones")
 @onready var player: Player = get_node("/root/Main/Player")
+@onready var chunk_loader: VisibleOnScreenNotifier2D = $ChunkLoader
 
 static var loaded: BitMap
 static var count: int
@@ -23,6 +25,8 @@ static var count: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	chunk_loader.reparent.call_deferred(zone_container)
+	
 	if not loaded:
 		var matrix = BitMap.new()
 		matrix.create(Vector2i(MAP_SIZE, MAP_SIZE))
@@ -75,10 +79,10 @@ func _instantiate_zone(zone: String, direction: Vector2i) -> void:
 
 # I don't know if this actually helps with anything
 func _on_chunk_loader_screen_entered() -> void:
-	set_physics_process(true)
-	set_process(true)
+	if zone.get_parent() != zone_container:
+		zone_container.add_child(zone)
 
 
 func _on_chunk_loader_screen_exited() -> void:
-	set_physics_process(false)
-	set_process(false)
+	if zone.get_parent() == zone_container:
+		zone_container.remove_child(zone)

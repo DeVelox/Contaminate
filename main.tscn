@@ -24,6 +24,8 @@ texture = ExtResource("1_6b8jp")
 script = ExtResource("2_e4yt6")
 player = NodePath("../Player")
 
+[node name="Enemies" type="Node2D" parent="LightMask"]
+
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 position = Vector2(947, 970)
 

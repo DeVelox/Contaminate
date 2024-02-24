@@ -71,18 +71,12 @@ var enemies: Array[EnemyType]
 var spawn: Vector2
 var spawns: Array[Vector2]
 var severity: Severity
-var original_location: Vector2
 
 # Unused
 var spawn_rate: float
 var waves: int
 
-# Optional
-var update_rate: float = 0.1
-var update_rate_curr: float
-
-@onready var enemy_manager: Spawner = $"."
-@onready var light_mask_node: Sprite2D = get_node("/root/Main/LightMask")
+@onready var enemy_container: Node2D = get_node("/root/Main/LightMask/Enemies")
 @onready var player: Player = get_node("/root/Main/Player")
 
 static var id: int
@@ -90,10 +84,6 @@ static var id: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Move node under light mask so enemies get masked by light
-	reparent.call_deferred(light_mask_node)
-	original_location = global_position
-	
 	if enemy_pool:
 		enemies = _enemy_pool_to_array()
 	
@@ -113,20 +103,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	# Lock in position so it doesn't move with the light mask
-	global_position = original_location
-	#player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
-
-	
+func _physics_process(delta: float) -> void:
 	if player_distance < trigger_radius:
 		_spawn_enemies()
-
-	if update_rate_curr < 0:
-		_move_enemies()
-		update_rate_curr = update_rate
-	else:
-		update_rate_curr -= delta
 
 
 func _enemy_pool_to_array() -> Array[EnemyType]:
@@ -150,6 +129,7 @@ func _spawn_enemies() -> void:
 	if spawned:
 		return
 
+	spawned = true
 	_normalize_weights()
 	var enemy_instance: Enemy
 	var budget: int = severity.budget
@@ -186,15 +166,8 @@ func _spawn_enemies() -> void:
 				* randfn(spawn_area, spawn_area / 2)
 			)
 		)
-		enemy_manager.add_child.call_deferred(i)
-	spawned = true
-
-
-func _move_enemies() -> void:
-	if not spawned:
-		return
-
-	get_tree().call_group("aggro", "set_direction", player.global_position)
+		enemy_container.add_child.call_deferred(i)
+		queue_free()
 
 
 func _sum_weights() -> float:

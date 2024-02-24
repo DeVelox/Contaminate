@@ -76,6 +76,7 @@ text = "1"
 
 [node name="ChunkLoader" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(960, 960)
+rect = Rect2(-960, -960, 1920, 1920)
 
 [connection signal="screen_entered" from="LoaderDirection/North" to="." method="_load_zone" flags=6 binds= [&"north"]]
 [connection signal="screen_entered" from="LoaderDirection/South" to="." method="_load_zone" flags=6 binds= [&"south"]]

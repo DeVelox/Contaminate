@@ -24,6 +24,8 @@ var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
 var speed: float
+var update_rate: float = 0.1
+var update_rate_curr: float
 var buff_dict: Dictionary = {
 	BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
@@ -54,7 +56,7 @@ func _ready() -> void:
 	stat_changed.connect(_speed_calc)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	speed = clamp(
 		(
 			(base_speed + buff_dict[BuffType.SPEED]["flat_calc"])
@@ -75,6 +77,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	_roll()
 	_pickup()
+	_move_enemies(delta)
 
 	#shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
 	point_light_2d.offset = lerp(
@@ -205,3 +208,10 @@ func _sum(a: float, b: float) -> float:
 func _speed_calc(buff_type: BuffType) -> void:
 	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
 	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)
+	
+func _move_enemies(delta: float) -> void:
+	if update_rate_curr < 0:
+		get_tree().call_group("aggro", "set_direction", global_position)
+		update_rate_curr = update_rate
+	else:
+		update_rate_curr -= delta
