@@ -41,10 +41,11 @@ func random_upgrades() -> Array[Upgrade]:
 	var selection := available_upgrades
 	var selected_upgrades: Array[Upgrade] = []
 	var random_selection: String
-	for i in selection:
-		random_selection = selection.pick_random()
-		selected_upgrades.append(upgrades[random_selection])
-		selection.erase(random_selection)
+	for i in 3:
+		if not selection.is_empty():
+			random_selection = selection.pick_random()
+			selected_upgrades.append(upgrades[random_selection])
+			selection.erase(random_selection)
 	return selected_upgrades
 
 
