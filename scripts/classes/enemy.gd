@@ -1,8 +1,9 @@
 class_name Enemy extends StaticBody2D
 
-signal speed_changed
+signal stat_changed(stat: BuffType)
 
-enum SpeedGroup { SHOCK, KNEE_CAP, BOOST, MISC }
+enum BuffBucket { SHOCK, KNEE_CAP, BOOST, MISC }
+enum BuffType { SPEED, HEALTH }
 
 @export var health: int = 10
 @export var attack: int = 1
@@ -20,10 +21,15 @@ var velocity := Vector2.ZERO
 var infection_count: int = 0
 
 var speed: float
-var speed_flat: Array[float]
-var speed_flat_calc: float
-var speed_multi: Array[float]
-var speed_multi_calc: float
+
+var buff_dict: Dictionary ={
+	BuffType.SPEED: {
+		"multi": [],
+		"multi_calc": 0.0,
+		"flat": [],
+		"flat_calc": 0.0
+	}
+}
 
 var enemy_id: int
 
@@ -41,21 +47,23 @@ func _ready() -> void:
 	deaggro.scale = Vector2(deaggro_radius / 10, deaggro_radius / 10)
 	deaggro.screen_exited.connect(set_aggro.bind(false))
 
-	speed_flat.resize(SpeedGroup.size())
-	speed_multi.resize(SpeedGroup.size())
+	buff_dict[BuffType.SPEED]["multi"].resize(BuffBucket.size())
+	buff_dict[BuffType.SPEED]["flat"].resize(BuffBucket.size())
+	buff_dict[BuffType.SPEED]["multi"].fill(0.0)
+	buff_dict[BuffType.SPEED]["flat"].fill(0.0)
 
-	speed_changed.connect(_speed_calc)
+	stat_changed.connect(_speed_calc)
 
 	$Sprite2D.hide()
 	set_physics_process(false)
 
-	#apply_speed_mod(5, -50, true, SpeedGroup.KNEE_CAP)
-	#apply_speed_mod(5, -20, true, SpeedGroup.KNEE_CAP)
-	#apply_speed_mod(2, 30, false, SpeedGroup.BOOST)
+	apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
+	apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
+	apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
 
 
 func _physics_process(delta: float) -> void:
-	speed = clamp((base_speed + speed_flat_calc) * (1 + speed_multi_calc), min_speed, max_speed)
+	speed = clamp((base_speed + buff_dict[BuffType.SPEED]["flat_calc"]) * (1 + buff_dict[BuffType.SPEED]["multi_calc"]), min_speed, max_speed)
 	#if enemy_id == 1:
 	#print_debug(speed)
 	motion = (direction * speed * delta)
@@ -88,35 +96,35 @@ func kill() -> void:
 	queue_free()
 
 
-func apply_speed_mod(
-	duration: float, amount: float, multi: bool = false, group: SpeedGroup = SpeedGroup.MISC
+func apply_buff(
+	duration: float, amount: float, buff_type: BuffType, multi: bool = false, group: BuffBucket = BuffBucket.MISC
 ) -> void:
-	if group == SpeedGroup.MISC:
+	if group == BuffBucket.MISC:
 		if multi:
-			speed_multi[group] += amount / 100.0
-			speed_changed.emit()
+			buff_dict[buff_type]["multi"][group] += amount / 100.0
+			stat_changed.emit(buff_type)
 			await get_tree().create_timer(duration).timeout
-			speed_multi[group] -= amount / 100.0
-			speed_changed.emit()
+			buff_dict[buff_type]["multi"][group] -= amount / 100.0
+			stat_changed.emit(buff_type)
 		else:
-			speed_flat[group] += amount
-			speed_changed.emit()
+			buff_dict[buff_type]["flat"][group] += amount
+			stat_changed.emit(buff_type)
 			await get_tree().create_timer(duration).timeout
-			speed_flat[group] -= amount
-			speed_changed.emit()
+			buff_dict[buff_type]["flat"][group] -= amount
+			stat_changed.emit(buff_type)
 	else:
-		if multi and absf(amount / 100.0) > absf(speed_multi[group]):
-			speed_multi[group] = amount / 100.0
-			speed_changed.emit()
+		if multi and absf(amount / 100.0) > absf(buff_dict[buff_type]["multi"][group]):
+			buff_dict[buff_type]["multi"][group] = amount / 100.0
+			stat_changed.emit(buff_type)
 			await get_tree().create_timer(duration).timeout
-			speed_multi[group] = 0.0
-			speed_changed.emit()
-		elif absf(amount) > absf(speed_flat[group]):
-			speed_flat[group] = amount
-			speed_changed.emit()
+			buff_dict[buff_type]["multi"][group] = 0.0
+			stat_changed.emit(buff_type)
+		elif absf(amount) > absf(buff_dict[buff_type]["flat"][group]):
+			buff_dict[buff_type]["flat"][group] = amount
+			stat_changed.emit(buff_type)
 			await get_tree().create_timer(duration).timeout
-			speed_flat[group] = 0.0
-			speed_changed.emit()
+			buff_dict[buff_type]["flat"][group] = 0.0
+			stat_changed.emit(buff_type)
 
 
 func infect() -> void:
@@ -153,6 +161,6 @@ func _sum(a: float, b: float) -> float:
 	return a + b
 
 
-func _speed_calc() -> void:
-	speed_multi_calc = speed_multi.reduce(_sum)
-	speed_flat_calc = speed_flat.reduce(_sum)
+func _speed_calc(buff_type: BuffType) -> void:
+	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
+	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)
