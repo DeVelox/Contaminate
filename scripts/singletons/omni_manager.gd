@@ -65,6 +65,5 @@ func _register_upgrades(folder: String, script: String) -> void:
 			if dir.current_is_dir():
 				_register_upgrades(folder + "/" + file, script)
 			elif file.ends_with(script):
-				print_debug(file)
 				load(folder + "/" + file).new()
 			file = dir.get_next()

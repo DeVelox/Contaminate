@@ -94,7 +94,6 @@ func kill() -> void:
 
 	UpgradeManager.on_kill.emit(self)
 	remove_from_group("aggro")
-	get_parent().enemy_instances.erase(self)
 	queue_free()
 
 
