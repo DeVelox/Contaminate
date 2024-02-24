@@ -45,7 +45,7 @@ func _ready() -> void:
 	speed_multi.resize(SpeedGroup.size())
 
 	speed_changed.connect(_speed_calc)
-	
+
 	$Sprite2D.hide()
 	set_physics_process(false)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://lgvewjetgk0v"]
+[gd_scene load_steps=12 format=3 uid="uid://lgvewjetgk0v"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_3lf01"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_5xlqd"]
@@ -9,8 +9,34 @@
 [ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="5_5dfyb"]
 [ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="6_orimu"]
 [ext_resource type="Script" path="res://scripts/upgrade_select.gd" id="8_3h43c"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="10_6itlc"]
+[ext_resource type="Texture2D" uid="uid://cj667chshihiq" path="res://assets/heart.svg" id="11_pve6h"]
 
 [node name="Menus" type="CanvasLayer"]
+
+[node name="HUD" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("10_6itlc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+layout_mode = 2
+
+[node name="Hearts" type="TextureRect" parent="HUD/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("11_pve6h")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="MainMenu" type="CenterContainer" parent="."]
 unique_name_in_owner = true
@@ -287,6 +313,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 20
 
+[connection signal="health_change" from="HUD" to="HUD" method="_update_health"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartGame" to="MainMenu" method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="MainMenu" method="_on_options_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]

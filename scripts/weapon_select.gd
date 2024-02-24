@@ -5,6 +5,7 @@ const RIFLE = preload("res://entities/weapons/rifle.tscn")
 const SHOTGUN = preload("res://entities/weapons/shotgun.tscn")
 const EXPLOSIVE = preload("res://entities/weapons/explosive.tscn")
 
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
@@ -30,6 +31,7 @@ func _on_explosive_pressed() -> void:
 	_swap_gun(EXPLOSIVE)
 	get_tree().paused = false
 	hide()
+
 
 func _swap_gun(gun: PackedScene) -> void:
 	var player: Player = get_node("/root/Main/Player")

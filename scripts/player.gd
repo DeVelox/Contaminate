@@ -11,7 +11,7 @@ const LIGHT_SHAKE = 25
 @export var aggro_shoot_radius: float
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
-var health: int = 50
+var health: int = 5
 var invuln_frames: int
 var roll_disabled: int
 var direction: Vector2
@@ -27,12 +27,14 @@ var flicker_intensity: float = 0.05
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var aggro_collision: CollisionShape2D = $AggroRange/CollisionShape2D
 @onready var invuln: Timer = $Invuln
+@onready var hud := get_node("/root/Main/Menus/HUD")
 
 
 func _ready() -> void:
 	shadow_caster.energy = LIGHT
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
+	hud.health_change.emit(health)
 
 
 func _physics_process(_delta: float) -> void:
@@ -97,12 +99,13 @@ func _on_flicker_timeout() -> void:
 func damage(attack: int) -> void:
 	if invuln.time_left:
 		return
-	if health > 0:
+	if health > 1:
 		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
 		invuln.start(0.5)
 	else:
 		SoundManager.sfx(SoundManager.DEATH)
+		health -= attack
 		hide()
 		set_physics_process(false)
 		var pikachu := Sprite2D.new()
@@ -112,6 +115,7 @@ func damage(attack: int) -> void:
 		get_tree().root.add_child(pikachu)
 		var tween := create_tween()
 		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
+	hud.health_change.emit(health)
 
 
 func _expand_aggro_range() -> void:

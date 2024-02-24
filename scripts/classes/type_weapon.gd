@@ -17,7 +17,11 @@ func _point_gun(player: Player, gun_offset: float) -> void:
 func _shoot_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
 	SoundManager.sfx(SoundManager.PISTOL)
 	var pass_ammo = ammo.duplicate()
-	var direction = player.velocity.normalized() if ammo.direction == Vector2.ZERO else ammo.direction.normalized()
+	var direction = (
+		player.velocity.normalized()
+		if ammo.direction == Vector2.ZERO
+		else ammo.direction.normalized()
+	)
 	if direction.is_zero_approx():
 		direction = Vector2.ONE.rotated(rotation)
 	pass_ammo.origin = global_position + direction * gun_length

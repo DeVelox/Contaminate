@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=13 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
 [ext_resource type="PackedScene" uid="uid://dx5l6w2qm1gay" path="res://entities/weapons/pistol.tscn" id="4_q177l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
+radius = 9.0
+height = 29.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmbbx"]
 size = Vector2(20, 30)
@@ -30,9 +32,12 @@ light_mode = 2
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
 size = Vector2(20, 2)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oyfv5"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xxo2"]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 y_sort_enabled = true
 collision_mask = 0
 script = ExtResource("1_nquv5")
@@ -80,7 +85,6 @@ autostart = true
 one_shot = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-z_index = 1
 material = SubResource("CanvasItemMaterial_my4c5")
 custom_minimum_size = Vector2(20, 2)
 offset_left = -10.0
@@ -93,7 +97,7 @@ texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CapsuleShape2D_5rsor")
+shape = SubResource("CapsuleShape2D_oyfv5")
 
 [node name="AggroRange" type="Area2D" parent="."]
 collision_layer = 0
