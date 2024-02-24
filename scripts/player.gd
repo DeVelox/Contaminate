@@ -1,18 +1,17 @@
 class_name Player extends CharacterBody2D
 
 signal just_shot
-signal stat_changed(stat: BuffType)
+signal stat_changed(stat)
 
-enum BuffBucket { SHOCK, KNEE_CAP, BOOST, MISC }
-enum BuffType { SPEED, HEALTH }
+
 
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
 const LIGHT_SHAKE = 25
 
-@export var base_speed: float = 200.0
+@export var base_speed: float = 140.0
 @export var min_speed: float = 10.0
-@export var max_speed: float = 300.0
+@export var max_speed: float = 500.0
 @export var aggro_radius: float
 @export var aggro_shoot_radius: float
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
@@ -27,7 +26,7 @@ var speed: float
 var update_rate: float = 0.1
 var update_rate_curr: float
 var buff_dict: Dictionary = {
-	BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
+	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -48,10 +47,10 @@ func _ready() -> void:
 	just_shot.connect(_expand_aggro_range)
 	hud.update_health(health)
 
-	buff_dict[BuffType.SPEED]["multi"].resize(BuffBucket.size())
-	buff_dict[BuffType.SPEED]["flat"].resize(BuffBucket.size())
-	buff_dict[BuffType.SPEED]["multi"].fill(0.0)
-	buff_dict[BuffType.SPEED]["flat"].fill(0.0)
+	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].resize(MechanicsManager.BuffBucket.size())
+	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].resize(MechanicsManager.BuffBucket.size())
+	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].fill(0.0)
+	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].fill(0.0)
 
 	stat_changed.connect(_speed_calc)
 
@@ -59,8 +58,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	speed = clamp(
 		(
-			(base_speed + buff_dict[BuffType.SPEED]["flat_calc"])
-			* (1 + buff_dict[BuffType.SPEED]["multi_calc"])
+			(base_speed + buff_dict[MechanicsManager.BuffType.SPEED]["flat_calc"])
+			* (1 + buff_dict[MechanicsManager.BuffType.SPEED]["multi_calc"])
 		),
 		min_speed,
 		max_speed
@@ -94,6 +93,7 @@ func _roll() -> void:
 		invuln_frames = 3
 		roll_disabled = 60
 		velocity = direction * speed * 6
+		UpgradeManager.on_roll.emit(self)
 	if roll_disabled > 0:
 		roll_disabled -= 1
 	if invuln_frames > 0:
@@ -169,11 +169,11 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 func apply_buff(
 	duration: float,
 	amount: float,
-	buff_type: BuffType,
+	buff_type,
 	multi: bool = false,
-	group: BuffBucket = BuffBucket.MISC
+	group = MechanicsManager.BuffBucket.MISC
 ) -> void:
-	if group == BuffBucket.MISC:
+	if group == MechanicsManager.BuffBucket.MISC:
 		if multi:
 			buff_dict[buff_type]["multi"][group] += amount / 100.0
 			stat_changed.emit(buff_type)
@@ -205,7 +205,7 @@ func _sum(a: float, b: float) -> float:
 	return a + b
 
 
-func _speed_calc(buff_type: BuffType) -> void:
+func _speed_calc(buff_type) -> void:
 	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
 	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)
 	

@@ -17,6 +17,8 @@ var available_upgrades: Array[StringName]
 
 func _ready() -> void:
 	_register_upgrades("res://scripts/upgrades", "manager.gd")
+	print_debug(upgrades)
+	print_debug(available_upgrades)
 
 
 func create_scene(scene) -> void:
@@ -63,5 +65,6 @@ func _register_upgrades(folder: String, script: String) -> void:
 			if dir.current_is_dir():
 				_register_upgrades(folder + "/" + file, script)
 			elif file.ends_with(script):
+				print_debug(file)
 				load(folder + "/" + file).new()
 			file = dir.get_next()
