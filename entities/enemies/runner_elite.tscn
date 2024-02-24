@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4qltjn05amth"]
+[gd_scene load_steps=7 format=3 uid="uid://dyynbdcghp2p1"]
 
-[ext_resource type="Script" path="res://scripts/enemy_elite.gd" id="1_4esnm"]
-[ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="2_fm4st"]
-[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_32yqe"]
+[ext_resource type="Script" path="res://scripts/enemies/runner_elite.gd" id="1_l6hib"]
+[ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="2_3k8bm"]
+[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_7cbrq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_epuet"]
 radius = 8.0
@@ -13,13 +13,11 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3kc1n"]
 
-[node name="Enemy Elite" type="StaticBody2D"]
+[node name="Runner Elite" type="StaticBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_4esnm")
-health = 50
-cost = 10
+script = ExtResource("1_l6hib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_epuet")
@@ -28,14 +26,12 @@ shape = SubResource("CircleShape2D_epuet")
 occluder = SubResource("OccluderPolygon2D_3tsh5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.25098, 1, 1)
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_fm4st")
+texture = ExtResource("2_3k8bm")
 
 [node name="Outline" type="Sprite2D" parent="."]
-z_index = 1
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_32yqe")
+texture = ExtResource("3_7cbrq")
 
 [node name="Deaggro" type="VisibleOnScreenNotifier2D" parent="."]
 
