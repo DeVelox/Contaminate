@@ -38,7 +38,7 @@ func remove_upgrade(upgrade: String) -> void:
 
 
 func random_upgrades() -> Array[Upgrade]:
-	var selection := available_upgrades
+	var selection := available_upgrades.duplicate()
 	var selected_upgrades: Array[Upgrade] = []
 	var random_selection: String
 	for i in 3:

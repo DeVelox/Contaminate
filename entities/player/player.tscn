@@ -64,7 +64,6 @@ offset = Vector2(0, 5)
 [node name="Pistol" parent="." instance=ExtResource("4_q177l")]
 
 [node name="ShadowCaster" type="PointLight2D" parent="."]
-scale = Vector2(1.5, 1.5)
 shadow_enabled = true
 texture = ExtResource("3_22jw8")
 

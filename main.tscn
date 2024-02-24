@@ -19,7 +19,6 @@ color = Color(0.403922, 0.117647, 0.333333, 1)
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1
-scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_6b8jp")
 script = ExtResource("2_e4yt6")
 player = NodePath("../Player")
