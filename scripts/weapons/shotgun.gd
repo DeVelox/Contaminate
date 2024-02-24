@@ -14,9 +14,9 @@ var gun_length: float = 20
 func _ready() -> void:
 	position = Vector2(gun_offset, 0)
 	ammo = ammo_type.instantiate()
-	ammo.damage = 1
+	ammo.damage = 20
 	ammo.speed = 1000
-	ammo.pen = 1
+	ammo.pen = 2
 	ammo.lifetime = 0.1
 	#ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
 

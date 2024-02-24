@@ -1,9 +1,7 @@
 class_name Enemy extends StaticBody2D
 
-signal stat_changed(stat: BuffType)
+signal stat_changed(stat)
 
-enum BuffBucket { SHOCK, KNEE_CAP, BOOST, MISC }
-enum BuffType { SPEED, HEALTH }
 
 @export var health: int = 10
 @export var attack: int = 1
@@ -23,7 +21,7 @@ var infection_count: int = 0
 var speed: float
 
 var buff_dict: Dictionary = {
-	BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
+	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
 
 var enemy_id: int
@@ -42,10 +40,10 @@ func _ready() -> void:
 	deaggro.scale = Vector2(deaggro_radius / 10, deaggro_radius / 10)
 	deaggro.screen_exited.connect(set_aggro.bind(false))
 
-	buff_dict[BuffType.SPEED]["multi"].resize(BuffBucket.size())
-	buff_dict[BuffType.SPEED]["flat"].resize(BuffBucket.size())
-	buff_dict[BuffType.SPEED]["multi"].fill(0.0)
-	buff_dict[BuffType.SPEED]["flat"].fill(0.0)
+	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].resize(MechanicsManager.BuffBucket.size())
+	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].resize(MechanicsManager.BuffBucket.size())
+	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].fill(0.0)
+	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].fill(0.0)
 
 	stat_changed.connect(_speed_calc)
 
@@ -62,8 +60,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	speed = clamp(
 		(
-			(base_speed + buff_dict[BuffType.SPEED]["flat_calc"])
-			* (1 + buff_dict[BuffType.SPEED]["multi_calc"])
+			(base_speed + buff_dict[MechanicsManager.BuffType.SPEED]["flat_calc"])
+			* (1 + buff_dict[MechanicsManager.BuffType.SPEED]["multi_calc"])
 		),
 		min_speed,
 		max_speed
@@ -96,18 +94,17 @@ func kill() -> void:
 
 	UpgradeManager.on_kill.emit(self)
 	remove_from_group("aggro")
-	get_parent().enemy_instances.erase(self)
 	queue_free()
 
 
 func apply_buff(
 	duration: float,
 	amount: float,
-	buff_type: BuffType,
+	buff_type,
 	multi: bool = false,
-	group: BuffBucket = BuffBucket.MISC
+	group = MechanicsManager.BuffBucket.MISC
 ) -> void:
-	if group == BuffBucket.MISC:
+	if group == MechanicsManager.BuffBucket.MISC:
 		if multi:
 			buff_dict[buff_type]["multi"][group] += amount / 100.0
 			stat_changed.emit(buff_type)
@@ -169,6 +166,6 @@ func _sum(a: float, b: float) -> float:
 	return a + b
 
 
-func _speed_calc(buff_type: BuffType) -> void:
+func _speed_calc(buff_type) -> void:
 	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
 	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)

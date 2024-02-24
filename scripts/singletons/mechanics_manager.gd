@@ -1,5 +1,8 @@
 extends Node
 
+enum BuffBucket { SHOCK, KNEE_CAP, BOOST, ROLL, MISC }
+enum BuffType { SPEED, HEALTH }
+
 #TODO: Change to const after values are locked in
 @export var _base_infection_damage: int = 3
 @export var _base_infection_count: int = 3
