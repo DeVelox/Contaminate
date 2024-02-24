@@ -14,7 +14,8 @@ const LIGHT_SHAKE = 25
 @export var aggro_shoot_radius: float
 @export_enum("light_ahead", "camera_ahead", "camera_drag") var camera: String
 
-var health: int = 5
+var max_health = 5
+var health: int = max_health
 var invuln_frames: int
 var roll_disabled: int
 var direction: Vector2

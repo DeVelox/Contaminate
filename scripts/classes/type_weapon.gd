@@ -1,7 +1,13 @@
 class_name Weapon extends Node2D
 
+@export var damage: int
+@export var speed: float
+@export var pen: int
+@export var lifetime: float
 var heat_level: float
 var fire_rate: float
+var origin: Vector2
+var direction: Vector2
 
 
 func _point_gun(player: Player, gun_offset: float) -> void:

@@ -1,9 +1,9 @@
 class_name Ammo extends Area2D
 
-@export var damage: int
-@export var speed: float
-@export var pen: int
-@export var lifetime: float
+var damage: int
+var speed: float
+var pen: int
+var lifetime: float
 var origin: Vector2
 var direction: Vector2
 
