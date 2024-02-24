@@ -85,6 +85,7 @@ autostart = true
 one_shot = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_my4c5")
 custom_minimum_size = Vector2(20, 2)
 offset_left = -10.0

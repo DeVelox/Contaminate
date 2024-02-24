@@ -42,31 +42,15 @@ class Severity:
 
 
 # Editor exports
-@export var spawn_locations: Node2D:
-	set(sl):
-		spawn_locations = sl
-		if spawn_locations:
-			for i in spawn_locations.get_children():
-				spawns.append(i.global_position)
-			spawn = spawns.pick_random()
+@export var spawn_locations: Node2D
 
-@export var enemy_pool: String:
-	set(ep):
-		enemy_pool = ep
-		if enemy_pool:
-			enemies = _enemy_pool_to_array()
+@export var enemy_pool: String
 @export var enemy_eights: String
 
-@export var danger: Danger:
-	set(t):
-		danger = t
-		severity = Severity.new(danger)
+@export var danger: Danger
 
 # Keep track of enemy ownership
-var instance_id: int:
-	set(iid):
-		instance_id = iid
-		enemy_group = "enemy" + str(instance_id)
+var instance_id: int
 
 # Internal
 var enemy_instances: Array[Enemy]
@@ -80,12 +64,8 @@ var spawned: bool
 var player_distance: float:
 	get:
 		return spawn.distance_squared_to(player.global_position)
-var trigger_radius: float:
-	get:
-		return pow(spawn_area * 4, 2)
-var spawn_area: float:
-	get:
-		return 0.25 * severity.budget
+var trigger_radius: float
+var spawn_area: float
 var enemy_group: String
 var enemies: Array[EnemyType]
 var spawn: Vector2
@@ -113,9 +93,23 @@ func _ready() -> void:
 	# Move node under light mask so enemies get masked by light
 	reparent.call_deferred(light_mask_node)
 	original_location = global_position
+	
+	if enemy_pool:
+		enemies = _enemy_pool_to_array()
+	
+	if danger:
+		severity = Severity.new(danger)
+		
+	if spawn_locations:
+		for i in spawn_locations.get_children():
+			spawns.append(i.global_position)
+		spawn = spawns.pick_random()
+		spawn_area = 0.25 * severity.budget
+		trigger_radius = pow(spawn_area * 4, 2)
 
 	id += 1
 	instance_id = id
+	enemy_group = "enemy" + str(instance_id)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -124,6 +118,7 @@ func _process(delta: float) -> void:
 	global_position = original_location
 	#player.flicker_intensity = clamp(100000.0 / player_distance, 0.05, 0.25)
 
+	
 	if player_distance < trigger_radius:
 		_spawn_enemies()
 

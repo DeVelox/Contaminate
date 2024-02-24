@@ -36,11 +36,6 @@ func _ready() -> void:
 	$Label.text = str(count)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
-
 func _load_zone(direction: StringName) -> void:
 	var tier := "t" + str(randi_range(min_tier, max_tier))
 	var rarity := "r" + str(randi_range(min_rarity, max_rarity))
@@ -81,7 +76,9 @@ func _instantiate_zone(zone: String, direction: Vector2i) -> void:
 # I don't know if this actually helps with anything
 func _on_chunk_loader_screen_entered() -> void:
 	set_physics_process(true)
+	set_process(true)
 
 
 func _on_chunk_loader_screen_exited() -> void:
 	set_physics_process(false)
+	set_process(false)
