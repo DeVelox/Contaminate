@@ -6,7 +6,6 @@ signal on_move(player: Player)
 signal on_heal(player: Player)
 signal on_hurt(player: Player)
 
-
 signal on_shoot(weapon: Weapon)
 
 signal on_kill(enemy: Enemy)
@@ -69,6 +68,7 @@ func _register_upgrades(folder: String, script: String) -> void:
 			elif file.ends_with(script):
 				load(folder + "/" + file).new()
 			file = dir.get_next()
+
 
 func get_player() -> Player:
 	var player: Player = get_node("/root/Main/Player")

@@ -3,7 +3,6 @@ extends Upgrade
 var max_health_bonus: int = 1
 
 
-
 func _init() -> void:
 	_register()
 

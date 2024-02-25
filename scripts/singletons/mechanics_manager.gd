@@ -3,7 +3,7 @@ extends Node
 signal stat_changed(stat)
 
 enum BuffBucket { SHOCK, KNEE_CAP, BOOST, ROLL, MISC }
-enum BuffType { SPEED, HEALTH, DAMAGE, CRIT_CHANCE}
+enum BuffType { SPEED, HEALTH, DAMAGE, CRIT_CHANCE }
 
 #TODO: Change to const after values are locked in
 @export var _base_infection_damage: int = 3

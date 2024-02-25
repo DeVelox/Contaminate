@@ -34,6 +34,9 @@ func _register() -> void:
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)
 
+
 func _add_crit(_enemy: Enemy) -> void:
 	var player = UpgradeManager.get_player()
-	MechanicsManager.apply_buff(player, buff_duration, crit_chance_bonus, buff_type, multi, buff_bucket)
+	MechanicsManager.apply_buff(
+		player, buff_duration, crit_chance_bonus, buff_type, multi, buff_bucket
+	)

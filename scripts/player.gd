@@ -21,6 +21,7 @@ var roll_disabled: int
 var direction: Vector2
 var light_energy: float
 var flicker_intensity: float = 0.05
+var pbv: float
 var speed: float
 var update_rate: float = 0.1
 var update_rate_curr: float
@@ -30,7 +31,8 @@ var heat_cost_multi: float = 1.0
 
 var buff_dict: Dictionary = {
 	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0},
-	MechanicsManager.BuffType.CRIT_CHANCE: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
+	MechanicsManager.BuffType.CRIT_CHANCE:
+	{"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -83,6 +85,9 @@ func _physics_process(delta: float) -> void:
 		0.25
 	)
 
+	pbv = progress_bar.value / 100
+	progress_bar.self_modulate = Color(pbv, 1 - pbv, 1 - pbv)
+
 
 func _calculate_properties() -> void:
 	speed = clamp(
@@ -102,7 +107,8 @@ func _calculate_properties() -> void:
 		0.0,
 		5.0
 	)
-	print_debug(crit_chance)
+	# print_debug(crit_chance)
+
 
 func _roll() -> void:
 	if Input.is_action_just_pressed("roll") and not roll_disabled:
@@ -167,9 +173,11 @@ func damage(attack: int) -> void:
 		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
 	hud.update_health(health)
 
+
 func heal(amount: int) -> void:
 	health = min(max_health, health + amount)
 	hud.update_health(health)
+
 
 func _expand_aggro_range() -> void:
 	aggro_collision.shape.radius = aggro_shoot_radius

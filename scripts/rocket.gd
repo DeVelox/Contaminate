@@ -23,5 +23,6 @@ func _on_explosion(body: Node2D) -> void:
 			UpgradeManager.on_hit.emit(body)
 		body.damage(damage)
 
+
 func _explosion_sound() -> void:
 	SoundManager.sfx(SoundManager.EXPLOSION)

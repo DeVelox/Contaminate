@@ -29,8 +29,12 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 			gun_overheat = false
 	else:
 		if Input.is_action_just_pressed("shoot"):
-			var is_crit: bool = true if randf() < player.crit_chance * load_ammo.proc_coeff else false
-			heat_level = min(load_ammo.heat_shot * player.heat_cost_multi + heat_level, load_ammo.heat_max)
+			var is_crit: bool = (
+				true if randf() < player.crit_chance * load_ammo.proc_coeff else false
+			)
+			heat_level = min(
+				load_ammo.heat_shot * player.heat_cost_multi + heat_level, load_ammo.heat_max
+			)
 			# Ability to override per weapon or just use player default
 			#player.aggro_shoot_radius = 300
 			player.just_shot.emit()
@@ -38,15 +42,16 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 			_shoot_gun(player.velocity, load_ammo, is_crit)
 			if heat_level == load_ammo.heat_max:
 				_overheat()
-				
-				
+
 	heat_level = max(0, heat_level - ammo.heat_rate * delta)
 
 
 func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo, is_crit: bool) -> void:
 	@warning_ignore("integer_division")
 	var angle := (load_ammo.bullet_count / 2) * -load_ammo.spread
-	var start_direction := player_velocity if not player_velocity.is_zero_approx() else Vector2.RIGHT
+	var start_direction := (
+		player_velocity if not player_velocity.is_zero_approx() else Vector2.RIGHT
+	)
 	for i in load_ammo.bullet_count:
 		load_ammo.direction = start_direction.rotated(deg_to_rad(angle))
 		angle += load_ammo.spread
@@ -64,6 +69,7 @@ func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo, is_crit: bool) -> voi
 		if is_crit:
 			pass_ammo.is_crit = true
 		get_tree().root.add_child(pass_ammo)
+
 
 func _overheat() -> void:
 	gun_heat_cooldown = true

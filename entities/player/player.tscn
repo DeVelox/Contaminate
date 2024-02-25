@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
-[ext_resource type="PackedScene" uid="uid://dk1wsonbibm50" path="res://entities/weapons/tool.tscn" id="2_guve7"]
+[ext_resource type="PackedScene" uid="uid://bbou7hvela1cg" path="res://entities/weapons/tool.tscn" id="2_guve7"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
@@ -26,11 +26,14 @@ fill_to = Vector2(0.75641, 0.230769)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ifrs4"]
 radius = 50.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my4c5"]
-light_mode = 2
+[sub_resource type="Gradient" id="Gradient_bqfhm"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0eh1e"]
-size = Vector2(20, 2)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h4rba"]
+gradient = SubResource("Gradient_bqfhm")
+width = 20
+height = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oyfv5"]
 
@@ -87,13 +90,12 @@ one_shot = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
-material = SubResource("CanvasItemMaterial_my4c5")
 custom_minimum_size = Vector2(20, 2)
 offset_left = -10.0
 offset_top = -18.0
 offset_right = 10.0
 offset_bottom = -16.0
-texture_progress = SubResource("PlaceholderTexture2D_0eh1e")
+texture_progress = SubResource("GradientTexture2D_h4rba")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 10
