@@ -15,3 +15,8 @@ func update_upgrade_list(upgrade: String) -> void:
 func reset_upgrade_list() -> void:
 	for i in %Upgrades.get_children():
 		i.queue_free()
+
+func pause_game() -> void:
+		%PauseMenu.toggled = true
+		get_tree().paused = true
+		%PauseMenu.show()

@@ -54,16 +54,16 @@ player = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 position = Vector2(947, 970)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Shaders" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="Chaos" type="TextureRect" parent="Shaders"]
 material = SubResource("ShaderMaterial_pbqo1")
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_psc1e")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="Vignette" type="ColorRect" parent="Shaders"]
 material = SubResource("ShaderMaterial_k76xm")
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 40.0

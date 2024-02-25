@@ -46,6 +46,7 @@ var buff_dict: Dictionary = {
 @onready var aggro_collision: CollisionShape2D = $AggroRange/CollisionShape2D
 @onready var invuln: Timer = $Invuln
 @onready var hud := get_node("/root/Main/Menus/HUD")
+@onready var vignette := get_node("/root/Main/Shaders/Vignette")
 
 
 func _ready() -> void:
@@ -163,14 +164,20 @@ func damage(attack: int) -> void:
 		SoundManager.sfx(SoundManager.DEATH)
 		health -= attack
 		hide()
+		hud.reset_upgrade_list()
 		set_physics_process(false)
-		var pikachu := Sprite2D.new()
-		pikachu.texture = load("res://assets/pikachu.png")
-		pikachu.scale = Vector2(0.1, 0.1)
-		pikachu.global_position = global_position
-		get_tree().root.add_child(pikachu)
 		var tween := create_tween()
-		tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
+		tween.tween_property(vignette.material, "shader_parameter/vignette_intensity", 50.0, 2.0)
+		tween.tween_callback(hud.pause_game)
+		# RIP Pikachu
+		# var pikachu := Sprite2D.new()
+		# pikachu.texture = load("res://assets/pikachu.png")
+		# pikachu.scale = Vector2(0.1, 0.1)
+		# pikachu.global_position = global_position
+		# get_tree().root.add_child(pikachu)
+		# var tween := create_tween()
+		# tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
+
 	hud.update_health(health)
 
 

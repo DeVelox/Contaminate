@@ -87,6 +87,7 @@ autostart = true
 one_shot = true
 
 [node name="Noise" type="Timer" parent="."]
+one_shot = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1

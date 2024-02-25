@@ -15,6 +15,11 @@ func _process(_delta: float) -> void:
 		if is_visible():
 			hide()
 
+	if get_viewport().has_focus():
+		AudioServer.set_bus_mute(0, false)
+	else:
+		AudioServer.set_bus_mute(0, true)
+
 
 func _on_master_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(value))
