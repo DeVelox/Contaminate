@@ -43,5 +43,5 @@ void fragment() {
 		texture(SCREEN_TEXTURE, SCREEN_UV + chaos_v * amount_b).b,
 		1.);
 		
-	COLOR.a = texture(TEXTURE, UV).a;
+	COLOR.a = texture(TEXTURE, UV).r;
 }

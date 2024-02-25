@@ -1,11 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://bavnh0qellabo"]
+[gd_scene load_steps=11 format=3 uid="uid://bavnh0qellabo"]
 
 [ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5ngur"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
 [ext_resource type="Script" path="res://scripts/light_mask.gd" id="2_e4yt6"]
 [ext_resource type="PackedScene" uid="uid://cr7pdhdr0ftkb" path="res://zones/t1r1.tscn" id="2_gpy0j"]
+[ext_resource type="Shader" path="res://scripts/shaders/distortion.gdshader" id="6_ogum4"]
 [ext_resource type="PackedScene" uid="uid://lgvewjetgk0v" path="res://entities/prefabs/menus.tscn" id="6_pje3k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbqo1"]
+shader = ExtResource("6_ogum4")
+shader_parameter/chaos = 32.0
+shader_parameter/radius = 1.0
+shader_parameter/attenuation = 2.0
+
+[sub_resource type="Gradient" id="Gradient_oal8k"]
+offsets = PackedFloat32Array(0.517647, 0.74902, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_psc1e"]
+gradient = SubResource("Gradient_oal8k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.15, 0.15)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5ngur")
@@ -29,5 +46,14 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_5a4th")]
 position = Vector2(947, 970)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_pbqo1")
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("GradientTexture2D_psc1e")
 
 [node name="Menus" parent="." instance=ExtResource("6_pje3k")]

@@ -13,7 +13,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if get_tree().current_scene.name == "Start":
 		return
-	if %WeaponSelect.is_visible():
+	if %WeaponSelect.is_visible() or %UpgradeSelect.is_visible():
 		return
 
 	if Input.is_action_just_pressed("menu"):
