@@ -33,6 +33,7 @@ func _ready() -> void:
 		loaded = matrix
 
 	if not map_location:
+		@warning_ignore("integer_division")
 		map_location = Vector2i(MAP_SIZE / 2, MAP_SIZE / 2)
 		loaded.set_bitv(map_location, true)
 

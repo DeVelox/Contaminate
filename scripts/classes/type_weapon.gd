@@ -42,6 +42,7 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 	heat_level = max(0, heat_level - ammo.heat_rate * delta)
 
 func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo) -> void:
+	@warning_ignore("integer_division")
 	var angle := (load_ammo.bullet_count / 2) * -load_ammo.spread
 	var start_direction := player_velocity if not player_velocity.is_zero_approx() else Vector2.RIGHT
 	for i in load_ammo.bullet_count:

@@ -16,6 +16,7 @@ const LIGHT_SHAKE = 25
 var max_health: int = 5
 var health: int = max_health
 var invuln_frames: int
+var roll_duration: int
 var roll_disabled: int
 var direction: Vector2
 var light_energy: float
@@ -66,10 +67,11 @@ func _physics_process(delta: float) -> void:
 	direction = (
 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	)
-	if direction:
-		velocity = lerp(velocity, direction * speed, 0.25)
-	else:
-		velocity = lerp(velocity, Vector2.ZERO, 0.25)
+	if roll_duration == 0:
+		if direction:
+			velocity = lerp(velocity, direction * speed, 0.25)
+		else:
+			velocity = lerp(velocity, Vector2.ZERO, 0.25)
 
 	move_and_slide()
 	_roll()
@@ -89,9 +91,12 @@ func _roll() -> void:
 		SoundManager.sfx(SoundManager.ROLL)
 		collision.set_deferred("disabled", true)
 		invuln_frames = 3
+		roll_duration = 120
 		roll_disabled = 60
 		velocity = direction * speed * 6
 		UpgradeManager.on_roll.emit(self)
+	if roll_duration > 0:
+		roll_duration -= 1
 	if roll_disabled > 0:
 		roll_disabled -= 1
 	if invuln_frames > 0:
