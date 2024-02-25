@@ -2,7 +2,6 @@ extends Upgrade
 
 var max_health_bonus: int = 1
 
-@onready var player: Player = get_node("/root/Main/Player")
 
 
 func _init() -> void:
@@ -10,6 +9,7 @@ func _init() -> void:
 
 
 func add() -> void:
+	var player: Player = get_node("/root/Main/Player")
 	player.max_health += 1
 	player.health = player.max_health
 	UpgradeManager.available_upgrades.erase(uname)

@@ -29,5 +29,4 @@ func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo) -> void:
 		direction = Vector2.RIGHT.rotated(rotation)
 	pass_ammo.origin = global_position + direction * gun_length
 	pass_ammo.direction = direction
-	pass_ammo.fired = true
 	get_tree().root.add_child(pass_ammo)

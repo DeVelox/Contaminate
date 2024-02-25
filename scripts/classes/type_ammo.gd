@@ -20,7 +20,6 @@ class_name Ammo extends Area2D
 @export var crit_damage: float
 @export var proc_coeff: float
 
-var fired: bool
 var origin: Vector2
 var direction: Vector2
 var range_squared: float
@@ -41,8 +40,9 @@ func _ready() -> void:
 	buff_dict[MechanicsManager.BuffType.DAMAGE]["flat"].fill(0.0)
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	global_position += speed * delta * direction
-	if fired and global_position.distance_squared_to(origin) > range_squared:
+	if global_position.distance_squared_to(origin) > range_squared:
 		queue_free()
