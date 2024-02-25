@@ -32,6 +32,7 @@ var buff_dict: Dictionary = {
 @onready var player_camera: Camera2D = $Camera2D
 @onready var pickup_radius: Area2D = $PickupRadius
 @onready var shadow_caster: PointLight2D = $ShadowCaster
+@onready var creepy_noise: Timer = $Noise
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
@@ -152,6 +153,10 @@ func _expand_aggro_range() -> void:
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
 	SoundManager.crossfade(SoundManager.MUSIC_COMBAT)
+	if creepy_noise.is_stopped():
+		SoundManager.sfx(SoundManager.CREATURES)
+		creepy_noise.wait_time = randf_range(20, 30)
+		creepy_noise.start()
 	if body is Elite:
 		body.set_elite_aggro()
 	if body is Enemy:

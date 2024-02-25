@@ -41,4 +41,5 @@ disabled = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="." to="." method="_on_contact"]
+[connection signal="explosion_sound" from="." to="." method="_explosion_sound" flags=6]
 [connection signal="body_entered" from="Explosion" to="." method="_on_explosion"]

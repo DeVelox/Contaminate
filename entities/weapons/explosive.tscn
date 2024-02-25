@@ -7,8 +7,15 @@
 [node name="Explosive" type="Node2D"]
 script = ExtResource("1_4iqlh")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_du3fm")
 
 [node name="Rocket" parent="." instance=ExtResource("2_3yrdg")]
+damage = 50
+speed = 100.0
+distance = 500.0
+heat_max = 100.0
+heat_shot = 100.0
+heat_rate = 50.0
+heat_cooldown = 1.0

@@ -23,4 +23,5 @@ func _get_property_list() -> Array[Dictionary]:
 func activate() -> void:
 	var upgrade_popup := get_node("/root/Main/Menus/UpgradeSelect")
 	upgrade_popup.upgrade_select()
+	upgrade_popup.currently_selecting = true
 	queue_free()

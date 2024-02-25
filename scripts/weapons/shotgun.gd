@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 			heat_level += ammo.heat_shot
 		else:
 			gun_overheat = true
+			SoundManager.sfx(SoundManager.OVERHEAT)
 			await get_tree().create_timer(ammo.heat_cooldown).timeout
 			gun_overheat = false
 			return
@@ -35,7 +36,7 @@ func _process(delta: float) -> void:
 		# Ability to override per weapon or just use player default
 		#player.aggro_shoot_radius = 300
 		player.just_shot.emit()
-		SoundManager.sfx(SoundManager.PISTOL)
+		SoundManager.sfx(SoundManager.SHOTGUN)
 		var angle := (ammo.bullet_count / 2) * -ammo.spread
 		var direction := player.velocity if not player.velocity.is_zero_approx() else Vector2.RIGHT
 		for i in ammo.bullet_count:

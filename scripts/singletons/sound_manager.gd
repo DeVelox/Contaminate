@@ -8,8 +8,14 @@ const BOOM = preload("res://assets/sounds/Boom.ogg")
 const DEATH = preload("res://assets/sounds/Death.ogg")
 const HIT = preload("res://assets/sounds/Hit.ogg")
 const PISTOL = preload("res://assets/sounds/Pistol.ogg")
+const RIFLE = preload("res://assets/sounds/Rifle.ogg")
+const SHOTGUN = preload("res://assets/sounds/Shotgun.ogg")
+const ROCKET = preload("res://assets/sounds/Rocket.ogg")
+const EXPLOSION = preload("res://assets/sounds/Explosion.ogg")
+const OVERHEAT = preload("res://assets/sounds/Overheat.ogg")
 const ROLL = preload("res://assets/sounds/Roll.ogg")
 const WHOOSH = preload("res://assets/sounds/Whoosh.ogg")
+const CREATURES = preload("res://assets/sounds/Creatures.ogg")
 
 # Events
 

@@ -83,6 +83,8 @@ autostart = true
 [node name="Invuln" type="Timer" parent="."]
 one_shot = true
 
+[node name="Noise" type="Timer" parent="."]
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
 material = SubResource("CanvasItemMaterial_my4c5")
