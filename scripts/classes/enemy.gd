@@ -1,7 +1,5 @@
 class_name Enemy extends StaticBody2D
 
-signal stat_changed(stat)
-
 @export var health: int = 10
 @export var attack: int = 1
 @export var base_speed: float = 100.0
@@ -30,6 +28,7 @@ var enemy_id: int
 @onready var infection_timer: Timer = $InfectionTimer
 @onready var enemies := get_node("/root/Main/LightMask/Enemies")
 @onready var enemies_afk := get_node("/root/Main/EnemiesAFK")
+
 static var id: int
 
 
@@ -45,16 +44,8 @@ func _ready() -> void:
 	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].fill(0.0)
 	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].fill(0.0)
 
-	stat_changed.connect(_speed_calc)
-
 	$Sprite2D.hide()
 	set_physics_process(false)
-
-
-#
-#apply_buff(5, -50, BuffType.SPEED, true, BuffBucket.KNEE_CAP)
-#apply_buff(5, -20, BuffType.SPEED,  true, BuffBucket.KNEE_CAP)
-#apply_buff(2, 30, BuffType.SPEED,  false, BuffBucket.BOOST)
 
 
 func _physics_process(delta: float) -> void:
@@ -97,41 +88,6 @@ func kill() -> void:
 	queue_free()
 
 
-func apply_buff(
-	duration: float,
-	amount: float,
-	buff_type,
-	multi: bool = false,
-	group = MechanicsManager.BuffBucket.MISC
-) -> void:
-	if group == MechanicsManager.BuffBucket.MISC:
-		if multi:
-			buff_dict[buff_type]["multi"][group] += amount / 100.0
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["multi"][group] -= amount / 100.0
-			stat_changed.emit(buff_type)
-		else:
-			buff_dict[buff_type]["flat"][group] += amount
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["flat"][group] -= amount
-			stat_changed.emit(buff_type)
-	else:
-		if multi and absf(amount / 100.0) > absf(buff_dict[buff_type]["multi"][group]):
-			buff_dict[buff_type]["multi"][group] = amount / 100.0
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["multi"][group] = 0.0
-			stat_changed.emit(buff_type)
-		elif absf(amount) > absf(buff_dict[buff_type]["flat"][group]):
-			buff_dict[buff_type]["flat"][group] = amount
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["flat"][group] = 0.0
-			stat_changed.emit(buff_type)
-
-
 func infect() -> void:
 	if infection_timer.is_stopped():
 		infection_timer.start()
@@ -164,10 +120,3 @@ func _check_infection() -> void:
 		infection_timer.stop()
 
 
-func _sum(a: float, b: float) -> float:
-	return a + b
-
-
-func _speed_calc(buff_type) -> void:
-	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
-	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)

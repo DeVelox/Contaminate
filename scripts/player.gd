@@ -1,7 +1,6 @@
 class_name Player extends CharacterBody2D
 
 signal just_shot
-signal stat_changed(stat)
 
 const CAMERA_SPEED = 50.0
 const LIGHT = 0.25
@@ -24,6 +23,7 @@ var flicker_intensity: float = 0.05
 var speed: float
 var update_rate: float = 0.1
 var update_rate_curr: float
+
 var buff_dict: Dictionary = {
 	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
 }
@@ -50,8 +50,6 @@ func _ready() -> void:
 	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].resize(MechanicsManager.BuffBucket.size())
 	buff_dict[MechanicsManager.BuffType.SPEED]["multi"].fill(0.0)
 	buff_dict[MechanicsManager.BuffType.SPEED]["flat"].fill(0.0)
-
-	stat_changed.connect(_speed_calc)
 
 
 func _physics_process(delta: float) -> void:
@@ -163,50 +161,6 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		damage(body.attack)
-
-
-func apply_buff(
-	duration: float,
-	amount: float,
-	buff_type,
-	multi: bool = false,
-	group = MechanicsManager.BuffBucket.MISC
-) -> void:
-	if group == MechanicsManager.BuffBucket.MISC:
-		if multi:
-			buff_dict[buff_type]["multi"][group] += amount / 100.0
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["multi"][group] -= amount / 100.0
-			stat_changed.emit(buff_type)
-		else:
-			buff_dict[buff_type]["flat"][group] += amount
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["flat"][group] -= amount
-			stat_changed.emit(buff_type)
-	else:
-		if multi and absf(amount / 100.0) > absf(buff_dict[buff_type]["multi"][group]):
-			buff_dict[buff_type]["multi"][group] = amount / 100.0
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["multi"][group] = 0.0
-			stat_changed.emit(buff_type)
-		elif absf(amount) > absf(buff_dict[buff_type]["flat"][group]):
-			buff_dict[buff_type]["flat"][group] = amount
-			stat_changed.emit(buff_type)
-			await get_tree().create_timer(duration).timeout
-			buff_dict[buff_type]["flat"][group] = 0.0
-			stat_changed.emit(buff_type)
-
-
-func _sum(a: float, b: float) -> float:
-	return a + b
-
-
-func _speed_calc(buff_type) -> void:
-	buff_dict[buff_type]["multi_calc"] = buff_dict[buff_type]["multi"].reduce(_sum)
-	buff_dict[buff_type]["flat_calc"] = buff_dict[buff_type]["flat"].reduce(_sum)
 
 
 func _move_enemies(delta: float) -> void:

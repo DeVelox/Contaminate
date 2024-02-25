@@ -3,6 +3,8 @@ extends Node
 enum BuffBucket { SHOCK, KNEE_CAP, BOOST, ROLL, MISC }
 enum BuffType { SPEED, HEALTH }
 
+signal stat_changed(stat)
+
 #TODO: Change to const after values are locked in
 @export var _base_infection_damage: int = 3
 @export var _base_infection_count: int = 3
@@ -20,11 +22,8 @@ var _shock_damage: int = _base_shock_damage
 var _shock_slow: float = _base_shock_slow
 var _shock_duration: float = _base_shock_duration
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass  # Replace with function body.
-
+	stat_changed.connect(_stat_calc)
 
 func get_base_infection_damage() -> int:
 	return _base_infection_damage
@@ -104,6 +103,47 @@ func set_shock_duration(duration) -> float:
 	return _shock_duration
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+
+func apply_buff(
+	body: Node2D,
+	duration: float,
+	amount: float,
+	buff_type,
+	multi: bool = false,
+	group = BuffBucket.MISC
+) -> void:
+	if group == BuffBucket.MISC:
+		if multi:
+			body.buff_dict[buff_type]["multi"][group] += amount / 100.0
+			stat_changed.emit(body, buff_type)
+			await get_tree().create_timer(duration).timeout
+			body.buff_dict[buff_type]["multi"][group] -= amount / 100.0
+			stat_changed.emit(body, buff_type)
+		else:
+			body.buff_dict[buff_type]["flat"][group] += amount
+			stat_changed.emit(body, buff_type)
+			await get_tree().create_timer(duration).timeout
+			body.buff_dict[buff_type]["flat"][group] -= amount
+			stat_changed.emit(body, buff_type)
+	else:
+		if multi and absf(amount / 100.0) > absf(body.buff_dict[buff_type]["multi"][group]):
+			body.buff_dict[buff_type]["multi"][group] = amount / 100.0
+			stat_changed.emit(body, buff_type)
+			await get_tree().create_timer(duration).timeout
+			body.buff_dict[buff_type]["multi"][group] = 0.0
+			stat_changed.emit(body, buff_type)
+		elif absf(amount) > absf(body.buff_dict[buff_type]["flat"][group]):
+			body.buff_dict[buff_type]["flat"][group] = amount
+			stat_changed.emit(body, buff_type)
+			await get_tree().create_timer(duration).timeout
+			body.buff_dict[buff_type]["flat"][group] = 0.0
+			stat_changed.emit(body, buff_type)
+
+
+func _sum(a: float, b: float) -> float:
+	return a + b
+
+
+func _stat_calc(body: Node2D, buff_type: BuffType) -> void:
+	body.buff_dict[buff_type]["multi_calc"] = body.buff_dict[buff_type]["multi"].reduce(_sum)
+	body.buff_dict[buff_type]["flat_calc"] = body.buff_dict[buff_type]["flat"].reduce(_sum)

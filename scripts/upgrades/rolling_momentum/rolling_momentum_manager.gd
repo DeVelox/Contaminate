@@ -24,7 +24,7 @@ func remove() -> void:
 
 
 func _speed_burst(player: Player) -> void:
-	player.apply_buff(duration, amount, buff_type, multi, buff_bucket)
+	MechanicsManager.apply_buff(player, duration, amount, buff_type, multi, buff_bucket)
 
 
 func _register() -> void:
