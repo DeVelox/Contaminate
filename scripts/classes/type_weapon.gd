@@ -1,29 +1,33 @@
 class_name Weapon extends Node2D
 
+var ammo: Ammo
+var shoot_func: Callable = _shoot_gun
+var gun_offset: float = 15
+var gun_length: float = 20
+var gun_overheat: bool
 var heat_level: float
 
 
-func _point_gun(player: Player, gun_offset: float) -> void:
-	if not player.velocity.is_zero_approx():
-		position = player.velocity.normalized() * gun_offset
-		rotation = player.velocity.angle()
-	if player.velocity.x < 0:
+func _point_gun(player_velocity: Vector2) -> void:
+	if not player_velocity.is_zero_approx():
+		position = player_velocity.normalized() * gun_offset
+		rotation = player_velocity.angle()
+	if player_velocity.x < 0:
 		$Sprite2D.flip_v = true
 	else:
 		$Sprite2D.flip_v = false
 
 
-func _shoot_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
-	SoundManager.sfx(SoundManager.PISTOL)
-	var pass_ammo = ammo.duplicate()
+func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo) -> void:
+	var pass_ammo = load_ammo.duplicate()
 	var direction = (
-		player.velocity.normalized()
-		if ammo.direction == Vector2.ZERO
-		else ammo.direction.normalized()
+		player_velocity.normalized()
+		if load_ammo.direction == Vector2.ZERO
+		else load_ammo.direction.normalized()
 	)
 	if direction.is_zero_approx():
-		direction = Vector2.ONE.rotated(rotation)
+		direction = Vector2.RIGHT.rotated(rotation)
 	pass_ammo.origin = global_position + direction * gun_length
 	pass_ammo.direction = direction
 	pass_ammo.fired = true
-	WeaponManager.shoot(pass_ammo)
+	get_tree().root.add_child(pass_ammo)

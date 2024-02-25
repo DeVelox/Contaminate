@@ -1,10 +1,5 @@
 class_name Rifle extends Weapon
 
-var ammo: Ammo
-var shoot_func: Callable = _shoot_gun
-var gun_offset: float = 30
-var gun_length: float = 40
-
 @onready var player: Player = get_node("/root/Main/Player")
 
 
@@ -12,16 +7,18 @@ var gun_length: float = 40
 func _ready() -> void:
 	position = Vector2(gun_offset, 0)
 	ammo = get_child(1)
+	gun_offset = 30
+	gun_length = 40
 	#ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	_point_gun(player, gun_offset)
+	_point_gun(player.velocity)
 	player.progress_bar.value = heat_level
 
 	if Input.is_action_just_pressed("shoot"):
 		# Ability to override per weapon or just use player default
 		#player.aggro_shoot_radius = 300
 		player.just_shot.emit()
-		shoot_func.call(player, ammo, gun_length)
+		_shoot_gun(player.velocity, ammo)

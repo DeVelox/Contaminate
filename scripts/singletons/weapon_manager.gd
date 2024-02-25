@@ -1,10 +1,6 @@
 extends Node
 
 
-func shoot(ammo: Ammo) -> void:
-	get_tree().root.add_child(ammo)
-
-
 func apply_ammo_upgrades(ammo_type: Ammo, weapon: Weapon, upgrade_array: Array[Node]) -> Variant:
 	var load_ammo = ammo_type
 	for i in upgrade_array:

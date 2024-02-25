@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ev24x45gddxq"]
+[gd_scene load_steps=4 format=3 uid="uid://ev24x45gddxq"]
 
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="1_0lo75"]
 [ext_resource type="PackedScene" uid="uid://e5o5ed575ll0" path="res://entities/ammo/bullet.tscn" id="2_nsq52"]
 [ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="2_skwxg"]
-[ext_resource type="PackedScene" uid="uid://c2iv7r7dy1ws" path="res://entities/weapons/upgrades/heat.tscn" id="3_7g8mk"]
-[ext_resource type="PackedScene" uid="uid://bo3l44bhkmkuu" path="res://entities/weapons/upgrades/spread.tscn" id="5_liper"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_0lo75")
@@ -18,10 +16,9 @@ damage = 10
 speed = 500.0
 distance = 300.0
 penetration = 5
-
-[node name="Spread" parent="." instance=ExtResource("5_liper")]
-
-[node name="Heat" parent="." instance=ExtResource("3_7g8mk")]
-heat_cost = 50.0
-heat_recharge = 50.0
-heat_threshold = 50.0
+heat_max = 100.0
+heat_shot = 50.0
+heat_rate = 30.0
+heat_cooldown = 1.5
+spread = 15.0
+bullet_count = 5

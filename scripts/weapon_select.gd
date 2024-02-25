@@ -1,6 +1,6 @@
 extends CenterContainer
 
-const PISTOL = preload("res://entities/weapons/pistol.tscn")
+const TOOL = preload("res://entities/weapons/tool.tscn")
 const RIFLE = preload("res://entities/weapons/rifle.tscn")
 const SHOTGUN = preload("res://entities/weapons/shotgun.tscn")
 const EXPLOSIVE = preload("res://entities/weapons/explosive.tscn")

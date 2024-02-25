@@ -1,8 +1,8 @@
 extends Upgrade
 
-@onready var player: Player = get_node("/root/Main/Player")
+var max_health_bonus: int = 1
 
-var max_health_bonus: int  = 1
+@onready var player: Player = get_node("/root/Main/Player")
 
 
 func _init() -> void:

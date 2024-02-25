@@ -17,3 +17,6 @@ mono_crash.*.json
 # Physics addons
 addons/godot-box2d/
 addons/godot-rapier2d/
+
+# VSCode
+.vscode

@@ -118,5 +118,3 @@ func _check_infection() -> void:
 		try_kill()
 	else:
 		infection_timer.stop()
-
-

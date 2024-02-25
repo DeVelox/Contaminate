@@ -1,9 +1,9 @@
 extends Upgrade
 
-@onready var player: Player = get_node("/root/Main/Player")
-
-var crit_chance_bonus: float  = 0.2
+var crit_chance_bonus: float = 0.2
 var non_crit_damage_reduction: float = 0.2
+
+@onready var player: Player = get_node("/root/Main/Player")
 
 
 func _init() -> void:

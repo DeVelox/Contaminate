@@ -1,9 +1,9 @@
 extends Node
 
-enum BuffBucket { SHOCK, KNEE_CAP, BOOST, ROLL, MISC }
-enum BuffType { SPEED, HEALTH }
-
 signal stat_changed(stat)
+
+enum BuffBucket { SHOCK, KNEE_CAP, BOOST, ROLL, MISC }
+enum BuffType { SPEED, HEALTH, DAMAGE }
 
 #TODO: Change to const after values are locked in
 @export var _base_infection_damage: int = 3
@@ -22,8 +22,10 @@ var _shock_damage: int = _base_shock_damage
 var _shock_slow: float = _base_shock_slow
 var _shock_duration: float = _base_shock_duration
 
+
 func _ready() -> void:
 	stat_changed.connect(_stat_calc)
+
 
 func get_base_infection_damage() -> int:
 	return _base_infection_damage
@@ -101,7 +103,6 @@ func get_shock_duration() -> float:
 func set_shock_duration(duration) -> float:
 	_shock_duration = duration
 	return _shock_duration
-
 
 
 func apply_buff(
