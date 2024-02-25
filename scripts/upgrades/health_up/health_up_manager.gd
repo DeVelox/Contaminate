@@ -9,7 +9,7 @@ func _init() -> void:
 
 
 func add() -> void:
-	var player: Player = get_node("/root/Main/Player")
+	var player = UpgradeManager.get_player()
 	player.max_health += 1
 	player.health = player.max_health
 	UpgradeManager.available_upgrades.erase(uname)

@@ -13,6 +13,10 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [node name="Grunt Boss" type="StaticBody2D"]
 script = ExtResource("1_qaoap")
+health = 50
+base_speed = 110.0
+tier = 2
+cost = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_itqy8")

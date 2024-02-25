@@ -66,3 +66,7 @@ func _register_upgrades(folder: String, script: String) -> void:
 			elif file.ends_with(script):
 				load(folder + "/" + file).new()
 			file = dir.get_next()
+
+func get_player() -> Player:
+	var player: Player = get_node("/root/Main/Player")
+	return player

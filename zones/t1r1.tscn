@@ -591,7 +591,7 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("3_j7odo")]
 spawn_locations = NodePath("../SpawnLocations")
-enemy_pool = "templates/enemy:0.5,bunny"
+enemy_pool = "grunt"
 danger = 3
 
 [node name="SpawnLocations" type="Node2D" parent="."]

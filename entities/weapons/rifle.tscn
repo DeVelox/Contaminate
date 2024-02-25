@@ -20,3 +20,4 @@ heat_max = 100.0
 heat_shot = 10.0
 heat_rate = 5.0
 heat_cooldown = 1.0
+bullet_count = 1

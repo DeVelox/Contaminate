@@ -1,12 +1,12 @@
 class_name Enemy extends StaticBody2D
 
-@export var health: int = 10
+@export var health: int
 @export var attack: int = 1
-@export var base_speed: float = 100.0
+@export var base_speed: float
 @export var min_speed: float = 10.0
 @export var max_speed: float = 200.0
-@export var tier: int = 1
-@export var cost: int = 1
+@export var tier: int
+@export var cost: int
 @export var bobbing: float = 45.0
 @export var deaggro_radius: float = 1000.0
 

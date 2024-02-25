@@ -17,6 +17,10 @@ polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_w3om8")
+health = 10
+base_speed = 80.0
+tier = 3
+cost = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ojpu8")

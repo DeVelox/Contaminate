@@ -15,26 +15,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_point_gun(player.velocity)
-	player.progress_bar.value = heat_level
+	_try_shoot(player, ammo, SoundManager.ROCKET, delta)
 
-	if not gun_overheat:
-		heat_level -= ammo.heat_rate * delta
 
-	if Input.is_action_just_pressed("shoot"):
-		if gun_overheat:
-			return
-		if heat_level <= ammo.heat_max:
-			heat_level += ammo.heat_shot
-		else:
-			gun_overheat = true
-			SoundManager.sfx(SoundManager.OVERHEAT)
-			await get_tree().create_timer(ammo.heat_cooldown).timeout
-			gun_overheat = false
-			return
 
-		# Ability to override per weapon or just use player default
-		#player.aggro_shoot_radius = 300
-		player.just_shot.emit()
-		SoundManager.sfx(SoundManager.ROCKET)
-		_shoot_gun(player.velocity, ammo)

@@ -18,6 +18,10 @@ scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_tfyjq")
+health = 10
+base_speed = 120.0
+tier = 3
+cost = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_epuet")
