@@ -48,4 +48,5 @@ func _on_main_menu_pressed() -> void:
 
 
 func _on_upgrades_pressed() -> void:
+	%PauseMenu.hide()
 	%UpgradeSelect.upgrade_select(true)

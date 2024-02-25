@@ -8,20 +8,22 @@ var fire_rate = 5
 var spread = 15
 var shoot_func: Callable
 var parent: Weapon
+var parent_ammo: Ammo
 
 func _ready() -> void:
 	parent = get_parent() as Weapon
-	if parent is Weapon:
-		if parent.fire_rate > 1:
-			parent.fire_rate += fire_rate
+	parent_ammo = parent.get_child(1) as Ammo
+	if parent_ammo is Ammo:
+		if parent_ammo.fire_rate > 1:
+			parent_ammo.fire_rate += fire_rate
 		else:
 			shoot_func = parent.shoot_func
 			parent.shoot_func = _spread
-			parent.fire_rate = fire_rate
+			parent_ammo.fire_rate = fire_rate
 		
 func _spread(player: Player, ammo: Ammo, gun_length: float) -> void:
 	var angle = (fire_rate / 2) * -spread
-	fire_rate = parent.fire_rate
+	fire_rate = parent_ammo.fire_rate
 	for i in fire_rate:
 		ammo.direction = player.velocity.rotated(deg_to_rad(angle))
 		angle += spread

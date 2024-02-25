@@ -1,7 +1,5 @@
 class_name Pistol extends Weapon
 
-@export var ammo_type: PackedScene
-
 var ammo: Ammo
 var shoot_func: Callable = _shoot_gun
 var gun_offset: float = 15
@@ -13,7 +11,7 @@ var gun_length: float = 20
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = Vector2(gun_offset, 0)
-	ammo = ammo_type.instantiate()
+	ammo = get_child(1)
 	ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
 
 

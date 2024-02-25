@@ -1,13 +1,6 @@
 class_name Weapon extends Node2D
 
-@export var damage: int
-@export var speed: float
-@export var pen: int
-@export var lifetime: float
 var heat_level: float
-var fire_rate: float
-var origin: Vector2
-var direction: Vector2
 
 
 func _point_gun(player: Player, gun_offset: float) -> void:
@@ -32,4 +25,5 @@ func _shoot_gun(player: Player, ammo: Ammo, gun_length: float) -> void:
 		direction = Vector2.ONE.rotated(rotation)
 	pass_ammo.origin = global_position + direction * gun_length
 	pass_ammo.direction = direction
+	pass_ammo.fired = true
 	WeaponManager.shoot(pass_ammo)

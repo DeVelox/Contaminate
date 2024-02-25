@@ -8,11 +8,16 @@
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_0lo75")
-ammo_type = ExtResource("2_nsq52")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_skwxg")
+
+[node name="Bullet" parent="." instance=ExtResource("2_nsq52")]
+damage = 10
+speed = 500.0
+distance = 300.0
+penetration = 5
 
 [node name="Spread" parent="." instance=ExtResource("5_liper")]
 

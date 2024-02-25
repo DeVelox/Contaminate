@@ -9,11 +9,12 @@
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource("1_ou55c")
-ammo_type = ExtResource("2_m6lfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_3evwg")
+
+[node name="Bullet" parent="." instance=ExtResource("2_m6lfh")]
 
 [node name="Heat" parent="." instance=ExtResource("4_nubwt")]
 

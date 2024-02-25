@@ -108,7 +108,7 @@ func apply_buff(
 	body: Node2D,
 	duration: float,
 	amount: float,
-	buff_type,
+	buff_type: BuffType,
 	multi: bool = false,
 	group = BuffBucket.MISC
 ) -> void:

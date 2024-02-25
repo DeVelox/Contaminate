@@ -7,11 +7,12 @@
 
 [node name="Rifle" type="Node2D"]
 script = ExtResource("1_ifk0q")
-ammo_type = ExtResource("2_t4d7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.05)
 texture = ExtResource("2_wb3fv")
+
+[node name="Bullet" parent="." instance=ExtResource("2_t4d7a")]
 
 [node name="Heat" parent="." instance=ExtResource("2_ao4ir")]
 heat_cost = 20.0
