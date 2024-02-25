@@ -1,7 +1,7 @@
 extends Upgrade
 
-var max_health_bonus: int = 1
-
+var bonus_crit_chance: float = 0.2
+var bonus_heat_cost: float = 0.2
 
 
 func _init() -> void:
@@ -10,8 +10,8 @@ func _init() -> void:
 
 func add() -> void:
 	var player = UpgradeManager.get_player()
-	player.max_health += 1
-	player.heal(player.max_health)
+	player.base_crit_chance += bonus_crit_chance
+	player.heat_cost_multi += bonus_heat_cost
 	UpgradeManager.available_upgrades.erase(uname)
 
 
@@ -20,12 +20,12 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "HealthUp"
+	uname = "HotHead"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Get an extra heart and a full heal"
-	logic = "res://scripts/upgrades/health_up/health_up_manager.gd"
-	icon = "res://assets/heart.svg"
+	logic = "res://scripts/upgrades/hot_head/hot_head_manager.gd"
+	icon = "res://assets/light_tendrils.png"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)

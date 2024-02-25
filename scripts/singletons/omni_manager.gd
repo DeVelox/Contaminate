@@ -3,6 +3,9 @@ extends Node
 
 signal on_roll(player: Player)
 signal on_move(player: Player)
+signal on_heal(player: Player)
+signal on_hurt(player: Player)
+
 
 signal on_shoot(weapon: Weapon)
 
