@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbttptgrknflx"]
 
-[ext_resource type="Script" path="res://scripts/enemy_elite.gd" id="1_50jjs"]
+[ext_resource type="Script" path="res://scripts/classes/enemy_elite.gd" id="1_50jjs"]
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="1_bndbx"]
 [ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_v1w7q"]
 

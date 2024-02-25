@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2pik842iva40"]
 
-[ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_ba7y0"]
+[ext_resource type="Script" path="res://scripts/classes/enemy_basic.gd" id="1_ba7y0"]
 [ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="2_xlj8h"]
 [ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_vrdnv"]
 

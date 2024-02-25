@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bgtnl1hwmny64"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_nquv5"]
+[ext_resource type="Script" path="res://scripts/misc/player.gd" id="1_nquv5"]
 [ext_resource type="PackedScene" uid="uid://bbou7hvela1cg" path="res://entities/weapons/tool.tscn" id="2_guve7"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://buhdc2xs0pe0y"]
 
 [ext_resource type="Texture2D" uid="uid://cxmjyfx14dxy1" path="res://assets/lightning-branches.svg" id="1_so65e"]
-[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_tfrbu"]
+[ext_resource type="Script" path="res://scripts/menus/upgrade.gd" id="1_tfrbu"]
 
 [node name="Upgrade" type="Button"]
 custom_minimum_size = Vector2(240, 360)

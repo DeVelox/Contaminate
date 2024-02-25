@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://sma8asr61yf6"]
 
-[ext_resource type="Script" path="res://scripts/zone.gd" id="1_ybdxd"]
+[ext_resource type="Script" path="res://scripts/misc/zone.gd" id="1_ybdxd"]
 [ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entities/prefabs/enemy_manager.tscn" id="2_rspjw"]
 
 [sub_resource type="TileSet" id="TileSet_tu2sm"]

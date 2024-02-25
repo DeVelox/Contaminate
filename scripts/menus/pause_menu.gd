@@ -1,7 +1,7 @@
 extends CenterContainer
 
 var toggled: bool
-var zone_class: Zone = load("res://scripts/zone.gd").new()
+var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
 
 
 # Called when the node enters the scene tree for the first time.

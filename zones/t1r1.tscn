@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr7pdhdr0ftkb"]
 
-[ext_resource type="Script" path="res://scripts/zone.gd" id="1_7bfvy"]
+[ext_resource type="Script" path="res://scripts/misc/zone.gd" id="1_7bfvy"]
 [ext_resource type="Texture2D" uid="uid://4wdlqek1t3uc" path="res://assets/Zombie Apocalypse Tileset Reference.png" id="2_c7r5o"]
 [ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entities/prefabs/enemy_manager.tscn" id="3_j7odo"]
 

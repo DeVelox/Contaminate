@@ -1,6 +1,6 @@
 extends CenterContainer
 
-var zone_class: Zone = load("res://scripts/zone.gd").new()
+var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
