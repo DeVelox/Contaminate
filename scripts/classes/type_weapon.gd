@@ -20,7 +20,7 @@ func _point_gun(player_velocity: Vector2) -> void:
 
 
 func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float) -> void:
-	_point_gun(player.velocity)
+	_point_gun(player.velocity.normalized().snapped(Vector2.ONE))
 	player.progress_bar.value = heat_level
 	if gun_heat_cooldown:
 		return
@@ -39,7 +39,7 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 			#player.aggro_shoot_radius = 300
 			player.just_shot.emit()
 			SoundManager.sfx(sfx)
-			_shoot_gun(player.velocity, load_ammo, is_crit)
+			_shoot_gun(player.velocity.normalized().snapped(Vector2.ONE), load_ammo, is_crit)
 			if heat_level == load_ammo.heat_max:
 				_overheat()
 

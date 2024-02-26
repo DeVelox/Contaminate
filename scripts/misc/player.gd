@@ -20,7 +20,6 @@ var roll_duration: int
 var roll_disabled: int
 var direction: Vector2
 var light_energy: float
-var flicker_intensity: float = 0.05
 var pbv: float
 var speed: float
 var update_rate: float = 0.1
@@ -147,10 +146,6 @@ func _camera_mode(mode: String) -> void:
 			player_camera.offset = lerp(player_camera.offset, -direction * CAMERA_SPEED, 0.1)
 		_:
 			return
-
-
-func _on_flicker_timeout() -> void:
-	light_energy = randf_range(LIGHT - flicker_intensity, LIGHT + flicker_intensity)
 
 
 func damage(attack: int) -> void:

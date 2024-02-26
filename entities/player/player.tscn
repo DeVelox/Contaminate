@@ -79,10 +79,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
 shape = SubResource("CircleShape2D_ifrs4")
 
-[node name="Flicker" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
 [node name="Invuln" type="Timer" parent="."]
 one_shot = true
 
@@ -111,6 +107,5 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
 shape = SubResource("CircleShape2D_1xxo2")
 
-[connection signal="timeout" from="Flicker" to="." method="_on_flicker_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
