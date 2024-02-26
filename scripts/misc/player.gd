@@ -210,3 +210,20 @@ func _move_enemies(delta: float) -> void:
 		update_rate_curr = update_rate
 	else:
 		update_rate_curr -= delta
+
+
+func _on_boss_timeout() -> void:
+	# Figure out which bosses we have
+	var enemy_container: Node2D = get_node("/root/Main/EnemiesAFK")
+	var boss1 := load("res://entities/enemies/grunt_boss.tscn").instantiate() as Boss
+	var boss2 := load("res://entities/enemies/exploder_boss.tscn").instantiate() as Boss
+
+	if $Boss.wait_time <= 300:
+		boss1.global_position = global_position + (Vector2(randf(), randf()).normalized() * 500)
+		enemy_container.add_child.call_deferred(boss1)
+		$Boss.start(600)
+	else:
+		boss2.global_position = global_position + (Vector2(randf(), randf()).normalized() * 500)
+		enemy_container.add_child.call_deferred(boss2)
+		
+

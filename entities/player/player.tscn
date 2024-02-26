@@ -85,6 +85,11 @@ one_shot = true
 [node name="Noise" type="Timer" parent="."]
 one_shot = true
 
+[node name="Boss" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
+autostart = true
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
 custom_minimum_size = Vector2(20, 2)
@@ -107,5 +112,6 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
 shape = SubResource("CircleShape2D_1xxo2")
 
+[connection signal="timeout" from="Boss" to="." method="_on_boss_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]

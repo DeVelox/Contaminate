@@ -12,6 +12,9 @@ cull_mode = 1
 polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
 
 [node name="Runner Boss" type="StaticBody2D"]
+scale = Vector2(4, 4)
+collision_layer = 8
+collision_mask = 9
 script = ExtResource("1_5mv7x")
 health = 20
 base_speed = 160.0

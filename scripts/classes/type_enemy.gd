@@ -14,7 +14,7 @@ var direction := Vector2.ZERO
 var motion := Vector2.ZERO
 var velocity := Vector2.ZERO
 var infection_count: int = 0
-
+var bob: float
 var speed: float
 
 var buff_dict: Dictionary = {
@@ -24,6 +24,7 @@ var buff_dict: Dictionary = {
 var enemy_id: int
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var outline: Sprite2D = $Outline
 @onready var deaggro: VisibleOnScreenNotifier2D = $Deaggro
 @onready var infection_timer: Timer = $InfectionTimer
 @onready var enemies := get_node("/root/Main/LightMask/Enemies")
@@ -47,6 +48,9 @@ func _ready() -> void:
 	$Sprite2D.hide()
 	set_physics_process(false)
 
+	if self is Boss:
+		set_aggro(true)
+
 
 func _physics_process(delta: float) -> void:
 	speed = clamp(
@@ -61,7 +65,9 @@ func _physics_process(delta: float) -> void:
 	#print_debug(speed)
 	motion = (direction * speed * delta)
 	velocity = lerp(velocity, motion, 0.1)
-	sprite.rotation_degrees = lerp(sprite.rotation_degrees, randf_range(-bobbing, bobbing), 0.1)
+	bob = randf_range(-bobbing, bobbing)
+	sprite.rotation_degrees = lerp(sprite.rotation_degrees, bob, 0.1)
+	outline.rotation_degrees = lerp(sprite.rotation_degrees, bob, 0.1)
 	move_and_collide(velocity, false, 1.0)
 
 
