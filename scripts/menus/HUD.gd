@@ -1,8 +1,9 @@
 extends MarginContainer
 
 
-func update_health(health: int) -> void:
-	%Hearts.custom_minimum_size.x = health * 48
+func update_health(health: int, max_health: int) -> void:
+	%Hearts.custom_minimum_size.x = health * 64
+	%MaxHearts.custom_minimum_size.x = max_health * 64
 
 
 func update_upgrade_list(upgrade: String) -> void:

@@ -52,7 +52,7 @@ func _ready() -> void:
 	shadow_caster.energy = LIGHT
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
-	hud.update_health(health)
+	hud.update_health(health, max_health)
 
 	for mehcanic in buff_dict:
 		buff_dict[mehcanic]["multi"].resize(MechanicsManager.BuffBucket.size())
@@ -173,12 +173,12 @@ func damage(attack: int) -> void:
 		# var tween := create_tween()
 		# tween.tween_property(pikachu, "scale", Vector2(1.0, 1.0), 0.5)
 
-	hud.update_health(health)
+	hud.update_health(health, max_health)
 
 
 func heal(amount: int) -> void:
 	health = min(max_health, health + amount)
-	hud.update_health(health)
+	hud.update_health(health, max_health)
 
 
 func _expand_aggro_range() -> void:

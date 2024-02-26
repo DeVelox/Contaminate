@@ -1,22 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://lgvewjetgk0v"]
+[gd_scene load_steps=13 format=3 uid="uid://lgvewjetgk0v"]
 
 [ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="1_3lf01"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_5xlqd"]
 [ext_resource type="Theme" uid="uid://cyenx03si47ju" path="res://entities/prefabs/menus.tres" id="1_r8y2f"]
+[ext_resource type="Texture2D" uid="uid://yg7560xh185w" path="res://assets/art/HUD/heart-drop.svg" id="2_q82at"]
 [ext_resource type="Script" path="res://scripts/menus/options.gd" id="2_vh8js"]
+[ext_resource type="Texture2D" uid="uid://ho73m0e56d7b" path="res://assets/art/HUD/tentacle-heart.svg" id="3_40hk2"]
 [ext_resource type="Texture2D" uid="uid://dja4cnmrwq3vd" path="res://assets/winchester-rifle.svg" id="4_rgsa0"]
 [ext_resource type="Script" path="res://scripts/menus/weapon_select.gd" id="4_tsyyj"]
 [ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="5_5dfyb"]
 [ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="6_orimu"]
 [ext_resource type="Script" path="res://scripts/menus/upgrade_select.gd" id="8_3h43c"]
 [ext_resource type="Script" path="res://scripts/menus/HUD.gd" id="10_6itlc"]
-[ext_resource type="Texture2D" uid="uid://cj667chshihiq" path="res://assets/heart.svg" id="11_pve6h"]
 
 [node name="Menus" type="CanvasLayer"]
 
 [node name="HUD" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -30,12 +30,24 @@ script = ExtResource("10_6itlc")
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Hearts" type="TextureRect" parent="HUD/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+
+[node name="Hearts" type="TextureRect" parent="HUD/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("11_pve6h")
+texture = ExtResource("2_q82at")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MaxHearts" type="TextureRect" parent="HUD/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_40hk2")
 expand_mode = 1
 stretch_mode = 1
 
