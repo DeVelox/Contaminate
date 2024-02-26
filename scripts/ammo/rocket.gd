@@ -8,12 +8,11 @@ signal explosion_sound
 
 func _on_contact(_body: Node2D) -> void:
 	await get_tree().create_timer(0.1).timeout
-	SoundManager.sfx(SoundManager.BOOM)
+	explosion_sound.emit()
 	explosion.monitoring = true
 	explosion.monitorable = true
 	collision.disabled = false
 	await get_tree().create_timer(0.1).timeout
-	explosion_sound.emit()
 	queue_free()
 
 

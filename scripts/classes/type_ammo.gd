@@ -46,5 +46,7 @@ func _physics_process(delta: float) -> void:
 	global_position += speed * delta * direction
 	if global_position.distance_squared_to(origin) > range_squared:
 		if self is Rocket:
-			SoundManager.sfx(SoundManager.EXPLOSION)
+			var rocket := self as Rocket
+			rocket._on_contact(null)
+			return
 		queue_free()
