@@ -2,6 +2,8 @@
 extends Node2D
 var upgrade: String = "Lightning"
 
+var threshold: Array[int] = [1, 10, 50, 100, 200, 500, 1000]
+static var count: int
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
@@ -21,7 +23,9 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func activate() -> void:
-	var upgrade_popup := get_node("/root/Main/Menus/UpgradeSelect")
-	upgrade_popup.upgrade_select()
-	upgrade_popup.currently_selecting = true
+	count += 1
+	if threshold.has(count):
+		var upgrade_popup := get_node("/root/Main/Menus/UpgradeSelect")
+		upgrade_popup.upgrade_select()
+		upgrade_popup.currently_selecting = true
 	queue_free()

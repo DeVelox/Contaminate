@@ -1,7 +1,6 @@
 extends CenterContainer
 
 var toggled: bool
-var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
 
 @onready var upgrades_debug: Button = $VBoxContainer/Upgrades
 
@@ -34,9 +33,15 @@ func _process(_delta: float) -> void:
 func _on_restart_pressed() -> void:
 	var vignette := get_node("/root/Main/Shaders/Vignette")
 	vignette.material.set_shader_parameter("vignette_intensity", 1.0)
+
+	# Reset static variables
+	var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
+	var drop_class: Node2D = load("res://scripts/misc/pickup.gd").new()
 	zone_class.loaded = null
 	zone_class.count = 0
+	drop_class.count = 0
 	UpgradeManager.reset_upgrades()
+
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
