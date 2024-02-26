@@ -18,9 +18,13 @@ func _on_contact(_body: Node2D) -> void:
 
 func _on_explosion(body: Node2D) -> void:
 	if body is Enemy:
-		if randf() < 0.1:
+		var current_damage = damage * 2 if is_crit else damage
+		var current_bonus_damage = bonus_damage * 2 if is_crit else bonus_damage
+		if randf() < proc_coeff:
+			if is_crit:
+				UpgradeManager.on_crit.emit(body)
 			UpgradeManager.on_hit.emit(body)
-		body.damage(damage)
+		body.damage(current_damage + current_bonus_damage)
 
 
 func _explosion_sound() -> void:

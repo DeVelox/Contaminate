@@ -27,6 +27,7 @@ var update_rate_curr: float
 var base_crit_chance: float = 0.05
 var crit_chance: float = base_crit_chance
 var heat_cost_multi: float = 1.0
+var damage_bonus: int = 0
 
 var buff_dict: Dictionary = {
 	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0},
@@ -154,6 +155,7 @@ func damage(attack: int) -> void:
 	if health > 1:
 		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
+		UpgradeManager.on_hit.emit(self)
 		invuln.start(0.5)
 	else:
 		SoundManager.sfx(SoundManager.DEATH)
@@ -178,6 +180,7 @@ func damage(attack: int) -> void:
 
 func heal(amount: int) -> void:
 	health = min(max_health, health + amount)
+	UpgradeManager.on_heal.emit(self)
 	hud.update_health(health, max_health)
 
 

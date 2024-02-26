@@ -24,6 +24,7 @@ var origin: Vector2
 var direction: Vector2
 var range_squared: float
 var is_crit: bool = false
+var bonus_damage: int = 0
 
 var buff_dict: Dictionary = {
 	MechanicsManager.BuffType.DAMAGE: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
