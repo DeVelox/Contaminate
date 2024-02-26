@@ -1,16 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://0xhhbww2jg67"]
+[gd_scene load_steps=12 format=3 uid="uid://bavnh0qellabo"]
 
-[ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="1_5a4th"]
-[ext_resource type="Script" path="res://scripts/misc/main.gd" id="1_5ngur"]
-[ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="1_6b8jp"]
-[ext_resource type="Script" path="res://scripts/misc/light_mask.gd" id="2_e4yt6"]
-[ext_resource type="PackedScene" uid="uid://cr7pdhdr0ftkb" path="res://zones/t1r1.tscn" id="2_gpy0j"]
-[ext_resource type="Shader" path="res://scripts/shaders/distortion.gdshader" id="6_ogum4"]
-[ext_resource type="PackedScene" uid="uid://lgvewjetgk0v" path="res://entities/prefabs/menus.tscn" id="6_pje3k"]
-[ext_resource type="Shader" path="res://scripts/shaders/vignette.gdshader" id="7_co8b5"]
+[ext_resource type="PackedScene" uid="uid://dqxxnidolck6m" path="res://zones/intro_zone.tscn" id="2_qx8eg"]
+[ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_ao3b3"]
+[ext_resource type="Script" path="res://scripts/misc/light_mask.gd" id="4_7euam"]
+[ext_resource type="PackedScene" uid="uid://bgtnl1hwmny64" path="res://entities/player/player.tscn" id="5_josl0"]
+[ext_resource type="Shader" path="res://scripts/shaders/distortion.gdshader" id="6_ih2ho"]
+[ext_resource type="Shader" path="res://scripts/shaders/vignette.gdshader" id="7_evb4r"]
+[ext_resource type="PackedScene" uid="uid://lgvewjetgk0v" path="res://entities/prefabs/menus.tscn" id="8_m7bnd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbqo1"]
-shader = ExtResource("6_ogum4")
+shader = ExtResource("6_ih2ho")
 shader_parameter/chaos = 12.0
 shader_parameter/radius = 1.0
 shader_parameter/attenuation = 2.0
@@ -26,33 +25,32 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.15, 0.15)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k76xm"]
-shader = ExtResource("7_co8b5")
+shader = ExtResource("7_evb4r")
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/vignette_opacity = 1.0
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_5ngur")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.403922, 0.117647, 0.333333, 1)
 
 [node name="Zones" type="Node2D" parent="."]
 
-[node name="Zone" parent="Zones" instance=ExtResource("2_gpy0j")]
+[node name="Intro Zone" parent="Zones" instance=ExtResource("2_qx8eg")]
 
 [node name="EnemiesAFK" type="Node2D" parent="."]
 
 [node name="LightMask" type="Sprite2D" parent="." node_paths=PackedStringArray("player")]
 clip_children = 1
-texture = ExtResource("1_6b8jp")
-script = ExtResource("2_e4yt6")
+texture = ExtResource("3_ao3b3")
+script = ExtResource("4_7euam")
 player = NodePath("../Player")
 
 [node name="Enemies" type="Node2D" parent="LightMask"]
 
-[node name="Player" parent="." instance=ExtResource("1_5a4th")]
-position = Vector2(947, 970)
+[node name="Player" parent="." instance=ExtResource("5_josl0")]
+position = Vector2(960, 960)
 
 [node name="Shaders" type="CanvasLayer" parent="."]
 
@@ -69,4 +67,4 @@ custom_minimum_size = Vector2(1920, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Menus" parent="." instance=ExtResource("6_pje3k")]
+[node name="Menus" parent="." instance=ExtResource("8_m7bnd")]

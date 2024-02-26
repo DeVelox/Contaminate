@@ -3,10 +3,14 @@ extends CenterContainer
 var toggled: bool
 var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
 
+@onready var upgrades_debug: Button = $VBoxContainer/Upgrades
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	if OS.is_debug_build():
+		upgrades_debug.show()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -84,6 +84,7 @@ layout_mode = 2
 text = "Restart"
 
 [node name="Upgrades" type="Button" parent="PauseMenu/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 text = "Upgrades"
@@ -181,22 +182,37 @@ script = ExtResource("4_tsyyj")
 custom_minimum_size = Vector2(800, 400)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainerText" type="MarginContainer" parent="WeaponSelect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainerText"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Corruption has taken hold of your mining tool, which path will you choose for it?"
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 360)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Rifle" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Rifle" type="Button" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle"]
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,30 +224,30 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_rgsa0")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
-text = "Rifle"
+text = "Longshot"
 horizontal_alignment = 1
 
-[node name="Shotgun" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Shotgun" type="Button" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun"]
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -243,30 +259,30 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("5_5dfyb")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
-text = "Shotgun"
+text = "Scattered"
 horizontal_alignment = 1
 
-[node name="Explosive" type="Button" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Explosive" type="Button" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive"]
+[node name="MarginContainer" type="MarginContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,20 +294,20 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("6_orimu")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Label" type="Label" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "Explosive"
@@ -333,6 +349,6 @@ theme_override_constants/separation = 20
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Master" to="Options" method="_on_master_value_changed"]
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Music" to="Options" method="_on_music_value_changed"]
 [connection signal="value_changed" from="Options/VBoxContainer/Volume/MarginContainer/VBoxContainer/Sounds" to="Options" method="_on_sounds_value_changed"]
-[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Rifle" to="WeaponSelect" method="_on_rifle_pressed"]
-[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Shotgun" to="WeaponSelect" method="_on_shotgun_pressed"]
-[connection signal="pressed" from="WeaponSelect/PanelContainer/MarginContainer/HBoxContainer/Explosive" to="WeaponSelect" method="_on_explosive_pressed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle" to="WeaponSelect" method="_on_rifle_pressed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun" to="WeaponSelect" method="_on_shotgun_pressed"]
+[connection signal="pressed" from="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive" to="WeaponSelect" method="_on_explosive_pressed"]

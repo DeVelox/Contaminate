@@ -16,7 +16,10 @@ func _on_start_game_pressed() -> void:
 	zone_class.count = 0
 	UpgradeManager.reset_upgrades()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://main.tscn")
+	if OS.is_debug_build():
+		get_tree().change_scene_to_file("res://main.tscn")
+	else:
+		get_tree().change_scene_to_file("res://intro.tscn")
 	%MainMenu.hide()
 
 
