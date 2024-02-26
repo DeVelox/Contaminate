@@ -2,6 +2,8 @@ extends MarginContainer
 
 
 func update_health(health: int, max_health: int) -> void:
+	if health <= 0:
+		%HUD.hide()
 	%Hearts.custom_minimum_size.x = health * 64
 	%MaxHearts.custom_minimum_size.x = max_health * 64
 
