@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://crxmodt46v11a"]
+[gd_scene load_steps=7 format=3 uid="uid://crxmodt46v11a"]
 
 [ext_resource type="Script" path="res://scripts/enemies/runner_boss.gd" id="1_5mv7x"]
-[ext_resource type="Texture2D" uid="uid://dy7v83ttmexil" path="res://icon.svg" id="2_8kj2w"]
-[ext_resource type="Texture2D" uid="uid://cf5btetwe3f7g" path="res://assets/outline.png" id="3_lh2o7"]
+[ext_resource type="Texture2D" uid="uid://b0gfwoldudtt0" path="res://assets/art/enemies/wolf.png" id="2_ts5md"]
+[ext_resource type="Texture2D" uid="uid://bty3788h6nbht" path="res://assets/art/enemies/wolf1.png" id="3_6uiya"]
+[ext_resource type="Material" uid="uid://dc5ma5golaq5a" path="res://scripts/shaders/highlight.tres" id="3_tw1h7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_itqy8"]
 radius = 8.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2glaw"]
-cull_mode = 1
-polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+polygon = PackedVector2Array(-6, -6, -8, 0, -6, 6, 0, 8, 6, 6, 8, 0, 6, -6, 0, -8)
 
 [node name="Runner Boss" type="StaticBody2D"]
 scale = Vector2(4, 4)
@@ -28,13 +28,14 @@ shape = SubResource("CircleShape2D_itqy8")
 occluder = SubResource("OccluderPolygon2D_2glaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_8kj2w")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_ts5md")
 
 [node name="Outline" type="Sprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_lh2o7")
+material = ExtResource("3_tw1h7")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_6uiya")
 
 [node name="Deaggro" type="VisibleOnScreenNotifier2D" parent="."]
 

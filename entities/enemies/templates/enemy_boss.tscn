@@ -8,8 +8,8 @@
 radius = 8.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2glaw"]
-cull_mode = 1
-polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+
+polygon = PackedVector2Array(-6, -6, -8, 0, -6, 6, 0, 8, 6, 6, 8, 0, 6, -6, 0, -8)
 
 [node name="Enemy Boss" type="StaticBody2D"]
 scale = Vector2(4, 4)

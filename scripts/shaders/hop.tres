@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ddwxi6uxhq3g5"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/hop.gdshader" id="1_yppfw"]
+
+[resource]
+shader = ExtResource("1_yppfw")
+shader_parameter/direction = null

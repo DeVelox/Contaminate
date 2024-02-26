@@ -8,8 +8,8 @@
 radius = 8.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kfkco"]
-cull_mode = 1
-polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+
+polygon = PackedVector2Array(-6, -6, -8, 0, -6, 6, 0, 8, 6, 6, 8, 0, 6, -6, 0, -8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i6c2m"]
 
