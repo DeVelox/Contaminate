@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://ev24x45gddxq"]
 
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="1_0lo75"]
+[ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="2_l54k8"]
 [ext_resource type="PackedScene" uid="uid://e5o5ed575ll0" path="res://entities/ammo/bullet.tscn" id="2_nsq52"]
-[ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="2_skwxg"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_0lo75")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_skwxg")
+texture = ExtResource("2_l54k8")
 
 [node name="Bullet" parent="." instance=ExtResource("2_nsq52")]
 damage = 10

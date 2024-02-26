@@ -2,7 +2,6 @@ extends CenterContainer
 
 var toggled: bool
 var zone_class: Zone = load("res://scripts/misc/zone.gd").new()
-@onready var vignette := get_node("/root/Main/Shaders/Vignette")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,10 +28,11 @@ func _process(_delta: float) -> void:
 
 
 func _on_restart_pressed() -> void:
+	var vignette := get_node("/root/Main/Shaders/Vignette")
+	vignette.material.set_shader_parameter("vignette_intensity", 1.0)
 	zone_class.loaded = null
 	zone_class.count = 0
 	UpgradeManager.reset_upgrades()
-	vignette.material.set_shader_parameter("vignette_intensity", 1.0)
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
