@@ -4,7 +4,7 @@ const UPGRADE = preload("res://entities/prefabs/upgrade.tscn")
 
 var currently_selecting: bool
 
-@onready var hbox: HBoxContainer = $PanelContainer/MarginContainer/CenterContainer/HBoxContainer
+@onready var hbox: HBoxContainer = $PanelContainer/VBoxContainer/MarginContainer/CenterContainer/HBoxContainer
 
 
 func _ready() -> void:
