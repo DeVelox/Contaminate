@@ -580,7 +580,9 @@ var can_collect: bool
 @onready var player := get_node(\"/root/Main/Player\")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	vignette.material.set_shader_parameter(\"vignette_intensity\", 50.0)
+	var tween := create_tween()
+	tween.tween_property(vignette.material, \"shader_parameter/vignette_intensity\", 1.0, 1.0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -592,7 +594,7 @@ func _process(delta: float) -> void:
 		$Sprite2D.self_modulate.a = mining_away
 	if mining_away < 0.1:
 		var tween := create_tween()
-		tween.tween_property(vignette.material, \"shader_parameter/vignette_intensity\", 40.0, 1.0)
+		tween.tween_property(vignette.material, \"shader_parameter/vignette_intensity\", 50.0, 1.0)
 		tween.tween_callback(get_tree().change_scene_to_file.bind(\"res://main.tscn\"))
 		
 
