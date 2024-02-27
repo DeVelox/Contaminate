@@ -17,4 +17,5 @@ func play_ending() -> void:
 	player.queue_free()
 	var tween := create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/vignette_intensity", 50.0, 2.0)
-	tween.tween_callback(get_tree().change_scene_to_file.bind("res://ending.tscn"))
+	await get_tree().create_timer(2.1).timeout
+	get_tree().change_scene_to_file("res://ending.tscn")
