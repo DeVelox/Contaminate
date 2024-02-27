@@ -42,7 +42,6 @@ func _on_restart_pressed() -> void:
 	drop_class.count = 0
 	UpgradeManager.reset_upgrades()
 
-	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 

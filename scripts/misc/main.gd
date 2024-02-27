@@ -6,6 +6,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	get_tree().paused = false
 	SoundManager.crossfade(SoundManager.MUSIC_NORMAL)
 	weapon_popup.weapon_select()
 	hud.show()
