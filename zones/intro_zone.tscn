@@ -589,8 +589,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	player.position.x = clamp(player.position.x, 0, 960)
 	player.position.y = clamp(player.position.y, 0, 540)
-	if can_collect and Input.is_action_pressed(\"shoot\"):
-		mining_away -= 0.2 * delta
+	if can_collect: # and Input.is_action_pressed(\"shoot\"):
+		mining_away -= 0.5 * delta
 		$Sprite2D.self_modulate.a = mining_away
 	if mining_away < 0.1:
 		var tween := create_tween()
