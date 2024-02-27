@@ -1,1 +1,1 @@
-extends Boss
+class_name TankBoss extends Boss

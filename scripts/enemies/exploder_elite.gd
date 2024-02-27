@@ -1,1 +1,1 @@
-extends Elite
+class_name ExploderElite extends Elite

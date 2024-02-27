@@ -97,9 +97,27 @@ func kill() -> void:
 		drop.position = global_position
 		get_tree().current_scene.add_child.call_deferred(drop)
 
+	if self is ExploderElite:
+		var explosion := Area2D.new()
+		var collision := CollisionShape2D.new()
+		collision.shape = CircleShape2D.new()
+		collision.shape.radius = 50
+		explosion.add_child(collision)
+		explosion.collision_mask = 11
+		add_child(explosion)
+		explosion.body_entered.connect(_explode)
+		SoundManager.sfx(SoundManager.WHOOSH)
+		await explosion.body_entered
+	
+	if self is TankBoss:
+		get_tree().change_scene_to_file("res://ending.tscn")
+
 	UpgradeManager.on_kill.emit(self)
 	remove_from_group("aggro")
 	queue_free()
+
+func _explode(body: Node2D) -> void:
+	body.damage(2)
 
 
 func infect() -> void:
