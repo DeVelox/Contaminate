@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Rogue One"
+config/name="Contaminate"
 run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/art/infested-mass.svg"
 
 [autoload]
 
