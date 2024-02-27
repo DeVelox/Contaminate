@@ -4,3 +4,5 @@
 
 [resource]
 shader = ExtResource("1_yppfw")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/damage = null
