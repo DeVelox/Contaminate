@@ -2,7 +2,7 @@ extends Upgrade
 
 var damage: int = 2
 var delay: float = 5.0
-var hit_chance: float = 0.5
+var hit_chance: float = 1.0
 var texture = preload("res://assets/art/upgrades/william-tell-skull.svg")
 
 
@@ -23,7 +23,7 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "MarkForDeath"
+	uname = "Mark for Death"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Whenever you damage an enemy there is a chance to mark it dealing damage after a delay"
@@ -42,10 +42,10 @@ func _do_damage(enemy: Enemy) -> void:
 	enemy.add_to_group("markedForDeath")
 	var mark := TextureRect.new()
 	mark.texture = texture
-	mark.scale = Vector2(0.5, 0.5)
+	mark.scale = Vector2(0.02, 0.02)
 	mark.position.y = -10
 	enemy.add_child(mark)
-	await get_tree().create_timer(delay).timeout
-	mark.queue_free()
+	await UpgradeManager.wait(delay)
 	if is_instance_valid(enemy):
+		mark.queue_free()
 		enemy.damage(damage)

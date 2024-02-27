@@ -25,7 +25,7 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "MinHealthSpeed"
+	uname = "Last Stand"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Gain bonus move speed when on low health"

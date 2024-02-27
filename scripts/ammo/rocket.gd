@@ -7,7 +7,7 @@ signal explosion_sound
 
 
 func on_contact(_body: Node2D) -> void:
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.02).timeout
 	explosion_sound.emit()
 	explosion.monitoring = true
 	explosion.monitorable = true

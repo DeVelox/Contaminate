@@ -12,14 +12,14 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_npjfh")
 
 [node name="Rocket" parent="." instance=ExtResource("2_3yrdg")]
-damage = 2
-speed = 100.0
+damage = 1
+speed = 250.0
 distance = 500.0
 heat_max = 100.0
-heat_shot = 75.0
+heat_shot = 45.0
 heat_rate = 25.0
 heat_cooldown = 5.0
 spread = 15.0
 bullet_count = 1
 crit_chance = 1.0
-proc_coeff = 0.1
+proc_coeff = 0.15

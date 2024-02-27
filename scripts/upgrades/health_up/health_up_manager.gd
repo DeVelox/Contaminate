@@ -19,7 +19,7 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "HealthUp"
+	uname = "Top Up"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Get an extra heart and a full heal"

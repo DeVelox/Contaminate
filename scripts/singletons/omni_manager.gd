@@ -75,3 +75,6 @@ func _register_upgrades(folder: String, script: String) -> void:
 func get_player() -> Player:
 	var player: Player = get_node("/root/Main/Player")
 	return player
+
+func wait(duration: float) -> void:
+	await get_tree().create_timer(duration).timeout

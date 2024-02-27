@@ -24,7 +24,7 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "CritMastery"
+	uname = "Crit Mastery"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Whenever you crit increase your crit chance for a short duration"

@@ -1,6 +1,7 @@
 extends Upgrade
 
 var damage_bonus: int = 1
+var heal_amount: int = 1
 
 func _init() -> void:
 	_register()
@@ -11,6 +12,8 @@ func add() -> void:
 		UpgradeManager.on_heal.connect(_add_damage)
 	if not UpgradeManager.on_hurt.is_connected(_remove_damage):
 		UpgradeManager.on_hurt.connect(_remove_damage)
+	var player = UpgradeManager.get_player()
+	player.heal(heal_amount)
 	UpgradeManager.available_upgrades.erase(uname)
 
 
@@ -26,7 +29,7 @@ func _register() -> void:
 	uname = "MaxHealthDamage"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Gain bonus damage when on full HP"
+	description = "Gain bonus damage when on full health, heal 1 Heart"
 	logic = "res://scripts/upgrades/max_health_damage/max_health_damage_manager.gd"
 	icon = "res://assets/art/upgrades/heart-battery.svg"
 	level = 0

@@ -32,6 +32,7 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 			var is_crit: bool = (
 				true if randf() < player.crit_chance * load_ammo.proc_coeff else false
 			)
+			load_ammo.bonus_damage = player.damage_bonus
 			heat_level = min(
 				load_ammo.heat_shot * player.heat_cost_multi + heat_level, load_ammo.heat_max
 			)

@@ -15,13 +15,14 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_fv3cj")
 
 [node name="Bullet" parent="." instance=ExtResource("2_nsq52")]
-damage = 10
+damage = 1
 speed = 500.0
 distance = 300.0
-penetration = 5
+penetration = 1
 heat_max = 100.0
 heat_shot = 50.0
 heat_rate = 30.0
 heat_cooldown = 1.5
 spread = 15.0
 bullet_count = 5
+proc_coeff = 0.3

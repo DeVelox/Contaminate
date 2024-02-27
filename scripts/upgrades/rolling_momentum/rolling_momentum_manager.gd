@@ -28,7 +28,7 @@ func _speed_burst(player: Player) -> void:
 
 
 func _register() -> void:
-	uname = "RollingMomentum"
+	uname = "Rolling Momentum"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
 	description = "Get a quick speed surge after rolling"
