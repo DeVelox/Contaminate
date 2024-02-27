@@ -13,6 +13,8 @@ func set_aggro(aggro: bool) -> void:
 func play_ending() -> void:
 	# Remember to call when the final boss dies
 	var vignette := get_node("/root/Main/Shaders/Vignette")
+	var player := get_node("/root/Main/Player")
+	player.queue_free()
 	var tween := create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/vignette_intensity", 50.0, 2.0)
 	tween.tween_callback(get_tree().change_scene_to_file.bind("res://ending.tscn"))
