@@ -12,6 +12,7 @@ func update_upgrade_list(upgrade: String) -> void:
 	var upgrade_icon := TextureRect.new()
 	upgrade_icon.texture = load(upgrade)
 	upgrade_icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+	upgrade_icon.use_parent_material = true
 	%Upgrades.add_child(upgrade_icon)
 
 

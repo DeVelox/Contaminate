@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=16 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/misc/player.gd" id="1_nquv5"]
+[ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_2w58b"]
 [ext_resource type="Texture2D" uid="uid://cmcfv0icn068b" path="res://assets/art/character/091-3.png" id="2_4dybd"]
 [ext_resource type="PackedScene" uid="uid://bbou7hvela1cg" path="res://entities/weapons/tool.tscn" id="2_guve7"]
 [ext_resource type="Material" uid="uid://ddwxi6uxhq3g5" path="res://scripts/shaders/hop.tres" id="2_p3dkk"]
@@ -9,6 +10,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
 radius = 9.0
 height = 29.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n33ql"]
 
 [sub_resource type="Gradient" id="Gradient_pe570"]
 offsets = PackedFloat32Array(0, 0.501961, 1)
@@ -66,6 +69,14 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_4dybd")
 offset = Vector2(0, 20)
 
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 0.270588)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_n33ql")
+position = Vector2(0, 83.3333)
+scale = Vector2(0.333333, 0.166667)
+texture = ExtResource("2_2w58b")
+
 [node name="Tool" parent="." instance=ExtResource("2_guve7")]
 
 [node name="ShadowCaster" type="PointLight2D" parent="."]
@@ -73,6 +84,7 @@ shadow_enabled = true
 texture = ExtResource("3_22jw8")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.784314, 1, 1, 1)
 texture = SubResource("GradientTexture2D_ps2w7")
 
 [node name="PickupRadius" type="Area2D" parent="."]

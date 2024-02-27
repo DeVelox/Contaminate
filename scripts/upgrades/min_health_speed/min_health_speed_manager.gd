@@ -29,7 +29,7 @@ func _register() -> void:
 	rarity = Rarity.COMMON
 	description = "Gain bonus move speed when on low health"
 	logic = "res://scripts/upgrades/min_health_speed/min_health_speed_manager.gd"
-	icon = "res://assets/winchester-rifle.svg"
+	icon = "res://assets/art/upgrades/life-support.svg"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)

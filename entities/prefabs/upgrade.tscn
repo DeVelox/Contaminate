@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/menus/upgrade.gd" id="1_tfrbu"]
 
 [node name="Upgrade" type="Button"]
-custom_minimum_size = Vector2(240, 360)
+custom_minimum_size = Vector2(300, 400)
 size_flags_horizontal = 3
 script = ExtResource("1_tfrbu")
 
@@ -36,6 +36,7 @@ text = "Upgrade"
 horizontal_alignment = 1
 
 [node name="Desc" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Description"

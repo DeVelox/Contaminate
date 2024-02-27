@@ -31,7 +31,7 @@ func _register() -> void:
 	rarity = Rarity.RARE
 	description = "Does the zap-zap."
 	logic = "res://scripts/upgrades/lightning_rod/lightning_rod_manager.gd"
-	icon = "res://assets/lightning-branches.svg"
+	icon = "res://assets/art/upgrades/lightning-branches.svg"
 	level = 0
 
 	UpgradeManager.upgrades[uname] = self

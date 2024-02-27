@@ -33,7 +33,7 @@ func _register() -> void:
 	rarity = Rarity.COMMON
 	description = "Get a quick speed surge after rolling"
 	logic = "res://scripts/upgrades/rolling_momentum/rolling_momentum_manager.gd"
-	icon = "res://assets/pikachu.png"
+	icon = "res://assets/art/upgrades/fire-dash.svg"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://lgvewjetgk0v"]
+[gd_scene load_steps=15 format=3 uid="uid://lgvewjetgk0v"]
 
 [ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="1_3lf01"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_5xlqd"]
@@ -12,6 +12,26 @@
 [ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="6_orimu"]
 [ext_resource type="Script" path="res://scripts/menus/upgrade_select.gd" id="8_3h43c"]
 [ext_resource type="Script" path="res://scripts/menus/HUD.gd" id="10_6itlc"]
+
+[sub_resource type="Shader" id="Shader_6n7ca"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.rgb = texture(TEXTURE, UV).rgb * 0.5;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ilqlc"]
+shader = SubResource("Shader_6n7ca")
 
 [node name="Menus" type="CanvasLayer"]
 
@@ -53,6 +73,7 @@ stretch_mode = 1
 
 [node name="Upgrades" type="HBoxContainer" parent="HUD/VBoxContainer"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ilqlc")
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
@@ -335,7 +356,6 @@ theme = ExtResource("1_r8y2f")
 script = ExtResource("8_3h43c")
 
 [node name="PanelContainer" type="PanelContainer" parent="UpgradeSelect"]
-custom_minimum_size = Vector2(800, 400)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelect/PanelContainer"]
@@ -362,9 +382,16 @@ theme_override_constants/margin_bottom = 20
 [node name="CenterContainer" type="CenterContainer" parent="UpgradeSelect/PanelContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeSelect/PanelContainer/VBoxContainer/MarginContainer/CenterContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeSelect/PanelContainer/VBoxContainer/MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(940, 400)
 layout_mode = 2
-theme_override_constants/separation = 20
+
+[node name="UpgradeList" type="GridContainer" parent="UpgradeSelect/PanelContainer/VBoxContainer/MarginContainer/CenterContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartGame" to="MainMenu" method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="MainMenu" method="_on_options_pressed"]

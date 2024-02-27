@@ -25,7 +25,7 @@ func _register() -> void:
 	rarity = Rarity.COMMON
 	description = "Get an extra heart and a full heal"
 	logic = "res://scripts/upgrades/hot_head/hot_head_manager.gd"
-	icon = "res://assets/light_tendrils.png"
+	icon = "res://assets/art/upgrades/dice-fire.svg"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)

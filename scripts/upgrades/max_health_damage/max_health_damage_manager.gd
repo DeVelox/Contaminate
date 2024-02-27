@@ -28,7 +28,7 @@ func _register() -> void:
 	rarity = Rarity.COMMON
 	description = "Whenever you crit increase your crit chance for a short duration"
 	logic = "res://scripts/upgrades/max_health_damage/max_health_damage_manager.gd"
-	icon = "res://assets/winchester-rifle.svg"
+	icon = "res://assets/art/upgrades/heart-battery.svg"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)
