@@ -3,6 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().paused = false
 	for i in %Label.text.length():
 		%Label.visible_characters += 1
 		await get_tree().create_timer(0.05).timeout
