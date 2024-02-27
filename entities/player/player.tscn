@@ -26,7 +26,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.75641, 0.230769)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ifrs4"]
-radius = 50.0
+radius = 100.0
 
 [sub_resource type="Gradient" id="Gradient_bqfhm"]
 offsets = PackedFloat32Array(0)
