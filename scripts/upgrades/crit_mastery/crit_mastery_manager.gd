@@ -27,7 +27,7 @@ func _register() -> void:
 	uname = "Crit Mastery"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Whenever you crit increase your crit chance for a short duration"
+	description = "Whenever you crit increase your crit chance for a short duration."
 	logic = "res://scripts/upgrades/crit_mastery/crit_mastery_manager.gd"
 	icon = "res://assets/art/upgrades/william-tell-skull.svg"
 	level = 0

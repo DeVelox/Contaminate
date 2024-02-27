@@ -22,7 +22,7 @@ func _register() -> void:
 	uname = "Top Up"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Get an extra heart and a full heal"
+	description = "Get an extra heart and a full heal."
 	logic = "res://scripts/upgrades/health_up/health_up_manager.gd"
 	icon = "res://assets/art/upgrades/self-love.svg"
 	level = 0

@@ -23,7 +23,7 @@ func _register() -> void:
 	uname = "Hot Head"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Get bonus crit chance, shots generate more Heat"
+	description = "Get bonus crit chance, shots generate more Heat."
 	logic = "res://scripts/upgrades/hot_head/hot_head_manager.gd"
 	icon = "res://assets/art/upgrades/dice-fire.svg"
 	level = 0

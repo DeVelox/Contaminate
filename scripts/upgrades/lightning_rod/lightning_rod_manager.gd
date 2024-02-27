@@ -32,7 +32,7 @@ func _register() -> void:
 	uname = "Smite"
 	type = Type.GENERAL
 	rarity = Rarity.RARE
-	description = "When you hit an enemy there is a chance to summon a lightning strike"
+	description = "When you hit an enemy there is a chance to summon a lightning strike."
 	logic = "res://scripts/upgrades/lightning_rod/lightning_rod_manager.gd"
 	icon = "res://assets/art/upgrades/lightning-branches.svg"
 	level = 0

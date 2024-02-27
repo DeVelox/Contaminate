@@ -26,10 +26,10 @@ func remove() -> void:
 
 
 func _register() -> void:
-	uname = "MaxHealthDamage"
+	uname = "Vigor"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Gain bonus damage when on full health, heal 1 Heart"
+	description = "Gain bonus damage when on full health, heal 1 Heart."
 	logic = "res://scripts/upgrades/max_health_damage/max_health_damage_manager.gd"
 	icon = "res://assets/art/upgrades/heart-battery.svg"
 	level = 0

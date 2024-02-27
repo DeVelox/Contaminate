@@ -26,9 +26,9 @@ func _register() -> void:
 	uname = "Mark for Death"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Whenever you damage an enemy there is a chance to mark it dealing damage after a delay"
+	description = "Whenever you damage an enemy there is a chance to mark it dealing damage after a delay."
 	logic = "res://scripts/upgrades/damage_after_delay/damage_after_delay_manager.gd"
-	icon = "res://assets/winchester-rifle.svg"
+	icon = "res://assets/art/upgrades/time-bomb.svg"
 	level = 0
 	UpgradeManager.upgrades[uname] = self
 	UpgradeManager.available_upgrades.append(uname)

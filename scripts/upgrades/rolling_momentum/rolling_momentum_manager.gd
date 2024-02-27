@@ -31,7 +31,7 @@ func _register() -> void:
 	uname = "Rolling Momentum"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Get a quick speed surge when rolling"
+	description = "Get a quick speed surge when rolling."
 	logic = "res://scripts/upgrades/rolling_momentum/rolling_momentum_manager.gd"
 	icon = "res://assets/art/upgrades/fire-dash.svg"
 	level = 0
