@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bpkwa4hiehele" path="res://entities/prefabs/enemy_manager.tscn" id="2_2iuy4"]
 [ext_resource type="PackedScene" uid="uid://co8harb41qvh3" path="res://entities/prefabs/tilemap.tscn" id="3_krwco"]
 
-[node name="Zone" type="Node2D"]
+[node name="Zone2" type="Node2D"]
 script = ExtResource("1_cwsfc")
 min_tier = 2
 max_tier = 3

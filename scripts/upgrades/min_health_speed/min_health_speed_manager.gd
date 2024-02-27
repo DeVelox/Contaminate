@@ -44,6 +44,6 @@ func _add_speed(player: Player) -> void:
 
 
 func _remove_speed(player: Player) -> void:
-	if player.health > health_bonus_threshold:
+	if player.base_speed > 140:
 		player.base_speed /= speed_bonus
 		player.heat_cost_multi += heat_cost_reduction
