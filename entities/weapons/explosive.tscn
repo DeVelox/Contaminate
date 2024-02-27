@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/weapons/explosive.gd" id="1_4iqlh"]
 [ext_resource type="PackedScene" uid="uid://bm3gd5ppkfxoe" path="res://entities/ammo/rocket.tscn" id="2_3yrdg"]
-[ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="3_du3fm"]
+[ext_resource type="Texture2D" uid="uid://54idqe8vkxw1" path="res://assets/art/weapons/arrow.png" id="2_npjfh"]
 
 [node name="Explosive" type="Node2D"]
 script = ExtResource("1_4iqlh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("3_du3fm")
+texture = ExtResource("2_npjfh")
 
 [node name="Rocket" parent="." instance=ExtResource("2_3yrdg")]
 damage = 2

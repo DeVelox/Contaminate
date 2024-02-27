@@ -8,8 +8,8 @@ func _ready() -> void:
 	position = Vector2(gun_offset, 0)
 	ammo = get_child(1).duplicate()
 	get_child(1).queue_free()
-	gun_offset = 30
-	gun_length = 40
+	# gun_offset = 30
+	# gun_length = 40
 	#ammo = WeaponManager.apply_ammo_upgrades(ammo, self, get_children())
 
 

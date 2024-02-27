@@ -48,6 +48,8 @@ func _ready() -> void:
 	$Sprite2D.hide()
 	set_physics_process(false)
 
+	if self is Elite:
+		initialise()
 	if self is Boss:
 		set_aggro(true)
 
@@ -65,6 +67,12 @@ func _physics_process(delta: float) -> void:
 	#print_debug(speed)
 	motion = (direction * speed * delta)
 	velocity = lerp(velocity, motion, 0.1)
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
+		$Outline.flip_h = true
+	else:
+		$Sprite2D.flip_h = false
+		$Outline.flip_h = false
 	bob = randf_range(-bobbing, bobbing)
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, bob, 0.1)
 	outline.rotation_degrees = lerp(sprite.rotation_degrees, bob, 0.1)
@@ -124,3 +132,7 @@ func _check_infection() -> void:
 		try_kill()
 	else:
 		infection_timer.stop()
+
+func initialise() -> void:
+	# Implemented just so Elite can override
+	pass

@@ -73,6 +73,11 @@ func _physics_process(delta: float) -> void:
 			velocity = lerp(velocity, direction * speed, 0.25)
 		else:
 			velocity = lerp(velocity, Vector2.ZERO, 0.25)
+	
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
+	else:
+		$Sprite2D.flip_h = false
 
 	move_and_slide()
 	_roll()
@@ -219,7 +224,7 @@ func _on_boss_timeout() -> void:
 	# Figure out which bosses we have
 	var enemy_container: Node2D = get_node("/root/Main/EnemiesAFK")
 	var boss1 := load("res://entities/enemies/grunt_boss.tscn").instantiate() as Boss
-	var boss2 := load("res://entities/enemies/exploder_boss.tscn").instantiate() as Boss
+	var boss2 := load("res://entities/enemies/tank_boss.tscn").instantiate() as Boss
 
 	if $Boss.wait_time <= 300:
 		boss1.global_position = global_position + (Vector2(randf(), randf()).normalized() * 500)

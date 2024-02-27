@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=14 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/misc/player.gd" id="1_nquv5"]
+[ext_resource type="Texture2D" uid="uid://cmcfv0icn068b" path="res://assets/art/character/091-3.png" id="2_4dybd"]
 [ext_resource type="PackedScene" uid="uid://bbou7hvela1cg" path="res://entities/weapons/tool.tscn" id="2_guve7"]
+[ext_resource type="Material" uid="uid://ddwxi6uxhq3g5" path="res://scripts/shaders/hop.tres" id="2_p3dkk"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
 radius = 9.0
 height = 29.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmbbx"]
-size = Vector2(20, 30)
 
 [sub_resource type="Gradient" id="Gradient_pe570"]
 offsets = PackedFloat32Array(0, 0.501961, 1)
@@ -32,7 +31,7 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_h4rba"]
 gradient = SubResource("Gradient_bqfhm")
-width = 20
+width = 40
 height = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oyfv5"]
@@ -49,10 +48,11 @@ aggro_shoot_radius = 400.0
 camera = "camera_drag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_5rsor")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
 limit_left = -96000
 limit_top = -96000
 limit_right = 96000
@@ -60,9 +60,11 @@ limit_bottom = 96000
 position_smoothing_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_p3dkk")
 position = Vector2(0, -5)
-texture = SubResource("PlaceholderTexture2D_kmbbx")
-offset = Vector2(0, 5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_4dybd")
+offset = Vector2(0, 20)
 
 [node name="Tool" parent="." instance=ExtResource("2_guve7")]
 
@@ -93,16 +95,17 @@ autostart = true
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
 custom_minimum_size = Vector2(20, 2)
-offset_left = -10.0
-offset_top = -18.0
-offset_right = 10.0
-offset_bottom = -16.0
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = -26.0
 texture_progress = SubResource("GradientTexture2D_h4rba")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_oyfv5")
 
 [node name="AggroRange" type="Area2D" parent="."]

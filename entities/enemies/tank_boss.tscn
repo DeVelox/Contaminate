@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://r8bpr5uhveb1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/tank_boss.gd" id="1_5skd3"]
-[ext_resource type="Texture2D" uid="uid://cx6slivr773ba" path="res://assets/art/enemies/bear.png" id="2_bqqph"]
-[ext_resource type="Texture2D" uid="uid://b8d5qk8fxctsu" path="res://assets/art/enemies/bear1.png" id="3_4rywo"]
+[ext_resource type="Texture2D" uid="uid://b37d0mnq5wy70" path="res://assets/art/enemies/owlBoss.png" id="2_800lx"]
 [ext_resource type="Material" uid="uid://dc5ma5golaq5a" path="res://scripts/shaders/highlight.tres" id="3_kt71q"]
+[ext_resource type="Texture2D" uid="uid://b0scvd22t7efr" path="res://assets/art/enemies/owlBoss1.png" id="4_d3xcx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_itqy8"]
 radius = 8.0
@@ -29,13 +29,13 @@ occluder = SubResource("OccluderPolygon2D_2glaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_bqqph")
+texture = ExtResource("2_800lx")
 
 [node name="Outline" type="Sprite2D" parent="."]
 z_index = 1
 material = ExtResource("3_kt71q")
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("3_4rywo")
+texture = ExtResource("4_d3xcx")
 
 [node name="Deaggro" type="VisibleOnScreenNotifier2D" parent="."]
 

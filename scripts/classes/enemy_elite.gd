@@ -7,8 +7,7 @@ var got_the_boys: bool
 @onready var aggro_range: Area2D = $AggroRange
 @onready var collision: CollisionShape2D = $AggroRange/CollisionShape2D
 
-
-func _ready() -> void:
+func initialise() -> void:
 	collision.shape.radius = reinforcement_radius
 	_monitoring(false)
 
