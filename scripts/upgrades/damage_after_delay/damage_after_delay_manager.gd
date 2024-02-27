@@ -42,6 +42,8 @@ func _do_damage(enemy: Enemy) -> void:
 	enemy.add_to_group("markedForDeath")
 	var mark := TextureRect.new()
 	mark.texture = texture
+	mark.scale = Vector2(0.5, 0.5)
+	mark.position.y = -10
 	enemy.add_child(mark)
 	await get_tree().create_timer(delay).timeout
 	mark.queue_free()

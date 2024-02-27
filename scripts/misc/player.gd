@@ -161,7 +161,7 @@ func damage(attack: int) -> void:
 	if health > 1:
 		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
-		UpgradeManager.on_hit.emit(self)
+		UpgradeManager.on_hurt.emit(self)
 		invuln.start(0.5)
 	else:
 		SoundManager.sfx(SoundManager.DEATH)
