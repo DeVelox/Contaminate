@@ -113,7 +113,8 @@ func kill() -> void:
 		await explosion.body_entered
 	
 	if self is TankBoss:
-		get_tree().change_scene_to_file("res://ending.tscn")
+		var tank = self as TankBoss
+		tank.play_ending()
 
 	UpgradeManager.on_kill.emit(self)
 	remove_from_group("aggro")

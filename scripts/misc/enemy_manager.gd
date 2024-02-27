@@ -100,7 +100,7 @@ func _ready() -> void:
 			spawns.append(i.global_position)
 		spawn = spawns.pick_random()
 		spawn_area = 0.25 * severity.budget
-		trigger_radius = pow(spawn_area * 4, 2)
+		trigger_radius = pow(max(540, spawn_area * 4), 2)
 
 	id += 1
 	instance_id = id

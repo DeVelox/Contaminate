@@ -17,3 +17,4 @@ func play_ending() -> void:
 	var tween := create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/vignette_intensity", 50.0, 2.0)
 	tween.tween_callback(hud.pause_game)
+	tween.tween_callback(get_tree().change_scene_to_file.bind("res://ending.tscn"))
