@@ -16,7 +16,7 @@ polygon = PackedVector2Array(-6, -6, -8, 0, -6, 6, 0, 8, 6, 6, 8, 0, 6, -6, 0, -
 [node name="Ranger Elite" type="StaticBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 8
-collision_mask = 9
+collision_mask = 25
 script = ExtResource("1_tfyjq")
 health = 10
 base_speed = 120.0

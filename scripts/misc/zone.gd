@@ -38,7 +38,6 @@ func _ready() -> void:
 		loaded.set_bitv(map_location, true)
 
 	count += 1
-	$Label.text = str(count)
 
 
 func _load_zone(direction: StringName) -> void:

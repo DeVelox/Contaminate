@@ -15,7 +15,7 @@ polygon = PackedVector2Array(-6, -6, -8, 0, -6, 6, 0, 8, 6, 6, 8, 0, 6, -6, 0, -
 
 [node name="Exploder Basic" type="StaticBody2D"]
 collision_layer = 2
-collision_mask = 11
+collision_mask = 27
 script = ExtResource("1_3mu3c")
 health = 2
 base_speed = 150.0
