@@ -44,7 +44,7 @@ height = 2
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
-collision_mask = 0
+collision_mask = 16
 script = ExtResource("1_nquv5")
 aggro_radius = 250.0
 aggro_shoot_radius = 400.0
