@@ -54,7 +54,7 @@ func _ready() -> void:
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
 	hud.update_health(health, max_health)
-	UpgradeManager.show_tutorial.connect(_show_tutorial, CONNECT_ONE_SHOT)
+	UpgradeManager.done_selecting.connect(_show_tutorial, CONNECT_ONE_SHOT)
 
 	for mehcanic in buff_dict:
 		buff_dict[mehcanic]["multi"].resize(MechanicsManager.BuffBucket.size())

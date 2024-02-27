@@ -2,7 +2,6 @@
 extends Node
 
 signal done_selecting
-signal show_tutorial
 
 signal on_roll(player: Player)
 signal on_move(player: Player)
