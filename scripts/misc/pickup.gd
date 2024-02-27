@@ -1,6 +1,6 @@
 extends Node2D
 
-var threshold: Array[int] = [1, 10, 50, 100, 200, 500, 1000]
+var threshold: Array[int] = [1, 6, 21, 51, 81, 121, 171, 300]
 
 @onready var upgrade_popup := get_node("/root/Main/Menus/UpgradeSelect")
 

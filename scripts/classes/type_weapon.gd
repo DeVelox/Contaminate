@@ -2,8 +2,8 @@ class_name Weapon extends Node2D
 
 var ammo: Ammo
 var shoot_func: Callable = _shoot_gun
-var gun_offset: float = 15
-var gun_length: float = 20
+var gun_offset: float = 30
+var gun_length: float = 10
 var gun_overheat: bool
 var gun_heat_cooldown: bool
 var heat_level: float

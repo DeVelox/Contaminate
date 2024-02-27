@@ -1,9 +1,9 @@
 extends Upgrade
 
-var duration: float = 0.5
+var duration: float = 0.4
 var buff_type = MechanicsManager.BuffType.SPEED
 var buff_bucket = MechanicsManager.BuffBucket.ROLL
-var amount: float = 200.0
+var amount: float = 180.0
 var multi: bool = true
 
 
@@ -31,7 +31,7 @@ func _register() -> void:
 	uname = "Rolling Momentum"
 	type = Type.GENERAL
 	rarity = Rarity.COMMON
-	description = "Get a quick speed surge after rolling"
+	description = "Get a quick speed surge when rolling"
 	logic = "res://scripts/upgrades/rolling_momentum/rolling_momentum_manager.gd"
 	icon = "res://assets/art/upgrades/fire-dash.svg"
 	level = 0
