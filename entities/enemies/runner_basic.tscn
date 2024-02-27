@@ -18,7 +18,7 @@ collision_layer = 2
 collision_mask = 27
 script = ExtResource("1_tvpdu")
 health = 2
-base_speed = 190.0
+base_speed = 150.0
 tier = 2
 cost = 3
 

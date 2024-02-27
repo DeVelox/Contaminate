@@ -25,26 +25,26 @@ class Severity:
 	func _init(danger: Danger) -> void:
 		match danger:
 			Danger.LOW1:
-				budget = 100
+				budget = 400
 				elite_count = 0
 			Danger.LOW2:
-				budget = 200
+				budget = 450
 				elite_count = 1
 			Danger.MEDIUM1:
-				budget = 300
-				elite_count = 2
-			Danger.MEDIUM2:
-				budget = 350
-				elite_count = 4
-			Danger.HIGH:
 				budget = 600
+				elite_count = 4
+			Danger.MEDIUM2:
+				budget = 650
 				elite_count = 7
+			Danger.HIGH:
+				budget = 800
+				elite_count = 10
 			Danger.EXTREME:
-				budget = 1000
+				budget = 1300
 				elite_count = 25
 			Danger.ELITES:
-				budget = 500
-				elite_count = 20
+				budget = 800
+				elite_count = 30
 
 
 # Editor exports
