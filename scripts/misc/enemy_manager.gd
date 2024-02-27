@@ -53,7 +53,7 @@ class Severity:
 @export var enemy_pool: String
 @export var enemy_eights: String
 
-@export var danger: Danger
+@export var danger: Danger = Danger.LOW1
 
 # Keep track of enemy ownership
 var instance_id: int
@@ -93,8 +93,7 @@ func _ready() -> void:
 	if enemy_pool:
 		enemies = _enemy_pool_to_array()
 
-	if danger:
-		severity = Severity.new(danger)
+	severity = Severity.new(danger)
 
 	if spawn_locations:
 		for i in spawn_locations.get_children():
