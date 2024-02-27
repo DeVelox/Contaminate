@@ -133,6 +133,7 @@ func _check_infection() -> void:
 	else:
 		infection_timer.stop()
 
+
 func initialise() -> void:
 	# Implemented just so Elite can override
 	pass

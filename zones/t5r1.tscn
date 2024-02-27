@@ -6,6 +6,8 @@
 
 [node name="Zone" type="Node2D"]
 script = ExtResource("1_0vyb8")
+min_tier = 5
+max_tier = 5
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("2_jn4eq")]
 spawn_locations = NodePath("../SpawnLocations")

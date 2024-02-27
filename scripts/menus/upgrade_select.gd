@@ -33,3 +33,4 @@ func _close() -> void:
 	for i in %UpgradeList.get_children():
 		%UpgradeList.remove_child.call_deferred(i)
 		i.queue_free()
+	UpgradeManager.done_selecting.emit()

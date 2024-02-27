@@ -48,6 +48,6 @@ func _physics_process(delta: float) -> void:
 	if global_position.distance_squared_to(origin) > range_squared:
 		if self is Rocket:
 			var rocket := self as Rocket
-			rocket._on_contact(null)
+			rocket.on_contact(null)
 			return
 		queue_free()

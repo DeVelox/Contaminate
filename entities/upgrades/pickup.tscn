@@ -9,7 +9,6 @@
 [node name="Pickup" type="StaticBody2D"]
 collision_layer = 4
 script = ExtResource("1_mbpw6")
-upgrade = "Lightning"
 
 [node name="Tilemap" parent="." instance=ExtResource("2_daluc")]
 material = ExtResource("3_xvh1l")

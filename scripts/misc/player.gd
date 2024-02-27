@@ -54,6 +54,7 @@ func _ready() -> void:
 	aggro_collision.shape.radius = aggro_radius
 	just_shot.connect(_expand_aggro_range)
 	hud.update_health(health, max_health)
+	UpgradeManager.show_tutorial.connect(_show_tutorial, CONNECT_ONE_SHOT)
 
 	for mehcanic in buff_dict:
 		buff_dict[mehcanic]["multi"].resize(MechanicsManager.BuffBucket.size())
@@ -73,7 +74,7 @@ func _physics_process(delta: float) -> void:
 			velocity = lerp(velocity, direction * speed, 0.25)
 		else:
 			velocity = lerp(velocity, Vector2.ZERO, 0.25)
-	
+
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true
 	else:
@@ -138,7 +139,7 @@ func _roll() -> void:
 func _pickup() -> void:
 	for i in pickup_radius.get_overlapping_bodies():
 		i.global_position = lerp(i.global_position, global_position, 0.1)
-		if i.global_position.distance_squared_to(global_position) < 25:
+		if i.global_position.distance_squared_to(global_position) < 50:
 			i.activate()
 
 
@@ -233,5 +234,20 @@ func _on_boss_timeout() -> void:
 	else:
 		boss2.global_position = global_position + (Vector2(randf(), randf()).normalized() * 500)
 		enemy_container.add_child.call_deferred(boss2)
-		
 
+
+func _show_tutorial() -> void:
+	var pickup_hint := Label.new()
+	pickup_hint.text = "I should collect more..."
+	pickup_hint.position = Vector2(-50, -50)
+	pickup_hint.add_theme_font_override("font", load("res://assets/PathwayGothicOne-Regular.ttf"))
+	pickup_hint.add_theme_font_size_override("font_size", 32)
+	pickup_hint.scale = Vector2(0.5, 0.5)
+	add_child.call_deferred(pickup_hint)
+	pickup_hint.visible_characters = 0
+	pickup_hint.visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING
+	for i in pickup_hint.text.length():
+		pickup_hint.visible_characters += 1
+		await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(1).timeout
+	pickup_hint.queue_free()

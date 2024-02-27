@@ -6,7 +6,7 @@ signal explosion_sound
 @onready var collision: CollisionShape2D = $Explosion/CollisionShape2D
 
 
-func _on_contact(_body: Node2D) -> void:
+func on_contact(_body: Node2D) -> void:
 	await get_tree().create_timer(0.1).timeout
 	explosion_sound.emit()
 	explosion.monitoring = true

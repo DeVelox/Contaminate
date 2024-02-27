@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://yg7560xh185w" path="res://assets/art/HUD/heart-drop.svg" id="2_q82at"]
 [ext_resource type="Script" path="res://scripts/menus/options.gd" id="2_vh8js"]
 [ext_resource type="Texture2D" uid="uid://ho73m0e56d7b" path="res://assets/art/HUD/tentacle-heart.svg" id="3_40hk2"]
-[ext_resource type="Texture2D" uid="uid://dja4cnmrwq3vd" path="res://assets/winchester-rifle.svg" id="4_rgsa0"]
 [ext_resource type="Script" path="res://scripts/menus/weapon_select.gd" id="4_tsyyj"]
-[ext_resource type="Texture2D" uid="uid://6bc753n8nkn5" path="res://assets/sawed-off-shotgun.svg" id="5_5dfyb"]
-[ext_resource type="Texture2D" uid="uid://bh3yvw7nnhdy3" path="res://assets/gunshot.svg" id="6_orimu"]
 [ext_resource type="Script" path="res://scripts/menus/upgrade_select.gd" id="8_3h43c"]
+[ext_resource type="Texture2D" uid="uid://cd36xmwbrykp5" path="res://assets/art/weapons/winchester-rifle.svg" id="9_j1och"]
+[ext_resource type="Texture2D" uid="uid://bldmra6g72sc0" path="res://assets/art/weapons/sawed-off-shotgun.svg" id="10_4htge"]
 [ext_resource type="Script" path="res://scripts/menus/HUD.gd" id="10_6itlc"]
+[ext_resource type="Texture2D" uid="uid://ih6148xt7g3m" path="res://assets/art/weapons/panzerfaust.svg" id="11_tsnp5"]
 
 [sub_resource type="Shader" id="Shader_6n7ca"]
 code = "shader_type canvas_item;
@@ -37,6 +37,7 @@ shader = SubResource("Shader_6n7ca")
 
 [node name="HUD" type="MarginContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -262,7 +263,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Rifle/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("4_rgsa0")
+texture = ExtResource("9_j1och")
 expand_mode = 5
 stretch_mode = 4
 
@@ -297,7 +298,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Shotgun/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_5dfyb")
+texture = ExtResource("10_4htge")
 expand_mode = 5
 stretch_mode = 4
 
@@ -332,7 +333,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WeaponSelect/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Explosive/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_orimu")
+texture = ExtResource("11_tsnp5")
 expand_mode = 5
 stretch_mode = 4
 

@@ -6,6 +6,7 @@
 
 [node name="Zone" type="Node2D"]
 script = ExtResource("1_7bfvy")
+max_tier = 2
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("3_j7odo")]
 spawn_locations = NodePath("../SpawnLocations")
@@ -15,10 +16,10 @@ danger = 3
 [node name="SpawnLocations" type="Node2D" parent="."]
 
 [node name="Spawn1" type="Marker2D" parent="SpawnLocations"]
-position = Vector2(833, 333)
+position = Vector2(1567, 304)
 
 [node name="Spawn2" type="Marker2D" parent="SpawnLocations"]
-position = Vector2(225, 815)
+position = Vector2(325, 1613)
 
 [node name="LoaderDirection" type="Node2D" parent="."]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqxxnidolck6m"]
 
 [ext_resource type="Texture2D" uid="uid://4wdlqek1t3uc" path="res://assets/Zombie Apocalypse Tileset Reference.png" id="2_hea56"]
-[ext_resource type="Texture2D" uid="uid://dj651iwqndkd" path="res://assets/tendrils.png" id="3_nshpo"]
+[ext_resource type="Texture2D" uid="uid://kgqh67mhilq5" path="res://assets/art/mapping/Tileset.png" id="2_lfpi1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5q131"]
 texture = ExtResource("2_hea56")
@@ -636,9 +636,11 @@ script = SubResource("GDScript_vme7v")
 shape = SubResource("CircleShape2D_eday5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(3, -3)
-scale = Vector2(0.248047, 0.226562)
-texture = ExtResource("3_nshpo")
+position = Vector2(-6.75292, 0.702608)
+scale = Vector2(0.322497, 0.294563)
+texture = ExtResource("2_lfpi1")
+region_enabled = true
+region_rect = Rect2(1784, 1032, 262, 283)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 270)

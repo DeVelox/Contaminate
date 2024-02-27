@@ -2,6 +2,7 @@ extends Upgrade
 
 var damage_bonus: int = 1
 
+
 func _init() -> void:
 	_register()
 
@@ -38,6 +39,7 @@ func _add_damage(_enemy: Enemy) -> void:
 	var player = UpgradeManager.get_player()
 	if player.health == player.max_health:
 		player.damage += damage_bonus
+
 
 func _remove_damage(_enemy: Enemy) -> void:
 	var player = UpgradeManager.get_player()

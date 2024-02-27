@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://emhb6x5gw17g"]
+[gd_scene load_steps=6 format=3 uid="uid://emhb6x5gw17g"]
 
 [ext_resource type="Script" path="res://scripts/upgrades/lightning_rod/lightning_rod_scene.gd" id="1_s5lpc"]
 [ext_resource type="Texture2D" uid="uid://c8tnxmiipl7e7" path="res://assets/art/upgrades/lightning-bolt.png" id="2_0h5mq"]
+[ext_resource type="Material" uid="uid://dc5ma5golaq5a" path="res://scripts/shaders/highlight.tres" id="2_wbd0j"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="3_xg77e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dl8ad"]
@@ -17,6 +18,7 @@ shape = SubResource("CircleShape2D_dl8ad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+material = ExtResource("2_wbd0j")
 position = Vector2(4, -55)
 scale = Vector2(0.18, 0.18)
 texture = ExtResource("2_0h5mq")

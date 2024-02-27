@@ -1,7 +1,6 @@
 extends CenterContainer
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if not get_tree().current_scene.name == "Start":

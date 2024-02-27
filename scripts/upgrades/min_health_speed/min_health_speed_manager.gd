@@ -3,6 +3,7 @@ extends Upgrade
 var health_bonus_threshold: int = 1
 var speed_bonus: float = 1.2
 
+
 func _init() -> void:
 	_register()
 
@@ -38,6 +39,7 @@ func _register() -> void:
 func _add_speed(player: Player) -> void:
 	if player.health <= health_bonus_threshold:
 		player.base_speed *= speed_bonus
+
 
 func _remove_speed(player: Player) -> void:
 	if player.health > health_bonus_threshold:
