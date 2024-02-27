@@ -99,7 +99,7 @@ one_shot = true
 one_shot = true
 
 [node name="Boss" type="Timer" parent="."]
-wait_time = 300.0
+wait_time = 180.0
 one_shot = true
 autostart = true
 
