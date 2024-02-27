@@ -1,7 +1,7 @@
 extends Upgrade
 
-var damage: int = 2
-var delay: float = 5.0
+var damage: int = 3
+var delay: float = 3.0
 var hit_chance: float = 1.0
 var texture = preload("res://assets/art/upgrades/william-tell-skull.svg")
 

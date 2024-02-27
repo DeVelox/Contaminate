@@ -11,7 +11,7 @@ max_tier = 2
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("2_tuf2e")]
 spawn_locations = NodePath("../SpawnLocations")
 enemy_pool = "grunt"
-danger = 3
+danger = 1
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 

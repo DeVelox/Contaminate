@@ -8,11 +8,12 @@
 script = ExtResource("1_lckxd")
 min_tier = 3
 max_tier = 4
+max_rarity = 2
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("2_ehsm4")]
 spawn_locations = NodePath("../SpawnLocations")
-enemy_pool = "grunt"
-danger = 3
+enemy_pool = "grunt:0.4,tank:0.3,runner:0.07,exploder:0.2"
+danger = 2
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 

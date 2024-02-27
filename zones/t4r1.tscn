@@ -11,8 +11,8 @@ max_tier = 5
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("spawn_locations") instance=ExtResource("2_bn0vw")]
 spawn_locations = NodePath("../SpawnLocations")
-enemy_pool = "grunt"
-danger = 3
+enemy_pool = "grunt:0.25,tank:0.4,runner:0.1,exploder:0.2"
+danger = 4
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 
