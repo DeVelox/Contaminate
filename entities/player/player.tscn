@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=15 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/misc/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_2w58b"]
@@ -10,8 +10,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rsor"]
 radius = 9.0
 height = 29.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n33ql"]
 
 [sub_resource type="Gradient" id="Gradient_pe570"]
 offsets = PackedFloat32Array(0, 0.501961, 1)
@@ -72,7 +70,6 @@ offset = Vector2(0, 20)
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(0, 0, 0, 0.270588)
 show_behind_parent = true
-material = SubResource("CanvasItemMaterial_n33ql")
 position = Vector2(0, 83.3333)
 scale = Vector2(0.333333, 0.166667)
 texture = ExtResource("2_2w58b")

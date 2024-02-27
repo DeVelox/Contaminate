@@ -161,6 +161,9 @@ func damage(attack: int) -> void:
 	if health > 1:
 		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
+		$Sprite2D.material.set_shader_parameter("damage", true)
+		await get_tree().create_timer(0.1).timeout
+		$Sprite2D.material.set_shader_parameter("damage", false)
 		UpgradeManager.on_hurt.emit(self)
 		invuln.start(0.5)
 	else:

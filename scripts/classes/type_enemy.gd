@@ -81,9 +81,9 @@ func _physics_process(delta: float) -> void:
 
 func damage(amount: int) -> void:
 	health -= amount
-	modulate = Color.PURPLE
-	var tween := create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color.WHITE
 	try_kill()
 
 

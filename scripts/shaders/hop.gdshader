@@ -1,5 +1,6 @@
 shader_type canvas_item;
 uniform vec2 direction = vec2(1.0);
+uniform bool damage;
 vec2 rotate(vec2 uv, vec2 pivot, float angle)
 {
 	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
@@ -21,5 +22,9 @@ void fragment()
 	//vec4 shadow = vec4(vec3(sprite_shadow.a * 0.0), sprite_shadow.a);
 	//COLOR.rgb = mix(shadow.rgb, sprite.rgb, 1.0);
 	//COLOR.a = shadow.a * 0.5 + sprite.a;
+	
 	COLOR = texture(TEXTURE, rotated_uv);
+	if (damage) {
+		COLOR.r = 1.0;
+	}
 }
