@@ -1,7 +1,7 @@
 extends Upgrade
 
-var bonus_crit_chance: float = 0.2
-var bonus_heat_cost: float = 0.2
+var bonus_crit_chance: float = 0.25
+var bonus_heat_cost: float = 0.1
 
 
 func _init() -> void:

@@ -1,6 +1,6 @@
 class_name Spawner extends Node2D
 
-enum Danger { LOW, MEDIUM, HIGH, EXTREME, BOSS }
+enum Danger { LOW1, LOW2, MEDIUM1, MEDIUM2, HIGH, EXTREME, ELITES }
 
 
 class EnemyType:
@@ -24,21 +24,27 @@ class Severity:
 
 	func _init(danger: Danger) -> void:
 		match danger:
-			Danger.LOW:
+			Danger.LOW1:
 				budget = 100
 				elite_count = 0
-			Danger.MEDIUM:
-				budget = 300
+			Danger.LOW2:
+				budget = 200
 				elite_count = 1
+			Danger.MEDIUM1:
+				budget = 300
+				elite_count = 2
+			Danger.MEDIUM2:
+				budget = 350
+				elite_count = 4
 			Danger.HIGH:
-				budget = 500
-				elite_count = 3
+				budget = 600
+				elite_count = 7
 			Danger.EXTREME:
 				budget = 1000
-				elite_count = 5
-			Danger.BOSS:
-				budget = 300
-				boss_count = 1
+				elite_count = 25
+			Danger.ELITES:
+				budget = 500
+				elite_count = 20
 
 
 # Editor exports
