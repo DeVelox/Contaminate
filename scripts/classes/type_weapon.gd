@@ -7,6 +7,7 @@ var gun_length: float = 10
 var gun_overheat: bool
 var gun_heat_cooldown: bool
 var heat_level: float
+var symbol: TextureRect
 
 
 func _point_gun(player_velocity: Vector2) -> void:
@@ -27,6 +28,7 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 	if gun_overheat:
 		if heat_level == 0:
 			gun_overheat = false
+			_overheat_symbol(false)
 	else:
 		if Input.is_action_just_pressed("shoot"):
 			var is_crit: bool = (
@@ -75,6 +77,18 @@ func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo, is_crit: bool) -> voi
 func _overheat() -> void:
 	gun_heat_cooldown = true
 	gun_overheat = true
+	_overheat_symbol(true)
 	SoundManager.sfx(SoundManager.OVERHEAT)
 	await get_tree().create_timer(ammo.heat_cooldown).timeout
 	gun_heat_cooldown = false
+
+func _overheat_symbol(enable: bool) -> void:
+	if enable:
+		var player = get_node("/root/Main/Player")
+		symbol = TextureRect.new()
+		symbol.texture = load("res://assets/art/stopwatch.svg")
+		symbol.position = Vector2(-10, -50)
+		symbol.scale = Vector2(0.04, 0.04)
+		player.add_child(symbol)
+	else:
+		symbol.queue_free()
