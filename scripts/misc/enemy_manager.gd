@@ -99,7 +99,7 @@ func _ready() -> void:
 		for i in spawn_locations.get_children():
 			spawns.append(i.global_position)
 		spawn = spawns.pick_random()
-		spawn_area = min(540, 0.25 * severity.budget)
+		spawn_area = max(540, 0.25 * severity.budget)
 		trigger_radius = pow(max(540, spawn_area * 4), 2)
 
 	id += 1
