@@ -13,6 +13,7 @@ config_version=5
 config/name="Contaminate"
 run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 config/icon="res://assets/art/infested-mass.svg"
 
 [autoload]
@@ -31,6 +32,7 @@ window/size/always_on_top=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [editor]
 

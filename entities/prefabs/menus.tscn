@@ -37,10 +37,10 @@ shader = SubResource("Shader_6n7ca")
 
 [node name="HUD" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
+theme = ExtResource("1_r8y2f")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -71,6 +71,11 @@ size_flags_horizontal = 0
 texture = ExtResource("3_40hk2")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="FPS" type="Label" parent="HUD/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="Upgrades" type="HBoxContainer" parent="HUD/VBoxContainer"]
 unique_name_in_owner = true
