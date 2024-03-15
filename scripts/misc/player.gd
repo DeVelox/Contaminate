@@ -29,6 +29,8 @@ var crit_chance: float = base_crit_chance
 var heat_cost_multi: float = 1.0
 var damage_bonus: int = 0
 var is_clicking: bool = false
+var click_location: Vector2
+var last_click: Vector2
 
 var buff_dict: Dictionary = {
 	MechanicsManager.BuffType.SPEED: {"multi": [],"multi_calc": 0.0, "flat": [],"flat_calc": 0.0},
@@ -66,12 +68,11 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed and not is_clicking:
 			is_clicking = true
+			%Marker.hide()
 		if is_clicking and not event.pressed:
 			is_clicking = false
-			direction = Vector2.ZERO
-
-	if event is InputEventMouse and is_clicking:
-		direction = (event.position - Vector2(960, 540)).normalized()
+			last_click = click_location
+			%Marker.show()
 
 func _physics_process(delta: float) -> void:
 	_calculate_properties()
@@ -79,7 +80,17 @@ func _physics_process(delta: float) -> void:
 	# direction = (
 	# 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	# )
-	
+
+	if is_clicking:
+		click_location = get_global_mouse_position()
+
+	if global_position.distance_squared_to(click_location) < 16:
+		%Marker.hide()
+		direction = Vector2.ZERO
+	else:
+		%Marker.global_position = last_click
+		direction = (click_location - global_position).normalized()
+
 	if roll_duration == 0:
 		if direction:
 			velocity = lerp(velocity, direction * speed, 0.25)
@@ -87,9 +98,9 @@ func _physics_process(delta: float) -> void:
 			velocity = lerp(velocity, Vector2.ZERO, 0.25)
 
 	if velocity.x < 0:
-		$Sprite2D.flip_h = true
+		sprite.flip_h = true
 	else:
-		$Sprite2D.flip_h = false
+		sprite.flip_h = false
 
 	move_and_slide()
 	_roll()
@@ -167,9 +178,9 @@ func damage(attack: int) -> void:
 	if health > 1:
 		SoundManager.sfx(SoundManager.HIT)
 		health -= attack
-		$Sprite2D.material.set_shader_parameter("damage", true)
+		sprite.material.set_shader_parameter("damage", true)
 		await get_tree().create_timer(0.1).timeout
-		$Sprite2D.material.set_shader_parameter("damage", false)
+		sprite.material.set_shader_parameter("damage", false)
 		UpgradeManager.on_hurt.emit(self)
 		invuln.start(0.5)
 	else:

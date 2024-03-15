@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgtnl1hwmny64"]
+[gd_scene load_steps=16 format=3 uid="uid://bgtnl1hwmny64"]
 
 [ext_resource type="Script" path="res://scripts/misc/player.gd" id="1_nquv5"]
 [ext_resource type="Texture2D" uid="uid://byvk6lr3ippcy" path="res://assets/light.png" id="2_2w58b"]
 [ext_resource type="Texture2D" uid="uid://cmcfv0icn068b" path="res://assets/art/character/091-3.png" id="2_4dybd"]
+[ext_resource type="Texture2D" uid="uid://ydb3f0p3cdq0" path="res://assets/art/position-marker.svg" id="2_86mcy"]
 [ext_resource type="PackedScene" uid="uid://bbou7hvela1cg" path="res://entities/weapons/tool.tscn" id="2_guve7"]
 [ext_resource type="Material" uid="uid://ddwxi6uxhq3g5" path="res://scripts/shaders/hop.tres" id="2_p3dkk"]
 [ext_resource type="Texture2D" uid="uid://r665h1vjcxqa" path="res://assets/light-iso.png" id="3_22jw8"]
@@ -126,6 +127,13 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
 scale = Vector2(1, 0.6)
 shape = SubResource("CircleShape2D_1xxo2")
+
+[node name="Marker" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_86mcy")
+offset = Vector2(0, -256)
 
 [connection signal="timeout" from="Boss" to="." method="_on_boss_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
