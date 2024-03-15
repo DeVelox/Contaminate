@@ -28,11 +28,12 @@ var base_crit_chance: float = 0.05
 var crit_chance: float = base_crit_chance
 var heat_cost_multi: float = 1.0
 var damage_bonus: int = 0
+var is_clicking: bool = false
 
 var buff_dict: Dictionary = {
-	MechanicsManager.BuffType.SPEED: {"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0},
+	MechanicsManager.BuffType.SPEED: {"multi": [],"multi_calc": 0.0, "flat": [],"flat_calc": 0.0},
 	MechanicsManager.BuffType.CRIT_CHANCE:
-	{"multi": [], "multi_calc": 0.0, "flat": [], "flat_calc": 0.0}
+	{"multi": [],"multi_calc": 0.0, "flat": [],"flat_calc": 0.0}
 }
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -48,7 +49,6 @@ var buff_dict: Dictionary = {
 @onready var hud := get_node("/root/Main/Menus/HUD")
 @onready var vignette := get_node("/root/Main/Shaders/Vignette")
 
-
 func _ready() -> void:
 	shadow_caster.energy = LIGHT
 	aggro_collision.shape.radius = aggro_radius
@@ -62,13 +62,24 @@ func _ready() -> void:
 		buff_dict[mehcanic]["multi"].fill(0.0)
 		buff_dict[mehcanic]["flat"].fill(0.0)
 
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and not is_clicking:
+			is_clicking = true
+		if is_clicking and not event.pressed:
+			is_clicking = false
+			direction = Vector2.ZERO
+
+	if event is InputEventMouse and is_clicking:
+		direction = (event.position - Vector2(960, 540)).normalized()
 
 func _physics_process(delta: float) -> void:
 	_calculate_properties()
 
-	direction = (
-		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
-	)
+	# direction = (
+	# 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
+	# )
+	
 	if roll_duration == 0:
 		if direction:
 			velocity = lerp(velocity, direction * speed, 0.25)
@@ -88,13 +99,12 @@ func _physics_process(delta: float) -> void:
 	#shadow_caster.energy = lerp(shadow_caster.energy, light_energy, 0.1)
 	point_light_2d.offset = lerp(
 		point_light_2d.offset,
-		Vector2(randf_range(-LIGHT_SHAKE, LIGHT_SHAKE), randf_range(-LIGHT_SHAKE, LIGHT_SHAKE)),
+		Vector2(randf_range( - LIGHT_SHAKE, LIGHT_SHAKE), randf_range( - LIGHT_SHAKE, LIGHT_SHAKE)),
 		0.25
 	)
 
 	pbv = progress_bar.value / 100
 	progress_bar.self_modulate = Color(pbv, 1 - pbv, 1 - pbv)
-
 
 func _calculate_properties() -> void:
 	speed = clamp(
@@ -116,7 +126,6 @@ func _calculate_properties() -> void:
 	)
 	# print_debug(crit_chance)
 
-
 func _roll() -> void:
 	if Input.is_action_just_pressed("roll") and not roll_disabled:
 		SoundManager.sfx(SoundManager.ROLL)
@@ -135,13 +144,11 @@ func _roll() -> void:
 	else:
 		collision.set_deferred("disabled", false)
 
-
 func _pickup() -> void:
 	for i in pickup_radius.get_overlapping_bodies():
 		i.global_position = lerp(i.global_position, global_position, 0.1)
 		if i.global_position.distance_squared_to(global_position) < 50:
 			i.activate()
-
 
 func _camera_mode(mode: String) -> void:
 	match mode:
@@ -153,7 +160,6 @@ func _camera_mode(mode: String) -> void:
 			player_camera.offset = lerp(player_camera.offset, -direction * CAMERA_SPEED, 0.1)
 		_:
 			return
-
 
 func damage(attack: int) -> void:
 	if invuln.time_left:
@@ -186,18 +192,15 @@ func damage(attack: int) -> void:
 
 	hud.update_health(health, max_health)
 
-
 func heal(amount: int) -> void:
 	health = min(max_health, health + amount)
 	UpgradeManager.on_heal.emit(self)
 	hud.update_health(health, max_health)
 
-
 func _expand_aggro_range() -> void:
 	aggro_collision.shape.radius = aggro_shoot_radius
 	await get_tree().create_timer(0.1).timeout
 	aggro_collision.shape.radius = aggro_radius
-
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
 	SoundManager.crossfade(SoundManager.MUSIC_COMBAT)
@@ -210,11 +213,9 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.set_aggro(true)
 
-
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		damage(body.attack)
-
 
 func _move_enemies(delta: float) -> void:
 	if update_rate_curr < 0:
@@ -222,7 +223,6 @@ func _move_enemies(delta: float) -> void:
 		update_rate_curr = update_rate
 	else:
 		update_rate_curr -= delta
-
 
 func _on_boss_timeout() -> void:
 	# Figure out which bosses we have
@@ -238,11 +238,10 @@ func _on_boss_timeout() -> void:
 		boss2.global_position = global_position + (Vector2(randf(), randf()).normalized() * 500)
 		enemy_container.add_child.call_deferred(boss2)
 
-
 func _show_tutorial() -> void:
 	var pickup_hint := Label.new()
 	pickup_hint.text = "I should collect more..."
-	pickup_hint.position = Vector2(-50, -50)
+	pickup_hint.position = Vector2( - 50, -50)
 	pickup_hint.add_theme_font_override("font", load("res://assets/PathwayGothicOne-Regular.ttf"))
 	pickup_hint.add_theme_font_size_override("font_size", 32)
 	pickup_hint.scale = Vector2(0.5, 0.5)
