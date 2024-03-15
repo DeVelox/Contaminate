@@ -28,7 +28,6 @@ var base_crit_chance: float = 0.05
 var crit_chance: float = base_crit_chance
 var heat_cost_multi: float = 1.0
 var damage_bonus: int = 0
-var is_clicking: bool = false
 var click_location: Vector2
 var last_click: Vector2
 
@@ -64,16 +63,6 @@ func _ready() -> void:
 		buff_dict[mehcanic]["multi"].fill(0.0)
 		buff_dict[mehcanic]["flat"].fill(0.0)
 
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed and not is_clicking:
-			is_clicking = true
-			%Marker.hide()
-		if is_clicking and not event.pressed:
-			is_clicking = false
-			last_click = click_location
-			%Marker.show()
-
 func _physics_process(delta: float) -> void:
 	_calculate_properties()
 
@@ -81,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	# 		Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
 	# )
 
-	if is_clicking:
+	if Input.is_action_pressed("click"):
 		click_location = get_global_mouse_position()
 
 	if global_position.distance_squared_to(click_location) < 16:

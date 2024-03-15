@@ -2,6 +2,8 @@ class_name Weapon extends Node2D
 
 var ammo: Ammo
 var shoot_func: Callable = _shoot_gun
+var _aim_direction: Vector2
+var mouse_aim: Vector2
 var gun_offset: float = 30
 var gun_length: float = 10
 var gun_overheat: bool
@@ -9,19 +11,23 @@ var gun_heat_cooldown: bool
 var heat_level: float
 var symbol: TextureRect
 
-
-func _point_gun(player_velocity: Vector2) -> void:
-	if not player_velocity.is_zero_approx():
-		position = player_velocity.normalized() * gun_offset
-		rotation = player_velocity.angle()
-	if player_velocity.x < 0:
+func _point_gun(aim_direction: Vector2) -> void:
+	if not aim_direction.is_zero_approx():
+		position = aim_direction.normalized() * gun_offset
+		rotation = aim_direction.angle()
+	if aim_direction.x < 0:
 		$Sprite2D.flip_v = true
 	else:
 		$Sprite2D.flip_v = false
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		mouse_aim = get_global_mouse_position()
 
 func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float) -> void:
-	_point_gun(player.velocity.normalized().snapped(Vector2.ONE))
+	# _aim_direction = player.velocity.normalized().snapped(Vector2.ONE)
+	_aim_direction = (mouse_aim - player.global_position)
+	_point_gun(_aim_direction)
 	player.progress_bar.value = heat_level
 	if gun_heat_cooldown:
 		return
@@ -42,25 +48,24 @@ func _try_shoot(player: Player, load_ammo: Ammo, sfx: AudioStream, delta: float)
 			#player.aggro_shoot_radius = 300
 			player.just_shot.emit()
 			SoundManager.sfx(sfx)
-			_shoot_gun(player.velocity.normalized().snapped(Vector2.ONE), load_ammo, is_crit)
+			_shoot_gun(_aim_direction, load_ammo, is_crit)
 			if heat_level == load_ammo.heat_max:
 				_overheat()
 
 	heat_level = max(0, heat_level - ammo.heat_rate * delta)
 
-
-func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo, is_crit: bool) -> void:
+func _shoot_gun(aim_direction: Vector2, load_ammo: Ammo, is_crit: bool) -> void:
 	@warning_ignore("integer_division")
-	var angle := (load_ammo.bullet_count / 2) * -load_ammo.spread
+	var angle := (load_ammo.bullet_count / 2) * - load_ammo.spread
 	var start_direction := (
-		player_velocity if not player_velocity.is_zero_approx() else Vector2.RIGHT
+		aim_direction if not aim_direction.is_zero_approx() else Vector2.RIGHT
 	)
 	for i in load_ammo.bullet_count:
 		load_ammo.direction = start_direction.rotated(deg_to_rad(angle))
 		angle += load_ammo.spread
 		var pass_ammo := load_ammo.duplicate() as Ammo
 		var direction = (
-			player_velocity.normalized()
+			aim_direction.normalized()
 			if load_ammo.direction == Vector2.ZERO
 			else load_ammo.direction.normalized()
 		)
@@ -72,7 +77,6 @@ func _shoot_gun(player_velocity: Vector2, load_ammo: Ammo, is_crit: bool) -> voi
 		if is_crit:
 			pass_ammo.is_crit = true
 		get_tree().root.add_child(pass_ammo)
-
 
 func _overheat() -> void:
 	gun_heat_cooldown = true
@@ -87,7 +91,7 @@ func _overheat_symbol(enable: bool) -> void:
 		var player = get_node("/root/Main/Player")
 		symbol = TextureRect.new()
 		symbol.texture = load("res://assets/art/stopwatch.svg")
-		symbol.position = Vector2(-10, -50)
+		symbol.position = Vector2( - 10, -50)
 		symbol.scale = Vector2(0.04, 0.04)
 		player.add_child(symbol)
 	else:
